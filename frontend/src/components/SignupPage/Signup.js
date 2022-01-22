@@ -1,20 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
+import { Box, Button, Heading, Stack, Input, Checkbox} from "@chakra-ui/react"
 import { Link } from "react-router-dom";
 
 const Signup = () => {
+  const [showPassword, setShowPassword] = useState(false)
+
   return (
-    <div>
-      <h1>Sign Up</h1>
-      <div>
-        <input type="text" placeholder="Name" />
-        <input type="text" placeholder="Phone" />
-        <input type="email" placeholder="Email" />
-        <input type="password" placeholder="password" />
-      </div>
+    <Box>
+      <Heading mb={5}>Sign Up</Heading>
+      <Stack>
+        <Input placeholder='Name'/>
+        <Input placeholder='Email'/>
+        <Input placeholder='Phone Number'/>
+        <Input placeholder='Password' type={showPassword ? 'text' : 'password'}/>
+        <Checkbox onChange={() => setShowPassword(!showPassword)}>Show password</Checkbox>
+      </Stack>
       <Link to="/">
-        <button>Go back to home</button>
+        <Button>Go back to home</Button>
       </Link>
-    </div>
+    </Box>
   );
 };
 

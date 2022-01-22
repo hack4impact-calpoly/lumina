@@ -1,14 +1,15 @@
 import React from "react";
+import { Box, Heading, Button } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
 const HomePage = () => {
   return (
-    <div>
-      <h1>Placeholder Home</h1>
+    <Box>
+      <Heading>Placeholder Home</Heading>
       <Link to="/sign-up">
-        <button>Go to sign up</button>
+        <Button>Go to sign up</Button>
       </Link>
-    </div>
+    </Box>
   );
 };
 
