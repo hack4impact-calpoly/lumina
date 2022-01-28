@@ -9,6 +9,9 @@ const HomePage = () => {
       <Link to="/sign-up">
         <Button>Go to sign up</Button>
       </Link>
+      <Link to="/change-password">
+        <Button>Go to change password</Button>
+      </Link>
     </Box>
   );
 };
