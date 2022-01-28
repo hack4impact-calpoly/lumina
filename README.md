@@ -23,7 +23,7 @@ Below is a table for the most common HTML tags/components and what the correspon
 | HTML Tag/Component       | New Chakra UI Tag/Component          |
 |--------------------------|--------------------------------------|
 | `<div> `                   | `<Box> `                               |
-| `<h1>`, `<h2>`, `<h3>`, etc... | `<Heading>` (specify level within tag) |
+| `<h1>`, `<h2>`, `<h3>`, etc... | `<Heading>`* (specify level within tag) |
 | `<input>`                  | `<Input>`                              |
 | `<button> `                | `<Button> `                            |
 | `<input type="checkbox">`  | `<Checkbox> `                          |
@@ -32,8 +32,9 @@ Below is a table for the most common HTML tags/components and what the correspon
 
 Essentially, everytime you find yourself using a built in HTML tag, google that tag + "Chakra UI" and you'll likely find a Chakra UI equivalent. Simply changing the tag to the Chakra UI equivalent is already going to be doing the most heavly lifting (tbh vanilla Chakra UI looks pretty good), but if you want to get into component customization, see the next section.
 
-***Takeaway: AVOID USING BUILT IN HTML TAGS***
+***Takeaway: AVOID USING BUILT IN HTML TAGS***\
 
+\* = To specify a certain heading level, do `<Heading as='h2'>` for the equivalent `<h2>`
 ### **What we can do with Chakra UI and why it's better than raw CSS**
 
 *Well how do I do XYZ in Chakra UI?*
