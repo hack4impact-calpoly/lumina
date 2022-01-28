@@ -12,7 +12,10 @@ const Signup = () => {
 
   return (
     <Box>
-      <Heading mb={5}>Sign Up</Heading>
+      <Heading textAlign="center">Sign Up</Heading>
+      <Link to="/">
+        <Button mt={3} mb={3}>Go back to home</Button>
+      </Link>
       <Stack>
         <Input placeholder="Name" onChange={(e) => setName(e.target.value)} />
         <Input placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
@@ -29,9 +32,7 @@ const Signup = () => {
           Show password
         </Checkbox>
       </Stack>
-      <Link to="/">
-        <Button>Go back to home</Button>
-      </Link>
+
     </Box>
   );
 };
