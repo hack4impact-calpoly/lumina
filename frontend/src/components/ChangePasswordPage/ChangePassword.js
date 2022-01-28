@@ -21,6 +21,9 @@ const ChangePassword = () => {
       <Text textAlign="center" mb={5}>
         Password reset has been verified. Please set a new password.
       </Text>
+      <Link to="/">
+        <Button mb={5}>Go back to home</Button>
+      </Link>
       <Stack>
         <Text>New Password</Text>
         <Input
@@ -43,9 +46,6 @@ const ChangePassword = () => {
             : "Password and Confirm Password needs to be the same"}
         </Text>
       </Stack>
-      <Link to="/">
-        <Button>Go back to home</Button>
-      </Link>
     </Box>
   );
 };
