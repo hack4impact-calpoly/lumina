@@ -10,6 +10,7 @@ import {
   Image,
   Center,
 } from "@chakra-ui/react";
+import { isMobile } from "react-device-detect";
 import { Link } from "react-router-dom";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 
@@ -74,8 +75,8 @@ const Signup = () => {
   }
 
   return (
-    <Box mt={5} mb={5} ml="25%" mr="25%">
-      <Stack direction="row" mb="10px">
+    <Box mt={10} ml={isMobile ? "10%" : "30%"} mr={isMobile ? "10%" : "30%"}>
+      <Stack direction="row" mb="30px">
         <Link to="/">
           <Center>
             <ArrowBackIcon w="5" h="5" verticalAlign="50%" />
