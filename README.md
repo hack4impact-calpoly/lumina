@@ -52,6 +52,8 @@ There are a ton of other really cool things that you can do in Chakra UI that I 
 
 **Wiki**: https://chakra-ui.com/
 
+**Chakra Icons**: https://chakra-ui.com/docs/media-and-icons/icon
+
 **Heading Component Wiki**: https://chakra-ui.com/docs/typography/heading
 
 **Detailed information about component properties**: https://chakra-ui.com/docs/features/style-props
