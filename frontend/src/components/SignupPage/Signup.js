@@ -9,6 +9,9 @@ import {
   Text,
   Image,
   Center,
+  HStack,
+  Flex,
+  Spacer,
 } from "@chakra-ui/react";
 import { isMobile } from "react-device-detect";
 import { Link } from "react-router-dom";
@@ -75,18 +78,26 @@ const Signup = () => {
   }
 
   return (
-    <Box mt={10} ml={isMobile ? "10%" : "30%"} mr={isMobile ? "10%" : "30%"}>
-      <Stack direction="row" mb="30px">
-        <Link to="/">
-          <Center>
-            <ArrowBackIcon w="5" h="5" verticalAlign="50%" />
-            <Text ml="20px" mb="2px" fontSize="20px">
-              Login
-            </Text>
-          </Center>
-        </Link>
-        <Image align="center" />
-      </Stack>
+    <Box mt={5} ml={isMobile ? "10%" : "30%"} mr={isMobile ? "10%" : "30%"}>
+      <Flex mb={5}>
+        <Center>
+          <Link to="/">
+            <Center>
+              <ArrowBackIcon w="5" h="5" verticalAlign="50%" />
+              <Text mb="2px" fontSize="20px">
+                Login
+              </Text>
+            </Center>
+          </Link>
+        </Center>
+        <Center flex="1" mr="100px">
+          <Image
+            src="https://slochamber.org/wp-content/uploads/2018/12/RISE_1024.png"
+            w="100px"
+            h="50px"
+          />
+        </Center>
+      </Flex>
       <Heading>Register an account</Heading>
       <Text mb={2}>All fields are required</Text>
       <Stack>
