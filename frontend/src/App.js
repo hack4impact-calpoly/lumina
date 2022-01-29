@@ -1,5 +1,6 @@
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, Box } from "@chakra-ui/react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { isMobile } from "react-device-detect";
 import "./App.css";
 import Signup from "./components/SignupPage/Signup";
 import HomePage from "./components/HomePage/HomePage";
@@ -8,18 +9,25 @@ import AccountCreated from "./components/SignupPage/AccountCreated";
 function App() {
   return (
     <ChakraProvider>
-      <Router>
-        <Routes>
-          <Route exact path="/" element={<HomePage />} />
-          <Route path="/sign-up" element={<Signup />} />
-          <Route
-            path="/account-created"
-            element={
-              <AccountCreated firstName="temp" email="exaple@gmail.com" />
-            }
-          />
-        </Routes>
-      </Router>
+      <Box
+        mt={5}
+        mb={5}
+        ml={isMobile ? "5%" : "30%"}
+        mr={isMobile ? "5%" : "30%"}
+      >
+        <Router>
+          <Routes>
+            <Route exact path="/" element={<HomePage />} />
+            <Route path="/sign-up" element={<Signup />} />
+            <Route
+              path="/account-created"
+              element={
+                <AccountCreated firstName="temp" email="exaple@gmail.com" />
+              }
+            />
+          </Routes>
+        </Router>
+      </Box>
     </ChakraProvider>
   );
 }
