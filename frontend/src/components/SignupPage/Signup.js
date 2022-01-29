@@ -8,8 +8,10 @@ import {
   Checkbox,
   Text,
   Image,
+  Center,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import { ArrowBackIcon } from "@chakra-ui/icons";
 
 const Signup = () => {
   const [name, setName] = useState("");
@@ -58,7 +60,7 @@ const Signup = () => {
   }
 
   function isValidPassword() {
-    return password === confirmPassword && password.length >= 6
+    return password === confirmPassword && password.length >= 6;
   }
 
   function isValidEmail() {
@@ -75,7 +77,12 @@ const Signup = () => {
     <Box mt={5} mb={5} ml="25%" mr="25%">
       <Stack direction="row" mb="10px">
         <Link to="/">
-          <Text>{"< Back"}</Text>
+          <Center>
+            <ArrowBackIcon w="5" h="5" verticalAlign="50%" />
+            <Text ml="20px" mb="2px" fontSize="20px">
+              Login
+            </Text>
+          </Center>
         </Link>
         <Image align="center" />
       </Stack>
@@ -93,7 +100,9 @@ const Signup = () => {
           onChange={(e) => setPhoneNumber(e.target.value)}
         />
         <Text color="red">
-          {validPhoneNumber ? "" : "Not a valid phone number (numbers only, no country code)"}
+          {validPhoneNumber
+            ? ""
+            : "Not a valid phone number (numbers only, no country code)"}
         </Text>
         <Text fontWeight="bold">Password</Text>
         <Input
@@ -123,9 +132,7 @@ const Signup = () => {
 
         <Button onClick={() => register()}>Register</Button>
         <Text color="red">
-          {validForm
-            ? ""
-            : "Please fill out all text boxes"}
+          {validForm ? "" : "Please fill out all text boxes"}
         </Text>
       </Stack>
     </Box>
