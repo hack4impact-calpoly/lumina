@@ -73,7 +73,7 @@ const Signup = () => {
   }
 
   return (
-    <Box mt={5} mb={5} ml={500} mr={500}>
+    <Box mt={5} mb={5} ml={400} mr={400}>
       <Stack direction="row">
         <Link to="/">
           <Button mt={3} mb={3}>
