@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const AccountCreated = ({ firstName, email }) => {
   return (
-    <Box textAlign="center" mt={5} mb={5} ml={400} mr={400}>
+    <Box textAlign="center" mt={5} mb={5} ml="25%" mr="25%">
       <Heading as="h1" mb={8}>
         Account Created
       </Heading>

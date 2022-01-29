@@ -33,7 +33,8 @@ const Signup = () => {
       };
       const goodEmail = isValidEmail();
       const goodPhoneNumber = isValidPhoneNumber();
-      if (goodEmail && goodPhoneNumber) {
+      const goodPassword = isValidPassword();
+      if (goodEmail && goodPhoneNumber && goodPassword) {
         console.log("Valid user!");
       }
     }
@@ -45,16 +46,14 @@ const Signup = () => {
         email !== "" &&
         phoneNumber !== "" &&
         password !== "" &&
-        confirmPassword !== "" &&
-        isValidPassword()
+        confirmPassword !== ""
     );
     return (
       name !== "" &&
       email !== "" &&
       phoneNumber !== "" &&
       password !== "" &&
-      confirmPassword !== "" &&
-      isValidPassword()
+      confirmPassword !== ""
     );
   }
 
@@ -73,11 +72,11 @@ const Signup = () => {
   }
 
   return (
-    <Box mt={5} mb={5} ml={400} mr={400}>
+    <Box mt={5} mb={5} ml="25%" mr="25%">
       <Stack direction="row">
         <Link to="/">
-          <Button mt={3} mb={3}>
-            {"<"}
+          <Button textAlign="right" mt={3} mb={3} bg="white">
+            {"< Back"}
           </Button>
         </Link>
         <Image align="center" />
