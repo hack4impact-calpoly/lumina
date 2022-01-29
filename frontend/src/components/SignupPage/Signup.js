@@ -12,7 +12,6 @@ import {
   InputRightElement,
   InputGroup,
 } from "@chakra-ui/react";
-import { isMobile } from "react-device-detect";
 import { Link } from "react-router-dom";
 import { ArrowBackIcon, ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 

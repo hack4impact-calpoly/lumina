@@ -1,6 +1,5 @@
 import { Button } from "@chakra-ui/button";
 import { Box, Heading, Text } from "@chakra-ui/layout";
-import { isMobile } from "react-device-detect";
 import React from "react";
 import { Link } from "react-router-dom";
 
