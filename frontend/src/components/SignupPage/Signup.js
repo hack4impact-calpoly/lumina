@@ -73,11 +73,9 @@ const Signup = () => {
 
   return (
     <Box mt={5} mb={5} ml="25%" mr="25%">
-      <Stack direction="row">
+      <Stack direction="row" mb="10px">
         <Link to="/">
-          <Button textAlign="right" mt={3} mb={3} bg="white">
-            {"< Back"}
-          </Button>
+          <Text>{"< Back"}</Text>
         </Link>
         <Image align="center" />
       </Stack>
