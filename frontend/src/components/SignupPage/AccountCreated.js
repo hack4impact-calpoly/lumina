@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const AccountCreated = ({ firstName, email }) => {
   return (
-    <Box textAlign="center" mt={5} mb={5} ml={isMobile ? "10%" : "30%"} mr={isMobile ? "10%" : "30%"}>
+    <Box textAlign="center">
       <Heading as="h1" mb={8}>
         Account Created
       </Heading>

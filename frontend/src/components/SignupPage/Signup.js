@@ -78,7 +78,7 @@ const Signup = () => {
   }
 
   return (
-    <Box mt={5} ml={isMobile ? "10%" : "30%"} mr={isMobile ? "10%" : "30%"}>
+    <Box>
       <Flex mb={5}>
         <Center>
           <Link to="/">
