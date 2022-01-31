@@ -9,6 +9,7 @@ const LogoWithBack = ({back}) => {
       <Link to={back}>
         <Center>
           <IconButton
+            variant="animated"
             icon={<ArrowBackIcon w="5" h="5" verticalAlign="50%" />}
           />
         </Center>
