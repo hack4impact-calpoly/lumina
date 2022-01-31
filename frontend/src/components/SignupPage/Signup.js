@@ -9,11 +9,12 @@ import {
   Image,
   Center,
   Flex,
-  InputRightElement,
-  InputGroup,
+  IconButton,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import { ArrowBackIcon, ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
+import { ArrowBackIcon } from "@chakra-ui/icons";
+import PasswordInput from "../SharedComponents/PasswordInput";
+import LogoWithBack from "../SharedComponents/LogoWithBack";
 
 const Signup = () => {
   const [name, setName] = useState("");
@@ -77,25 +78,7 @@ const Signup = () => {
 
   return (
     <Box>
-      <Flex mb={5}>
-        <Center>
-          <Link to="/">
-            <Center>
-              <ArrowBackIcon w="5" h="5" verticalAlign="50%" />
-              <Text mb="2px" fontSize="20px">
-                Login
-              </Text>
-            </Center>
-          </Link>
-        </Center>
-        <Center flex="1" mr="100px">
-          <Image
-            src="https://slochamber.org/wp-content/uploads/2018/12/RISE_1024.png"
-            w="100px"
-            h="50px"
-          />
-        </Center>
-      </Flex>
+      <LogoWithBack back="/"/>
       <Heading>Register an account</Heading>
       <Text mb={2}>All fields are required</Text>
       <Stack>
@@ -115,39 +98,23 @@ const Signup = () => {
             : "Not a valid phone number (numbers only, no country code)"}
         </Text>
         <Text fontWeight="bold">Password</Text>
-        <InputGroup>
-          <Input
-            placeholder="Password"
-            type={showPassword ? "text" : "password"}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <InputRightElement w="5.5rem">
-            <Button onClick={() => setShowPassword(!showPassword)}>
-              <Text mr="9px">{showPassword ? "Hide" : "Show"}</Text>
-              {showPassword ? <ViewOffIcon /> : <ViewIcon />}
-            </Button>
-          </InputRightElement>
-        </InputGroup>
-
+        <PasswordInput
+          setPassword={setPassword}
+          showPassword={showPassword}
+          setShowPassword={setShowPassword}
+        />
         <Text color="red">
           {password.length >= 6
             ? ""
             : "Passwords must be at least 6 characters long"}
         </Text>
         <Text fontWeight="bold">Confirm Password</Text>
-        <InputGroup>
-          <Input
-            placeholder="Confirm Password"
-            type={showPassword ? "text" : "password"}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          />
-          <InputRightElement w="5.5rem">
-            <Button onClick={() => setShowPassword(!showPassword)}>
-              <Text mr="9px">{showPassword ? "Hide" : "Show"}</Text>
-              {showPassword ? <ViewOffIcon /> : <ViewIcon />}
-            </Button>
-          </InputRightElement>
-        </InputGroup>
+        <PasswordInput
+          placeholder="Confirm Password"
+          setPassword={setConfirmPassword}
+          showPassword={showPassword}
+          setShowPassword={setShowPassword}
+        />
         <Text color="red">
           {password === confirmPassword
             ? ""
