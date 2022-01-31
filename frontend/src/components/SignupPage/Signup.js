@@ -9,11 +9,11 @@ import {
   Image,
   Center,
   Flex,
-  InputRightElement,
-  InputGroup,
+  IconButton,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import { ArrowBackIcon, ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
+import { ArrowBackIcon } from "@chakra-ui/icons";
+import PasswordInput from "../SharedComponents/PasswordInput";
 
 const Signup = () => {
   const [name, setName] = useState("");
@@ -81,10 +81,9 @@ const Signup = () => {
         <Center>
           <Link to="/">
             <Center>
-              <ArrowBackIcon w="5" h="5" verticalAlign="50%" />
-              <Text mb="2px" fontSize="20px">
-                Login
-              </Text>
+              <IconButton
+                icon={<ArrowBackIcon w="5" h="5" verticalAlign="50%" />}
+              />
             </Center>
           </Link>
         </Center>
@@ -115,39 +114,23 @@ const Signup = () => {
             : "Not a valid phone number (numbers only, no country code)"}
         </Text>
         <Text fontWeight="bold">Password</Text>
-        <InputGroup>
-          <Input
-            placeholder="Password"
-            type={showPassword ? "text" : "password"}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <InputRightElement w="5.5rem">
-            <Button onClick={() => setShowPassword(!showPassword)}>
-              <Text mr="9px">{showPassword ? "Hide" : "Show"}</Text>
-              {showPassword ? <ViewOffIcon /> : <ViewIcon />}
-            </Button>
-          </InputRightElement>
-        </InputGroup>
-
+        <PasswordInput
+          setPassword={setPassword}
+          showPassword={showPassword}
+          setShowPassword={setShowPassword}
+        />
         <Text color="red">
           {password.length >= 6
             ? ""
             : "Passwords must be at least 6 characters long"}
         </Text>
         <Text fontWeight="bold">Confirm Password</Text>
-        <InputGroup>
-          <Input
-            placeholder="Confirm Password"
-            type={showPassword ? "text" : "password"}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          />
-          <InputRightElement w="5.5rem">
-            <Button onClick={() => setShowPassword(!showPassword)}>
-              <Text mr="9px">{showPassword ? "Hide" : "Show"}</Text>
-              {showPassword ? <ViewOffIcon /> : <ViewIcon />}
-            </Button>
-          </InputRightElement>
-        </InputGroup>
+        <PasswordInput
+          placeholder="Confirm Password"
+          setPassword={setConfirmPassword}
+          showPassword={showPassword}
+          setShowPassword={setShowPassword}
+        />
         <Text color="red">
           {password === confirmPassword
             ? ""
