@@ -1,11 +1,6 @@
 import React, { useState } from "react";
-import {
-  Box,
-  Button,
-  Heading,
-  Text,
-  useColorModeValue,
-} from "@chakra-ui/react";
+import { Box, Button, Heading, Text } from "@chakra-ui/react";
+import { Card } from "../SharedComponents/Card";
 import LogoWithBack from "../SharedComponents/LogoWithBack";
 import FormInput from "../SharedComponents/FormInput";
 import { useNavigate } from "react-router-dom";
@@ -26,7 +21,8 @@ const Signup = () => {
   const [validEmail, setValidEmail] = useState(true);
   const [validPhoneNumber, setValidPhoneNumber] = useState(true);
   const [validPassword, setValidPassword] = useState(true);
-  const [samePasswordConfirmPassword, setSamePasswordConfirmPassword] = useState(true);
+  const [samePasswordConfirmPassword, setSamePasswordConfirmPassword] =
+    useState(true);
   const [showPassword, setShowPassword] = useState(false);
 
   function register() {
@@ -42,12 +38,12 @@ const Signup = () => {
       NUMBER_REGEX.test(phoneNumber) && phoneNumber.length === 10;
     if (!goodPhoneNumber) setValidPhoneNumber(false);
     else setValidPhoneNumber(true);
-    const goodPassword = password.length >= 6
-    if(!goodPassword) setValidPassword(false)
-    else setValidPassword(true)
-    const identicalPassword = password === confirmPassword
-    if(!identicalPassword) setSamePasswordConfirmPassword(false)
-    else setSamePasswordConfirmPassword(true)
+    const goodPassword = password.length >= 6;
+    if (!goodPassword) setValidPassword(false);
+    else setValidPassword(true);
+    const identicalPassword = password === confirmPassword;
+    if (!identicalPassword) setSamePasswordConfirmPassword(false);
+    else setSamePasswordConfirmPassword(true);
     return (
       goodName &&
       email !== "" &&
@@ -66,12 +62,7 @@ const Signup = () => {
       <LogoWithBack back="/" />
       <Heading>Register an account</Heading>
       <Text mb={2}>All fields are required</Text>
-      <Box
-        rounded={"lg"}
-        bg={useColorModeValue("white", "gray.700")}
-        boxShadow={"lg"}
-        p={8}
-      >
+      <Card>
         <FormInput
           id="firstname"
           isInvalid={firstName === ""}
@@ -105,7 +96,9 @@ const Signup = () => {
           errorMessage="Phone Number is required"
           onChange={(e) => setPhoneNumber(e.target.value)}
         />
-        <Text color="red">{validPhoneNumber ? "" : "Invalid Phone Number (numbers only)"}</Text>
+        <Text color="red">
+          {validPhoneNumber ? "" : "Invalid Phone Number (numbers only)"}
+        </Text>
         <FormInput
           id="password"
           isInvalid={password === ""}
@@ -117,7 +110,9 @@ const Signup = () => {
           setShowPassword={setShowPassword}
           showPassword={showPassword}
         />
-        <Text color={validPassword ? "black" : "red"} fontSize="14px">*Password must be at least 6 characters long</Text>
+        <Text color={validPassword ? "black" : "red"} fontSize="14px">
+          *Password must be at least 6 characters long
+        </Text>
         <FormInput
           id="confirmPassword"
           isInvalid={confirmPassword === ""}
@@ -129,21 +124,22 @@ const Signup = () => {
           setShowPassword={setShowPassword}
           showPassword={showPassword}
         />
-        <Text color="red">{samePasswordConfirmPassword ? "" : "Password and Confirm Password must be the same"}</Text>
+        <Text color="red">
+          {samePasswordConfirmPassword
+            ? ""
+            : "Password and Confirm Password must be the same"}
+        </Text>
         <Button
+          variant="animated"
           w="100%"
           mt={3}
           color="white"
           bg="teal"
           onClick={() => register()}
-          _hover={{
-            transform: "translateY(-2px)",
-            boxShadow: "lg",
-          }}
         >
           Register
         </Button>
-      </Box>
+      </Card>
     </Box>
   );
 };

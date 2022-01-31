@@ -5,10 +5,11 @@ import "./App.css";
 import Signup from "./components/SignupPage/Signup";
 import HomePage from "./components/HomePage/HomePage";
 import AccountCreated from "./components/SignupPage/AccountCreated";
+import theme from "./theme";
 
 function App() {
   return (
-    <ChakraProvider>
+    <ChakraProvider theme={theme}>
       <Box
         mt={5}
         mb={5}
