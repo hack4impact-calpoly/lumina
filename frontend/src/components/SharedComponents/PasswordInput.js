@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { ViewOffIcon, ViewIcon } from "@chakra-ui/icons";
 import {
   InputGroup,
