@@ -24,7 +24,13 @@ const PasswordInput = ({
         onChange={(e) => setPassword(e.target.value)}
       />
       <InputRightElement w="5.5rem">
-        <Button onClick={() => setShowPassword(!showPassword)}>
+        <Button
+          bg="rgba(255, 255, 255, 0)"
+          onClick={() => setShowPassword(!showPassword)}
+          _hover={{
+            bg:"rgba(255, 255, 255, 0)"
+          }}
+        >
           <Text mr="9px">{showPassword ? "Hide" : "Show"}</Text>
           {showPassword ? <ViewOffIcon /> : <ViewIcon />}
         </Button>
