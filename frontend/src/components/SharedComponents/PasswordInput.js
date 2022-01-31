@@ -28,7 +28,7 @@ const PasswordInput = ({
           bg="rgba(255, 255, 255, 0)"
           onClick={() => setShowPassword(!showPassword)}
           _hover={{
-            bg:"rgba(255, 255, 255, 0)"
+            bg: "rgba(255, 255, 255, 0)",
           }}
         >
           <Text mr="9px">{showPassword ? "Hide" : "Show"}</Text>

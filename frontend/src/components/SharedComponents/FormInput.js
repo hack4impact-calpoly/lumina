@@ -14,7 +14,7 @@ const FormInput = (props) => {
         {props.label}
       </FormLabel>
       {props.type === "password" ? (
-        <PasswordInput {...props}/>
+        <PasswordInput {...props} />
       ) : (
         <Input
           id={props.htmlFor}

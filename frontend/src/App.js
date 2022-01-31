@@ -20,12 +20,7 @@ function App() {
           <Routes>
             <Route exact path="/" element={<HomePage />} />
             <Route path="/sign-up" element={<Signup />} />
-            <Route
-              path="/account-created"
-              element={
-                <AccountCreated firstName="temp" email="exaple@gmail.com" />
-              }
-            />
+            <Route path="/account-created" element={<AccountCreated />} />
           </Routes>
         </Router>
       </Box>

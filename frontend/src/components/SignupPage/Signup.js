@@ -4,8 +4,8 @@ import { Card } from "../SharedComponents/Card";
 import LogoWithBack from "../SharedComponents/LogoWithBack";
 import FormInput from "../SharedComponents/FormInput";
 import { useNavigate } from "react-router-dom";
-import { storeEmail, storeName } from './SignUpSlice'
-import { useDispatch } from 'react-redux'
+import { storeEmail, storeName } from "./SignUpSlice";
+import { useDispatch } from "react-redux";
 
 const EMAIL_REGEX =
   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -13,7 +13,7 @@ const NUMBER_REGEX = /^\d+$/;
 
 const Signup = () => {
   let navigate = useNavigate();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -31,10 +31,10 @@ const Signup = () => {
 
   function register() {
     if (isValidForm()) {
-      dispatch(storeEmail(email))
-      dispatch(storeName(firstName))
-      navigate("/account-created")
-    };
+      dispatch(storeEmail(email));
+      dispatch(storeName(firstName));
+      navigate("/account-created");
+    }
   }
 
   function isValidForm() {
