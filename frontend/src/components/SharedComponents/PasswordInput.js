@@ -11,7 +11,7 @@ import {
 // Show input states MUST be held within the parent component
 
 const PasswordInput = ({
-  label,
+  placeholder,
   setPassword,
   showPassword,
   setShowPassword,
@@ -19,7 +19,7 @@ const PasswordInput = ({
   return (
     <InputGroup>
       <Input
-        placeholder={label}
+        placeholder={placeholder}
         type={showPassword ? "text" : "password"}
         onChange={(e) => setPassword(e.target.value)}
       />

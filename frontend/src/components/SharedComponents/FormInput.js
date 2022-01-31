@@ -19,7 +19,7 @@ const FormInput = (props) => {
         <Input
           id={props.htmlFor}
           onChange={props.onChange}
-          placeholder={props.label}
+          placeholder={props.placeholder}
         />
       )}
 
