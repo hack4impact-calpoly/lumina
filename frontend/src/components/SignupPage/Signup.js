@@ -6,13 +6,7 @@ import {
   Stack,
   Input,
   Text,
-  Image,
-  Center,
-  Flex,
-  IconButton,
 } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
-import { ArrowBackIcon } from "@chakra-ui/icons";
 import PasswordInput from "../SharedComponents/PasswordInput";
 import LogoWithBack from "../SharedComponents/LogoWithBack";
 
