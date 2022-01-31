@@ -13,8 +13,6 @@ function App() {
       <Box
         mt={5}
         mb={5}
-        ml={isMobile ? "5%" : "30%"}
-        mr={isMobile ? "5%" : "30%"}
       >
         <Router>
           <Routes>

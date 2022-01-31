@@ -1,4 +1,5 @@
 import { extendTheme } from "@chakra-ui/react";
+import { isMobile } from "react-device-detect";
 
 const Card = {
   // The styles all Cards have in common
@@ -26,6 +27,13 @@ const Card = {
   },
 };
 
+const CenterBox ={
+  baseStyle : {
+    mr: isMobile ? "5%" : "25%",
+    ml: isMobile ? "5%" : "25%",
+  }
+}
+
 const Button = {
   variants: {
     animated: {
@@ -40,6 +48,7 @@ const Button = {
 const theme = extendTheme({
   components: {
     Card,
+    CenterBox,
     Button,
   },
 });

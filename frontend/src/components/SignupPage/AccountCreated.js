@@ -4,13 +4,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 import LogoWithBack from "../SharedComponents/LogoWithBack";
 import { useSelector } from "react-redux";
+import { CenterBox } from "../SharedComponents/CenterBox";
 
 const AccountCreated = () => {
   const name = useSelector((state) => state.signUp.name.payload);
   const email = useSelector((state) => state.signUp.email.payload);
   return (
-    <Box textAlign="center">
-      <LogoWithBack back="/" />
+    <CenterBox textAlign="center">
+      <LogoWithBack/>
       <Heading as="h1" mb={8}>
         Account Created
       </Heading>
@@ -33,7 +34,7 @@ const AccountCreated = () => {
           Return to Login
         </Button>
       </Link>
-    </Box>
+    </CenterBox>
   );
 };
 

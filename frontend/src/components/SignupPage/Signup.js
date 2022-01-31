@@ -6,6 +6,7 @@ import FormInput from "../SharedComponents/FormInput";
 import { useNavigate } from "react-router-dom";
 import { storeEmail, storeName } from "./SignUpSlice";
 import { useDispatch } from "react-redux";
+import { CenterBox } from "../SharedComponents/CenterBox";
 
 const EMAIL_REGEX =
   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -66,7 +67,7 @@ const Signup = () => {
   }
 
   return (
-    <Box>
+    <CenterBox>
       <LogoWithBack back="/" />
       <Heading>Register an account</Heading>
       <Text mb={2}>All fields are required</Text>
@@ -148,7 +149,7 @@ const Signup = () => {
           Register
         </Button>
       </Card>
-    </Box>
+    </CenterBox>
   );
 };
 
