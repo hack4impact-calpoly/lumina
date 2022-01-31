@@ -72,7 +72,7 @@ const Signup = () => {
       <Text mb={2}>All fields are required</Text>
       <Card>
         <FormInput
-          id="firstname"
+          id="firstName"
           isInvalid={firstName === ""}
           label="First Name"
           placeholder="John"
