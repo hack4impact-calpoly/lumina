@@ -1,4 +1,4 @@
-import { Box, useStyleConfig } from "@chakra-ui/react";
+import { Box, Center, useStyleConfig } from "@chakra-ui/react";
 
 export function CenterBox(props) {
   const { variant, children, ...rest } = props;
@@ -7,8 +7,10 @@ export function CenterBox(props) {
 
   // Pass the computed styles into the `__css` prop
   return (
-    <Box __css={styles} {...rest}>
-      {props.children}
-    </Box>
+    <Center>
+      <Box __css={styles} {...rest}>
+        {props.children}
+      </Box>
+    </Center>
   );
 }

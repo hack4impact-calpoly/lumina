@@ -29,8 +29,7 @@ const Card = {
 
 const CenterBox ={
   baseStyle : {
-    mr: isMobile ? "5%" : "25%",
-    ml: isMobile ? "5%" : "25%",
+    w: isMobile ? "95%" : "900px",
   }
 }
 
