@@ -8,7 +8,12 @@ import {
   Text,
 } from "@chakra-ui/react";
 
-// Show input states MUST be held within the parent component
+// Generic password input box with a show and hide right element button
+// Show password states MUST be handled in the parent component
+// Accepted Props:
+// placeholder (optional)
+// setPassword (required)
+// showPassword, setShowPassword (required)
 
 const PasswordInput = ({
   placeholder,

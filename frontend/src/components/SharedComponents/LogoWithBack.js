@@ -2,6 +2,11 @@ import React from "react";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import { Flex, Center, IconButton, Image, Box } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+
+// Consists of the Rise logo with an optional back button
+// Accepted props:
+// 'back="/link-here"' - designates what the back button does, if not included the back button will not render
+
 const LogoWithBack = ({ back }) => {
   return (
     <Flex mb={5}>

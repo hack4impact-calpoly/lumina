@@ -1,5 +1,9 @@
 import { Box, useStyleConfig } from "@chakra-ui/react";
 
+// Generic Card component, essentially a box with an undershadow
+// Accepted props:
+// All props that <Box> accepts, <Card> also accepts (i.e. 'mt', 'w', 'h', etc.)
+
 export function Card(props) {
   const { variant, children, ...rest } = props;
 

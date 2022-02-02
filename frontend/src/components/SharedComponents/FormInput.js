@@ -22,6 +22,7 @@ import PasswordInput from "./PasswordInput";
 // onChange
 // type (password or not)
 // errorMessage
+// Also accepts all <PasswordInput> properties
 // See signup page for examples
 
 

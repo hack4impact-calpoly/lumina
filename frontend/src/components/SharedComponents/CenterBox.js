@@ -1,5 +1,7 @@
 import { Box, Center, useStyleConfig } from "@chakra-ui/react";
 
+// Box that keeps its children at the center of the screen, limited to 95% of screen on mobile or 900px on desktop
+
 export function CenterBox(props) {
   const { variant, children, ...rest } = props;
 
