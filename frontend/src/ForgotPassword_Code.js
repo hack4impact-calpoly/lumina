@@ -4,6 +4,7 @@ import {
   Button,
   Heading,
   Stack,
+  VStack,
   Input,
   Text,
   Image,
@@ -11,6 +12,7 @@ import {
   Flex,
   InputRightElement,
   InputGroup,
+  Spacer,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { ArrowBackIcon, ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
@@ -41,15 +43,26 @@ const ForgotPassword_Code = ({email}) => {
                 </Center>
             </Flex>
 
+            <Center>
             <Heading>Forgot Password</Heading>
+            </Center>
+            <Center>
             <Text>An email has been sent to {email} to verify that you are trying to change your password.</Text>
+            </Center>
 
+            <Center>
             <Stack>
+                
                 <Text fontWeight="bold">Please enter the verification code:</Text>
-                <Input onChange={(e) => setCode(e.target.value)}/>
-
-                <Button>Submit</Button>
+                
+                <Input width="300px" onChange={(e) => setCode(e.target.value)}/>
+                
+                
+                <Button colorScheme='red' width="150px">Submit</Button>
+                
             </Stack>
+            </Center>
+            
         </Box>
     );
 };

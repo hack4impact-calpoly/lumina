@@ -18,7 +18,7 @@ import { ArrowBackIcon, ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 const ForgotPassword_Email = () => {
     const [email, setEmail] = useState("");
 
-    function sumbit() {
+    function submit() {
         const userEmail = {
             email: email
         }
@@ -46,16 +46,24 @@ const ForgotPassword_Email = () => {
                 </Center>
             </Flex>
 
+            <Center>
             <Heading>Forgot Password</Heading>
+            </Center>
+            <Center>
             <Text mb={2}>Please enter the email that your RISE volunteer account is associated with.</Text>
-
+            </Center>
+            
+            <Center>
             <Stack>
+                
                 <Text fontWeight="bold">Email</Text>
                 <Input
+                    width="300px"
                     onChange={(e) => setEmail(e.target.value)}/>
 
-                <Button> Sumbit </Button>
+                <Button width="150px" colorScheme='red' onClick={() => submit()}> Sumbit </Button>
             </Stack>
+            </Center>
         </Box>
     );
 
