@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Button, Heading, Text } from "@chakra-ui/react";
+import { Button, Heading, Text } from "@chakra-ui/react";
 import { Card } from "../SharedComponents/Card";
 import LogoWithBack from "../SharedComponents/LogoWithBack";
 import FormInput from "../SharedComponents/FormInput";

@@ -1,6 +1,5 @@
 import { ChakraProvider, Box } from "@chakra-ui/react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { isMobile } from "react-device-detect";
 import "./App.css";
 import Signup from "./components/SignupPage/Signup";
 import HomePage from "./components/HomePage/HomePage";
