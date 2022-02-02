@@ -13,16 +13,16 @@ import PasswordInput from "./PasswordInput";
 
 // Generic Input for a form, includes a <FormControl>, <FormLabel>, <Input>, <FormErrorMessage>, etc.
 // Available props:
-// id
-// isInvalid
-// label
-// leftElement
-// rightElement
-// placeholder
-// onChange
+// id (required)
+// isInvalid (optional)
+// label (required)
+// leftElement (optional)
+// rightElement (optional)
+// placeholder (optional)
+// onChange (required)
 // type (password or not)
-// errorMessage
-// Also accepts all <PasswordInput> properties
+// errorMessage (optional)
+// Also accepts all <PasswordInput> properties (required if type === 'password')
 // See signup page for examples
 
 
