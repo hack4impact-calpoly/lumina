@@ -24,6 +24,7 @@ import { ViewOffIcon, ViewIcon } from "@chakra-ui/icons";
 // onChange (required)
 // type (password or not)
 // errorMessage (optional)
+// isRequired (optional)
 // Also accepts all <PasswordInput> properties (required if type === 'password')
 // See signup page for examples
 
