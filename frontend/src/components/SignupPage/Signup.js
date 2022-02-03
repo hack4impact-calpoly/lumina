@@ -1,11 +1,9 @@
 import React, { useState } from "react";
-import { Button, Heading, Text } from "@chakra-ui/react";
+import { Box, Button, Heading, Text } from "@chakra-ui/react";
 import { Card } from "../SharedComponents/Card";
 import LogoWithBack from "../SharedComponents/LogoWithBack";
 import FormInput from "../SharedComponents/FormInput";
-import { useNavigate } from "react-router-dom";
-import { storeEmail, storeName } from "./SignUpSlice";
-import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { CenterBox } from "../SharedComponents/CenterBox";
 
 const EMAIL_REGEX =
@@ -13,12 +11,67 @@ const EMAIL_REGEX =
 const NUMBER_REGEX = /^\d+$/;
 
 const Signup = () => {
-  let navigate = useNavigate();
-  const dispatch = useDispatch();
-
   const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+
   const [email, setEmail] = useState("");
+
+  const [accountCreated, setAccountCreated] = useState(false);
+
+  return (
+    <CenterBox>
+      {accountCreated ? (
+        <AccountCreated name={firstName} email={email} />
+      ) : (
+        <SignupForm
+          firstName={firstName}
+          setFirstName={setFirstName}
+          email={email}
+          setEmail={setEmail}
+          setAccountCreated={setAccountCreated}
+        />
+      )}
+    </CenterBox>
+  );
+};
+
+const AccountCreated = ({ name, email }) => {
+  return (
+    <CenterBox textAlign="center">
+      <LogoWithBack />
+      <Heading as="h1" mb={8}>
+        Account Created
+      </Heading>
+      <Heading as="h2" mb={5}>
+        Hi, {name}!
+      </Heading>
+      <Text mb={6}>
+        An account has been created using the email{" "}
+        {<Text fontWeight="bold">{email}</Text>} which will be used to log in to
+        the Lumina Alliance volunteer system.
+      </Text>
+      <Text mb={6}>
+        Please wait 3-5 business days for your account to become active, as you
+        will not be able to access the volunteer system until a staff member
+        approves your account.
+      </Text>
+      <Text mb={6}>Thank you for volunteering with Lumina Alliance!</Text>
+      <Link to="/">
+        <Button color="white" bg="teal" variant="animated">
+          Return to Login
+        </Button>
+      </Link>
+    </CenterBox>
+  );
+};
+
+const SignupForm = ({
+  firstName,
+  setFirstName,
+  email,
+  setEmail,
+  setAccountCreated,
+}) => {
+  const [lastName, setLastName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -32,9 +85,7 @@ const Signup = () => {
 
   function register() {
     if (isValidForm()) {
-      dispatch(storeEmail(email));
-      dispatch(storeName(firstName));
-      navigate("/account-created");
+      setAccountCreated(true);
     }
   }
 
@@ -67,7 +118,7 @@ const Signup = () => {
   }
 
   return (
-    <CenterBox>
+    <Box>
       <LogoWithBack back="/" />
       <Heading>Register an account</Heading>
       <Text mb={2}>All fields are required</Text>
@@ -149,7 +200,7 @@ const Signup = () => {
           Register
         </Button>
       </Card>
-    </CenterBox>
+    </Box>
   );
 };
 

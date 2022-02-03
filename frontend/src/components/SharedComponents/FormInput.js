@@ -8,8 +8,10 @@ import {
   InputRightElement,
   InputLeftElement,
   Box,
+  Button,
+  Text
 } from "@chakra-ui/react";
-import PasswordInput from "./PasswordInput";
+import { ViewOffIcon, ViewIcon } from "@chakra-ui/icons";
 
 // Generic Input for a form, includes a <FormControl>, <FormLabel>, <Input>, <FormErrorMessage>, etc.
 // Available props:
@@ -57,5 +59,35 @@ const FormInput = (props) => {
     </FormControl>
   );
 };
+
+const PasswordInput = ({
+  placeholder,
+  setPassword,
+  showPassword,
+  setShowPassword,
+}) => {
+  return (
+    <InputGroup>
+      <Input
+        placeholder={placeholder}
+        type={showPassword ? "text" : "password"}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <InputRightElement w="5.5rem">
+        <Button
+          bg="rgba(255, 255, 255, 0)"
+          onClick={() => setShowPassword(!showPassword)}
+          _hover={{
+            bg: "rgba(255, 255, 255, 0)",
+          }}
+        >
+          <Text mr="9px">{showPassword ? "Hide" : "Show"}</Text>
+          {showPassword ? <ViewOffIcon /> : <ViewIcon />}
+        </Button>
+      </InputRightElement>
+    </InputGroup>
+  );
+};
+
 
 export default FormInput;
