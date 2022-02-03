@@ -130,6 +130,7 @@ const SignupForm = ({
           placeholder="John"
           errorMessage="First name is required"
           onChange={(e) => setFirstName(e.target.value)}
+          isRequired
         />
         <FormInput
           id="lastName"
@@ -138,6 +139,7 @@ const SignupForm = ({
           placeholder="Doe"
           errorMessage="Last name is required"
           onChange={(e) => setLastName(e.target.value)}
+          isRequired
         />
         <FormInput
           id="email"
@@ -146,6 +148,7 @@ const SignupForm = ({
           placeholder="example@example.com"
           errorMessage="Email is required"
           onChange={(e) => setEmail(e.target.value)}
+          isRequired
         />
         <Text color="red">{validEmail ? "" : "Invalid Email"}</Text>
         <FormInput
@@ -155,6 +158,7 @@ const SignupForm = ({
           placeholder="+1 (___)___-____"
           errorMessage="Phone Number is required"
           onChange={(e) => setPhoneNumber(e.target.value)}
+          isRequired
         />
         <Text color="red">
           {validPhoneNumber ? "" : "Invalid Phone Number (numbers only)"}
@@ -169,6 +173,7 @@ const SignupForm = ({
           setPassword={setPassword}
           setShowPassword={setShowPassword}
           showPassword={showPassword}
+          isRequired
         />
         <Text color={validPassword ? "black" : "red"} fontSize="14px">
           *Password must be at least 6 characters long
@@ -183,6 +188,7 @@ const SignupForm = ({
           setPassword={setConfirmPassword}
           setShowPassword={setShowPassword}
           showPassword={showPassword}
+          isRequired
         />
         <Text color="red">
           {samePasswordConfirmPassword

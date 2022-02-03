@@ -30,7 +30,7 @@ import { ViewOffIcon, ViewIcon } from "@chakra-ui/icons";
 
 const FormInput = (props) => {
   return (
-    <FormControl isRequired isInvalid={props.isInvalid}>
+    <FormControl {...props} isInvalid={props.isInvalid}>
       <FormLabel htmlFor={props.id} fontWeight="bold">
         {props.label}
       </FormLabel>
