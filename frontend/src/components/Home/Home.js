@@ -29,7 +29,7 @@ const Home = () => {
     <Box>
       <LogoWithBack boxShadow="md" />
       <Flex>
-        <Sidebar setMainContent={setMainContent} />
+        <Sidebar mainContent={mainContent} setMainContent={setMainContent} />
         <Flex mt="30px" ml="70px">
           {switchMainComponent()}
         </Flex>
@@ -38,7 +38,7 @@ const Home = () => {
   );
 };
 
-const Sidebar = ({ setMainContent }) => {
+const Sidebar = ({ mainContent, setMainContent }) => {
   return (
     <Card w="300px" h="100%" flexDir="column" pos="sticky">
       <Link to="/">
@@ -58,24 +58,28 @@ const Sidebar = ({ setMainContent }) => {
           icon={FiHome}
           w="100%"
           onClick={() => setMainContent("")}
+          bg={mainContent === "" ? "teal.400" : "white"}
         />
         <SidebarItem
           name="Calendar"
           icon={FiCalendar}
           w="100%"
           onClick={() => setMainContent("calendar")}
+          bg={mainContent === "calendar" ? "teal.400" : "white"}
         />
         <SidebarItem
           name="Directory"
           icon={FiMenu}
           w="100%"
           onClick={() => setMainContent("directory")}
+          bg={mainContent === "directory" ? "teal.400" : "white"}
         />
         <SidebarItem
           name="Profile"
           icon={FiUser}
           w="100%"
           onClick={() => setMainContent("profile")}
+          bg={mainContent === "profile" ? "teal.400" : "white"}
         />
       </VStack>
     </Card>
@@ -90,19 +94,15 @@ const SidebarItem = ({ icon, name, ...rest }) => {
       p="4"
       mx="4"
       borderRadius="lg"
-      role="group"
       cursor="pointer"
       _hover={{
-        bg: "cyan.400",
+        bg: "teal.400",
         color: "white",
       }}
     >
       <Icon
         mr="4"
         fontSize="16"
-        _groupHover={{
-          color: "white",
-        }}
         as={icon}
       />
       <Text fontSize="20px">{name}</Text>
