@@ -61,9 +61,12 @@ const ForgotPassword_Email = () => {
                     width="300px"
                     onChange={(e) => setEmail(e.target.value)}/>
 
-                <Button width="150px" colorScheme='red' onClick={() => submit()}> Sumbit </Button>
             </Stack>
-            </Center>
+            </Center>           
+
+            <Flex>
+                <Button mt= "30px" ml="725px" width="150px" colorScheme='red' onClick={() => submit()}> Sumbit </Button>
+            </Flex>
         </Box>
     );
 
