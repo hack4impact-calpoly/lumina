@@ -8,6 +8,7 @@ import Calendar from "./Calendar";
 import Dashboard from "./Dashboard";
 import Profile from "./Profile";
 import { Card } from "../SharedComponents/Card";
+import { BrowserView, MobileView } from "react-device-detect";
 
 const Home = () => {
   const [mainContent, setMainContent] = useState("");
@@ -27,6 +28,24 @@ const Home = () => {
 
   return (
     <Box>
+      <BrowserView>
+        <HomeBrowser mainContent={mainContent} setMainContent={setMainContent} switchMainComponent={switchMainComponent} />
+      </BrowserView>
+      <MobileView>
+        <HomeMobile mainContent={mainContent} setMainContent={setMainContent} switchMainComponent={switchMainComponent} />
+      </MobileView>
+    </Box>
+  );
+};
+
+const HomeBrowser = ({
+  mainContent,
+  setMainContent,
+  switchMainComponent,
+  ...rest
+}) => {
+  return (
+    <Box {...rest}>
       <LogoWithBack
         position="fixed"
         boxShadow="md"
@@ -46,6 +65,19 @@ const Home = () => {
           {switchMainComponent()}
         </Flex>
       </Flex>
+    </Box>
+  );
+};
+
+const HomeMobile = ({
+  mainContent,
+  setMainContent,
+  switchMainComponent,
+  ...rest
+}) => {
+  return (
+    <Box {...rest}>
+      MOBILE HOME
     </Box>
   );
 };
