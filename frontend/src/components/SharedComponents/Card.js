@@ -1,4 +1,4 @@
-import { Box, useStyleConfig } from "@chakra-ui/react";
+import { Flex, useStyleConfig } from "@chakra-ui/react";
 
 // Generic Card component, essentially a box with an undershadow
 // Accepted props:
@@ -11,8 +11,8 @@ export function Card(props) {
 
   // Pass the computed styles into the `__css` prop
   return (
-    <Box __css={styles} {...rest}>
+    <Flex __css={styles} {...rest}>
       {props.children}
-    </Box>
+    </Flex>
   );
 }

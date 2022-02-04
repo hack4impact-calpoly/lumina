@@ -7,12 +7,12 @@ import { Link } from "react-router-dom";
 // Accepted props:
 // 'back="/link-here"' - designates what the back button does, if not included the back button will not render
 
-const LogoWithBack = ({ back }) => {
+const LogoWithBack = (props) => {
   return (
-    <Flex mb={5}>
+    <Flex mb={5} {...props}>
       <Center>
-        {back ? (
-          <Link to={back}>
+        {props.back ? (
+          <Link to={props.back}>
             <Center>
               <IconButton
                 variant="animated"
@@ -24,7 +24,7 @@ const LogoWithBack = ({ back }) => {
           <Box></Box>
         )}
       </Center>
-      <Center flex="1" mr={back ? "40px" : "0px"}>
+      <Center flex="1" mr={props.back ? "40px" : "0px"}>
         <Image
           src="https://slochamber.org/wp-content/uploads/2018/12/RISE_1024.png"
           w="100px"
