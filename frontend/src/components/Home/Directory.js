@@ -8,17 +8,87 @@ import {
   Text,
   VStack,
   IconButton,
-  Center,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { Card } from "../SharedComponents/Card";
 import FormInput from "../SharedComponents/FormInput";
 import { BrowserView, MobileView } from "react-device-detect";
-import { CenterBox } from "../SharedComponents/CenterBox";
 
 const Directory = () => {
   const [name, setName] = useState("");
   const [contactList, setContactList] = useState([
+    {
+      name: "First Last",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "First Last",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "First Last",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "First Last",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "First Last",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "First Last",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "First Last",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "First Last",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "First Last",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "First Last",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "First Last",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "First Last",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "First Last",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "First Last",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "First Last",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "First Last",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "First Last",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "First Last",
+      phone: "(805) 555-5555",
+    },
     {
       name: "First Last",
       phone: "(805) 555-5555",
@@ -63,7 +133,9 @@ const DirectoryBrowser = ({ contactList, setName }) => {
       <HeaderAndSearch setName={setName} minW="400px" mr="90px" />
       <VStack spacing={4}>
         {contactList.map((contact) => {
-          return <Contact name={contact.name} number={contact.phone} width="500px"/>;
+          return (
+            <Contact name={contact.name} number={contact.phone} width="500px" />
+          );
         })}
       </VStack>
     </Flex>
@@ -72,12 +144,12 @@ const DirectoryBrowser = ({ contactList, setName }) => {
 
 const DirectoryMobile = ({ contactList, setName }) => {
   return (
-  <VStack align="left" w="95%" ml="2.5%" spacing={4}>
-    <HeaderAndSearch setName={setName} mb="30px"/>
-    {contactList.map((contact) => {
-        return <Contact name={contact.name} number={contact.phone} w="100%"/>;
-    })}
-  </VStack>
+    <VStack align="left" w="95%" ml="2.5%" spacing={4}>
+      <HeaderAndSearch setName={setName} mb="30px" />
+      {contactList.map((contact) => {
+        return <Contact name={contact.name} number={contact.phone} w="100%" />;
+      })}
+    </VStack>
   );
 };
 

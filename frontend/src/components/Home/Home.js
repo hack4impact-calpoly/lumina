@@ -27,10 +27,22 @@ const Home = () => {
 
   return (
     <Box>
-      <LogoWithBack boxShadow="md" />
+      <LogoWithBack
+        position="fixed"
+        boxShadow="md"
+        as="header"
+        backgroundColor="white"
+        w="100%"
+        zIndex="sticky"
+      />
       <Flex>
-        <Sidebar mainContent={mainContent} setMainContent={setMainContent} />
-        <Flex mt="30px" ml="70px">
+        <Sidebar
+          mainContent={mainContent}
+          setMainContent={setMainContent}
+          position="fixed"
+          zIndex="sticky"
+        />
+        <Flex mt="90px" ml="370px">
           {switchMainComponent()}
         </Flex>
       </Flex>
@@ -38,9 +50,9 @@ const Home = () => {
   );
 };
 
-const Sidebar = ({ mainContent, setMainContent }) => {
+const Sidebar = ({ mainContent, setMainContent, ...rest }) => {
   return (
-    <Card w="300px" h="100%" flexDir="column" pos="sticky">
+    <Card {...rest} w="300px" h="100%" flexDir="column">
       <Link to="/">
         <Text
           cursor="pointer"
@@ -100,11 +112,7 @@ const SidebarItem = ({ icon, name, ...rest }) => {
         color: "white",
       }}
     >
-      <Icon
-        mr="4"
-        fontSize="16"
-        as={icon}
-      />
+      <Icon mr="4" fontSize="16" as={icon} />
       <Text fontSize="20px">{name}</Text>
     </Flex>
   );

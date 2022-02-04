@@ -10,7 +10,7 @@ import Directory from "./components/Home/Directory";
 function App() {
   return (
     <ChakraProvider theme={theme}>
-      <Box mt={5}>
+      <Box>
         <Router>
           <Routes>
             <Route exact path="/" element={<HomePage />} />
