@@ -29,10 +29,18 @@ const Home = () => {
   return (
     <Box>
       <BrowserView>
-        <HomeBrowser mainContent={mainContent} setMainContent={setMainContent} switchMainComponent={switchMainComponent} />
+        <HomeBrowser
+          mainContent={mainContent}
+          setMainContent={setMainContent}
+          switchMainComponent={switchMainComponent}
+        />
       </BrowserView>
       <MobileView>
-        <HomeMobile mainContent={mainContent} setMainContent={setMainContent} switchMainComponent={switchMainComponent} />
+        <HomeMobile
+          mainContent={mainContent}
+          setMainContent={setMainContent}
+          switchMainComponent={switchMainComponent}
+        />
       </MobileView>
     </Box>
   );
@@ -75,11 +83,7 @@ const HomeMobile = ({
   switchMainComponent,
   ...rest
 }) => {
-  return (
-    <Box {...rest}>
-      MOBILE HOME
-    </Box>
-  );
+  return <Box {...rest}>MOBILE HOME</Box>;
 };
 
 const Sidebar = ({ mainContent, setMainContent, ...rest }) => {
