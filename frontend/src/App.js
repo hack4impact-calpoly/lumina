@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Signup from "./components/SignupPage/Signup";
 import HomePage from "./components/HomePage/HomePage";
+import Home from "./components/Home/Home"
 import theme from "./theme";
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
           <Routes>
             <Route exact path="/" element={<HomePage />} />
             <Route path="/sign-up" element={<Signup />} />
+            <Route path="/home" element={<Home />} />
           </Routes>
         </Router>
       </Box>

@@ -12,6 +12,9 @@ const HomePage = () => {
       <Link to="/change-password">
         <Button>Go to change password</Button>
       </Link>
+      <Link to="/home">
+        <Button>Go to Home</Button>
+      </Link>
     </Box>
   );
 };
