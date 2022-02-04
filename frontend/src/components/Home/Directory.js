@@ -8,55 +8,82 @@ import {
   Text,
   VStack,
   IconButton,
+  Center,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { Card } from "../SharedComponents/Card";
 import FormInput from "../SharedComponents/FormInput";
+import { BrowserView, MobileView } from "react-device-detect";
+import { CenterBox } from "../SharedComponents/CenterBox";
 
 const Directory = () => {
   const [name, setName] = useState("");
   const [contactList, setContactList] = useState([
     {
       name: "First Last",
-      phone: "(805) 555-555",
+      phone: "(805) 555-5555",
     },
     {
       name: "First Last",
-      phone: "(805) 555-555",
+      phone: "(805) 555-5555",
     },
     {
       name: "First Last",
-      phone: "(805) 555-555",
+      phone: "(805) 555-5555",
     },
     {
       name: "First Last",
-      phone: "(805) 555-555",
+      phone: "(805) 555-5555",
     },
     {
       name: "First Last",
-      phone: "(805) 555-555",
+      phone: "(805) 555-5555",
     },
     {
       name: "First Last",
-      phone: "(805) 555-555",
+      phone: "(805) 555-5555",
     },
   ]);
 
   return (
+    <Box>
+      <BrowserView>
+        <DirectoryBrowser setName={setName} contactList={contactList} />
+      </BrowserView>
+      <MobileView>
+        <DirectoryMobile setName={setName} contactList={contactList} />
+      </MobileView>
+    </Box>
+  );
+};
+
+const DirectoryBrowser = ({ contactList, setName }) => {
+  return (
     <Flex flexDir="row">
-      <HeaderAndSearch align="top" setName={setName} minW="400px" mr="90px" />
+      <HeaderAndSearch setName={setName} minW="400px" mr="90px" />
       <VStack spacing={4}>
         {contactList.map((contact) => {
-          return <Contact name={contact.name} number={contact.phone} />;
+          return <Contact name={contact.name} number={contact.phone} width="500px"/>;
         })}
       </VStack>
     </Flex>
   );
 };
 
-const Contact = ({ name, number }) => {
+const DirectoryMobile = ({ contactList, setName }) => {
   return (
-    <Card w="500px">
+  <VStack align="left" w="95%" ml="2.5%" spacing={4}>
+    <HeaderAndSearch setName={setName} mb="30px"/>
+    {contactList.map((contact) => {
+        return <Contact name={contact.name} number={contact.phone} w="100%"/>;
+    })}
+  </VStack>
+  );
+};
+
+const Contact = ({ name, number, ...rest }) => {
+  return (
+    <Card {...rest}>
       <HStack>
         <VStack align="left">
           <Text fontWeight="bold" fontSize="20px">

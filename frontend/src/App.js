@@ -5,6 +5,7 @@ import Signup from "./components/SignupPage/Signup";
 import HomePage from "./components/HomePage/HomePage";
 import Home from "./components/Home/Home";
 import theme from "./theme";
+import Directory from "./components/Home/Directory";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
             <Route exact path="/" element={<HomePage />} />
             <Route path="/sign-up" element={<Signup />} />
             <Route path="/home" element={<Home />} />
+            <Route path="/mobile-directory" element={<Directory />} />
           </Routes>
         </Router>
       </Box>

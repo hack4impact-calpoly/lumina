@@ -15,6 +15,9 @@ const HomePage = () => {
       <Link to="/home">
         <Button>Go to Home</Button>
       </Link>
+      <Link to="/mobile-directory">
+        <Button>Go to Directory Mobile</Button>
+      </Link>
     </Box>
   );
 };
