@@ -12,7 +12,6 @@ import {
 import React, { useState } from "react";
 import { Card } from "../SharedComponents/Card";
 import FormInput from "../SharedComponents/FormInput";
-import TransparentIconButton from "../SharedComponents/TransparentIconButton";
 
 const Directory = () => {
   const [name, setName] = useState("");
@@ -67,8 +66,8 @@ const Contact = ({ name, number }) => {
         </VStack>
         <Spacer />
         <HStack align="right" spacing={8}>
-          <TransparentIconButton icon={<PhoneIcon w={8} h={8} />} />
-          <TransparentIconButton icon={<EmailIcon w={8} h={8} />} />
+          <IconButton variant="animated" icon={<PhoneIcon w={8} h={8} />} />
+          <IconButton variant="animated" icon={<EmailIcon w={8} h={8} />} />
         </HStack>
       </HStack>
     </Card>
