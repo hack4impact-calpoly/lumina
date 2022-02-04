@@ -7,6 +7,7 @@ import LogoWithBack from "../SharedComponents/LogoWithBack";
 import Calendar from "./Calendar";
 import Dashboard from "./Dashboard";
 import Profile from "./Profile";
+import { Card } from "../SharedComponents/Card";
 
 const Home = () => {
   const [mainContent, setMainContent] = useState("");
@@ -39,7 +40,7 @@ const Home = () => {
 
 const Sidebar = ({ setMainContent }) => {
   return (
-    <Flex w="300px" h="100%" flexDir="column" boxShadow="md" pos="sticky">
+    <Card w="300px" h="100%" flexDir="column" pos="sticky">
       <Link to="/">
         <Text
           cursor="pointer"
@@ -77,7 +78,7 @@ const Sidebar = ({ setMainContent }) => {
           onClick={() => setMainContent("profile")}
         />
       </VStack>
-    </Flex>
+    </Card>
   );
 };
 
