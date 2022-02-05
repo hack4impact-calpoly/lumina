@@ -107,6 +107,7 @@ const Sidebar = ({ mainContent, setMainContent, ...rest }) => {
           w="100%"
           onClick={() => setMainContent("")}
           bg={mainContent === "" ? "teal.400" : "white"}
+          color={mainContent === "" ? "white" : "black"}
         />
         <SidebarItem
           name="Calendar"
@@ -114,6 +115,7 @@ const Sidebar = ({ mainContent, setMainContent, ...rest }) => {
           w="100%"
           onClick={() => setMainContent("calendar")}
           bg={mainContent === "calendar" ? "teal.400" : "white"}
+          color={mainContent === "calendar" ? "white" : "black"}
         />
         <SidebarItem
           name="Directory"
@@ -121,6 +123,7 @@ const Sidebar = ({ mainContent, setMainContent, ...rest }) => {
           w="100%"
           onClick={() => setMainContent("directory")}
           bg={mainContent === "directory" ? "teal.400" : "white"}
+          color={mainContent === "directory" ? "white" : "black"}
         />
         <SidebarItem
           name="Profile"
@@ -128,6 +131,7 @@ const Sidebar = ({ mainContent, setMainContent, ...rest }) => {
           w="100%"
           onClick={() => setMainContent("profile")}
           bg={mainContent === "profile" ? "teal.400" : "white"}
+          color={mainContent === "profile" ? "white" : "black"}
         />
       </VStack>
     </Card>
