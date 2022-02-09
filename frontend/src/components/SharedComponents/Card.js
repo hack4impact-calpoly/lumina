@@ -11,7 +11,7 @@ export function Card(props) {
 
   // Pass the computed styles into the `__css` prop
   return (
-    <Flex __css={styles} {...rest}>
+    <Flex __css={styles} {...rest} alig>
       {props.children}
     </Flex>
   );
