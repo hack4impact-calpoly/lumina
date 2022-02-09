@@ -16,20 +16,42 @@ import { Card } from "../SharedComponents/Card";
 import LogoWithBack from "../SharedComponents/LogoWithBack";
 import FormInput from "../SharedComponents/FormInput";
 
+const EMAIL_REGEX =
+  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 export default function Login() {
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
   const [validEmail, setValidEmail] = useState(true);
 
-  let submitLogin = (email, password) => {
-    console.log('submitted email: ' + email);
-    console.log('submitted password: ' + password);
+  const [password, setPassword] = useState('');
+  const [validPassword, setValidPassword] = useState(true);
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  function submitLogin() {
+    if (isValidForm()) {
+      console.log('submitted email: ' + email);
+      console.log('submitted password: ' + password);
+    }
   }
 
   const mainStyle = {
     backgroundColor: '#F6F6F6'
+  }
+
+  function isValidForm() {
+    const goodEmail = EMAIL_REGEX.test(email);
+    if (!goodEmail) setValidEmail(false);
+    else setValidEmail(true);
+    const goodPassword = password.length >= 6;
+    if (!goodPassword) setValidPassword(false);
+    else setValidPassword(true);
+    return (
+      email !== "" &&
+      goodEmail &&
+      password !== "" &&
+      goodPassword
+    );
   }
 
   return (
@@ -63,7 +85,7 @@ export default function Login() {
                   setShowPassword={setShowPassword}
                   showPassword={showPassword}
                   isRequired
-                />                
+                />
                 <FormLabel htmlFor='passwordField' id='forgotPassword' float='right'>
                   <Link to="/forgot-password">
                     Forgot your password?
@@ -73,7 +95,7 @@ export default function Login() {
                 <Button
                   isFullWidth
                   my='1rem'
-                  onClick={ () => submitLogin(email, password) }
+                  onClick={ () => submitLogin() }
                   background='#024E6B'
                   color='white'
                 >
