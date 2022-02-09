@@ -87,7 +87,7 @@ export default function Login() {
                   isRequired
                 />
                 <FormLabel htmlFor='passwordField' id='forgotPassword' float='right'>
-                  <Link to="/forgot-password">
+                  <Link to="/change-password">
                     Forgot your password?
                   </Link>
                 </FormLabel>

@@ -19,7 +19,7 @@ function App() {
             <Route exact path="/" element={<Login />} />
             <Route path="/home" element={<HomePage />} />
             <Route path="/sign-up" element={<Signup />} />
-            <Route path="/forgot-password" element={<ChangePassword />} />
+            <Route path="/change-password" element={<ChangePassword />} />
           </Routes>
         </Router>
       </Box>
