@@ -7,6 +7,7 @@ import Home from "./components/Home/Home";
 import theme from "./theme";
 import Directory from "./components/Home/Directory";
 import NotFound from "./components/NotFound/NotFound";
+import ChangePassword from "./components/ChangePasswordPage/ChangePassword";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Route path="/sign-up" element={<Signup />} />
             <Route path="/home" element={<Home />} />
             <Route path="/mobile-directory" element={<Directory />} />
+            <Route path="/change-password" element={<ChangePassword />} />
             <Route path="*" element={ <NotFound /> } />
           </Routes>
         </Router>
