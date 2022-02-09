@@ -63,7 +63,7 @@ const FormInput = (props) => {
 
 const PasswordInput = ({
   placeholder,
-  setPassword,
+  onChange,
   showPassword,
   setShowPassword,
 }) => {
@@ -72,7 +72,7 @@ const PasswordInput = ({
       <Input
         placeholder={placeholder}
         type={showPassword ? "text" : "password"}
-        onChange={(e) => setPassword(e.target.value)}
+        onChange={onChange}
       />
       <InputRightElement w="5.5rem">
         <Button
