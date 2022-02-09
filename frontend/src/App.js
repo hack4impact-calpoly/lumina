@@ -1,12 +1,10 @@
 import { ChakraProvider, Box } from "@chakra-ui/react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
-<<<<<<< HEAD
-=======
 import Login from "./components/LoginPage/Login";
->>>>>>> issue4
 import Signup from "./components/SignupPage/Signup";
 import HomePage from "./components/HomePage/HomePage";
+import ChangePassword from "./components/ChangePasswordPage/ChangePassword";
 import theme from "./theme";
 
 function App() {
@@ -18,8 +16,10 @@ function App() {
       >
         <Router>
           <Routes>
-            <Route exact path="/" element={<HomePage />} />
+            <Route exact path="/" element={<Login />} />
+            <Route path="/home" element={<HomePage />} />
             <Route path="/sign-up" element={<Signup />} />
+            <Route path="/forgot-password" element={<ChangePassword />} />
           </Routes>
         </Router>
       </Box>

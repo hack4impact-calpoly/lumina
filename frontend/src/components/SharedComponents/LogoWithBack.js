@@ -29,6 +29,8 @@ const LogoWithBack = ({ back }) => {
           src="https://slochamber.org/wp-content/uploads/2018/12/RISE_1024.png"
           w="100px"
           h="50px"
+          alt='RISE logo in color.'
+          mixBlendMode='multiply'
         />
       </Center>
     </Flex>
