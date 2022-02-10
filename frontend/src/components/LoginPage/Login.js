@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import {
   Box,
   Container,
-  VStack,
+  Center,
   Heading,
   FormControl,
   FormLabel,
@@ -35,10 +35,6 @@ export default function Login() {
     }
   }
 
-  const mainStyle = {
-    backgroundColor: '#F6F6F6'
-  }
-
   function isValidForm() {
     const goodEmail = EMAIL_REGEX.test(email);
     if (!goodEmail) setValidEmail(false);
@@ -55,57 +51,56 @@ export default function Login() {
   }
 
   return (
-      <main style={ mainStyle }>
-        <Container h='100vh'>
-          <VStack justify='center' h='100%'>
-            <Card>
-              <LogoWithBack />
-              <Heading as='h1' size='3xl' align='center' color='#024E6B'>Volunteer System</Heading>
-              <FormControl id='loginForm' mt='1rem' pt='2rem'>
+      <Box>
+        <Center h='100%'>
+          <Card>
+            <LogoWithBack />
+            <Heading as='h1' size='2xl' align='center' color='#024E6B'>Volunteer System</Heading>
+            <FormControl id='loginForm' mt='1rem' pt='2rem'>
+
+            <FormInput
+              id="email"
+              isInvalid={email === ""}
+              label="Email"
+              placeholder="example@example.com"
+              errorMessage="Email is required"
+              onChange={(e) => setEmail(e.target.value)}
+              isRequired
+            />
+            <Text color="red">{validEmail ? "" : "Invalid Email"}</Text>
 
               <FormInput
-                id="email"
-                isInvalid={email === ""}
-                label="Email"
-                placeholder="example@example.com"
-                errorMessage="Email is required"
-                onChange={(e) => setEmail(e.target.value)}
+                id="password"
+                isInvalid={password === ""}
+                label="Password"
+                errorMessage="Password is required"
+                onChange={(e) => setPassword(e.target.value)}
+                type="password"
+                setPassword={setPassword}
+                setShowPassword={setShowPassword}
+                showPassword={showPassword}
                 isRequired
               />
-              <Text color="red">{validEmail ? "" : "Invalid Email"}</Text>
+              <FormLabel htmlFor='passwordField' id='forgotPassword' float='right'>
+                <Link to="/change-password">
+                  Forgot your password?
+                </Link>
+              </FormLabel>
 
-                <FormInput
-                  id="password"
-                  isInvalid={password === ""}
-                  label="Password"
-                  errorMessage="Password is required"
-                  onChange={(e) => setPassword(e.target.value)}
-                  type="password"
-                  setPassword={setPassword}
-                  setShowPassword={setShowPassword}
-                  showPassword={showPassword}
-                  isRequired
-                />
-                <FormLabel htmlFor='passwordField' id='forgotPassword' float='right'>
-                  <Link to="/change-password">
-                    Forgot your password?
-                  </Link>
-                </FormLabel>
-
-                <Button
-                  isFullWidth
-                  my='1rem'
-                  onClick={ () => submitLogin() }
-                  background='#024E6B'
-                  color='white'
-                >
-                  Log In
-                </Button>
-                <Box id='createAccount' textAlign='center'>First time? <Link to='/sign-up' title='Create a new Lumina volunteer account'>Create a new account</Link></Box>
-              </FormControl>
-            </Card>
-          </VStack>
-        </Container>
-      </main>
+              <Button
+                variant='animated'
+                isFullWidth
+                my='1rem'
+                onClick={ () => submitLogin() }
+                background='#024E6B'
+                color='white'
+              >
+                Log In
+              </Button>
+              <Box id='createAccount' textAlign='center'>First time? <Link to='/sign-up' title='Create a new Lumina volunteer account'>Create a new account</Link></Box>
+            </FormControl>
+          </Card>
+        </Center>
+      </Box>
   );
 }
