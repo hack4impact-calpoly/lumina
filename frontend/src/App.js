@@ -8,6 +8,7 @@ import Login from "./components/LoginPage/Login";
 import Signup from "./components/SignupPage/Signup";
 import HomePage from "./components/HomePage/HomePage";
 import theme from "./theme";
+import ChangePassword from "./components/ChangePasswordPage/ChangePassword";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Routes>
             <Route exact path="/" element={<HomePage />} />
             <Route path="/sign-up" element={<Signup />} />
+            <Route path="/change-password" element={<ChangePassword />} />
           </Routes>
         </Router>
       </Box>
