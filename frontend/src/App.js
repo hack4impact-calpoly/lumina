@@ -10,10 +10,7 @@ import theme from "./theme";
 function App() {
   return (
     <ChakraProvider theme={theme}>
-      <Box
-        mt={5}
-        mb={5}
-      >
+      <Box>
         <Router>
           <Routes>
             <Route exact path="/" element={<Login />} />

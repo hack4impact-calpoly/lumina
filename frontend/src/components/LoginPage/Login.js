@@ -50,57 +50,63 @@ export default function Login() {
     );
   }
 
-  return (
-      <Box>
-        <Center h='100%'>
-          <Card>
-            <LogoWithBack />
-            <Heading as='h1' size='2xl' align='center' color='#024E6B'>Volunteer System</Heading>
-            <FormControl id='loginForm' mt='1rem' pt='2rem'>
+  const mainStyle = {
+    backgroundColor: '#F6F6F6'
+  }
 
-            <FormInput
-              id="email"
-              isInvalid={email === ""}
-              label="Email"
-              placeholder="example@example.com"
-              errorMessage="Email is required"
-              onChange={(e) => setEmail(e.target.value)}
-              isRequired
-            />
-            <Text color="red">{validEmail ? "" : "Invalid Email"}</Text>
+  return (
+      <Box style={ mainStyle }>
+        <Container h='100vh'>
+          <Center h='100%'>
+            <Card>
+              <LogoWithBack />
+              <Heading as='h1' size='2xl' align='center' color='#024E6B'>Volunteer System</Heading>
+              <FormControl id='loginForm' mt='1rem' pt='2rem'>
 
               <FormInput
-                id="password"
-                isInvalid={password === ""}
-                label="Password"
-                errorMessage="Password is required"
-                onChange={(e) => setPassword(e.target.value)}
-                type="password"
-                setPassword={setPassword}
-                setShowPassword={setShowPassword}
-                showPassword={showPassword}
+                id="email"
+                isInvalid={email === ""}
+                label="Email"
+                placeholder="example@example.com"
+                errorMessage="Email is required"
+                onChange={(e) => setEmail(e.target.value)}
                 isRequired
               />
-              <FormLabel htmlFor='passwordField' id='forgotPassword' float='right'>
-                <Link to="/change-password">
-                  Forgot your password?
-                </Link>
-              </FormLabel>
+              <Text color="red">{validEmail ? "" : "Invalid Email"}</Text>
 
-              <Button
-                variant='animated'
-                isFullWidth
-                my='1rem'
-                onClick={ () => submitLogin() }
-                background='#024E6B'
-                color='white'
-              >
-                Log In
-              </Button>
-              <Box id='createAccount' textAlign='center'>First time? <Link to='/sign-up' title='Create a new Lumina volunteer account'>Create a new account</Link></Box>
-            </FormControl>
-          </Card>
-        </Center>
+                <FormInput
+                  id="password"
+                  isInvalid={password === ""}
+                  label="Password"
+                  errorMessage="Password is required"
+                  onChange={(e) => setPassword(e.target.value)}
+                  type="password"
+                  setPassword={setPassword}
+                  setShowPassword={setShowPassword}
+                  showPassword={showPassword}
+                  isRequired
+                />
+                <FormLabel htmlFor='passwordField' id='forgotPassword' float='right'>
+                  <Link to="/change-password">
+                    Forgot your password?
+                  </Link>
+                </FormLabel>
+
+                <Button
+                  variant='animated'
+                  isFullWidth
+                  my='1rem'
+                  onClick={ () => submitLogin() }
+                  background='#024E6B'
+                  color='white'
+                >
+                  Log In
+                </Button>
+                <Box id='createAccount' textAlign='center'>First time? <Link to='/sign-up' title='Create a new Lumina volunteer account'>Create a new account</Link></Box>
+              </FormControl>
+            </Card>
+          </Center>
+        </Container>
       </Box>
   );
 }
