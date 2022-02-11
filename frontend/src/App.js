@@ -1,13 +1,14 @@
 import { ChakraProvider, Box } from "@chakra-ui/react";
-import { BrowserRouter as Router, Routes, Route, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
+import Login from "./components/LoginPage/Login";
 import Signup from "./components/SignupPage/Signup";
 import HomePage from "./components/HomePage/HomePage";
 import Home from "./components/Home/Home";
+import ChangePassword from "./components/ChangePasswordPage/ChangePassword";
 import theme from "./theme";
 import Directory from "./components/Home/Directory";
 import NotFound from "./components/NotFound/NotFound";
-import ChangePassword from "./components/ChangePasswordPage/ChangePassword";
 
 function App() {
   return (
@@ -15,7 +16,8 @@ function App() {
       <Box>
         <Router>
           <Routes>
-            <Route exact path="/" element={<HomePage />} />
+            <Route exact path="/" element={<Login />} />
+            <Route path="/placeholder" element={<HomePage />} />
             <Route path="/sign-up" element={<Signup />} />
             <Route path="/home" element={<Home />} />
             <Route path="/mobile-directory" element={<Directory />} />
