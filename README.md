@@ -9,6 +9,14 @@ The Lumina project team consists of 6 Cal Poly students, including:
 - Veronica Guzman - Software Developer
 - Vincent Pheng - Software Developer
 
+## **UI Testing on Mobile**
+
+1) Find out your computer's IPv4 Address (google)
+2) Type that IPv4 address into your phone's browser
+3) Add ":3000" at the end
+
+Example: "192.168.1.234:3000"
+
 ## **UI Tenants**
 
 Figured that if we had some over arching rules and guides to how we handle UI/Frontend work, it might be really helpful so that everyone is on the same page. This would allow us to easily switch out devs as well from backend to frontend work without having them be completely lost.
