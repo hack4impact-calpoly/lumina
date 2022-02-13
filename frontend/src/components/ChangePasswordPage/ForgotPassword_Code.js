@@ -18,6 +18,8 @@ import { Link } from "react-router-dom";
 import { ArrowBackIcon, ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import LogoWithBack from "../SharedComponents/LogoWithBack";
 import FormInput from "../SharedComponents/FormInput";
+import { CenterBox } from "../SharedComponents/CenterBox";
+import { Card } from "../SharedComponents/Card";
 
 
 const ForgotPassword_Code = ({email}) => {
@@ -31,40 +33,43 @@ const ForgotPassword_Code = ({email}) => {
     }
 
     return(
-        <Box>
+        <CenterBox textAlign="center">
+
             <LogoWithBack back="/"/>
 
-            <Center>
-            <Heading>Forgot Password</Heading>
-            </Center>
-            <Center>
-            <Text>An email has been sent to {email} to verify that you are trying to change your password.</Text>
-            </Center>
 
-            <Center>
-                <Stack>
-                    <FormInput 
-                    width="300px" 
+            <Heading>Forgot Password</Heading>
+
+            <Text>An email has been sent to {email} to verify that you are trying to change your password.</Text>
+
+
+            <Card>
+                <FormInput 
+                    width="300px"
+                    ml={260} 
                     id="code" 
                     invalid={email === ""}
                     label="Please enter the verification code:"
                     onChange={(e) => setCode(e.target.value)}
-                    isRequired/>
-                </Stack>
-            </Center>
+                    isRequired
+                />
+            
+
                 
             <Flex>
                 <Button 
                 mt= "30px" 
-                ml="725px"
+                ml="425px"
                 width="150px"
                 color={"white"}
                 bg={"#E53E3E"}
                 variant="animated"
                 onClick={() => submit()}>Submit</Button>
             </Flex>
+            </Card>
             
-        </Box>
+
+        </CenterBox>
     );
 };
 
