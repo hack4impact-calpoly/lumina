@@ -25,12 +25,15 @@ import { Card } from "../SharedComponents/Card";
 function ForgotPassword_Code(props) {
     const [code, setCode] = useState("");
     const [validCode, setValidCode] = useState(true);
+
     const { state } = useLocation();
     console.log(state);
     const email = state.email;
 
+    let navigate = useNavigate();
+    
     function submit() {
-        if (code !== "") setValidCode(false);
+        if (code === "") setValidCode(false);
         else {
             setValidCode(true);
 
@@ -38,10 +41,12 @@ function ForgotPassword_Code(props) {
                 email: email,
                 code: code
             }
-
-            
-
+            navigate("/change-password");
         }
+        return (
+            code !== "" &&
+            validCode
+        );
         
     }
 
@@ -61,11 +66,12 @@ function ForgotPassword_Code(props) {
                     width="300px"
                     ml={260} 
                     id="code" 
-                    invalid={email === ""}
+                    invalid={code === ""}
                     label="Please enter the verification code:"
                     onChange={(e) => setCode(e.target.value)}
                     isRequired
                 />
+                <Text color="red">{validCode ? "" : "Invalid Code"}</Text>
             
 
                 
