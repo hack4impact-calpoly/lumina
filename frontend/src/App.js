@@ -6,9 +6,8 @@ import Signup from "./components/SignupPage/Signup";
 import HomePage from "./components/HomePage/HomePage";
 import ChangePassword from "./components/ChangePasswordPage/ChangePassword";
 import theme from "./theme";
-import ForgotPassword_Email from './ForgotPassword_Email';
-import ForgotPassword_Code from './ForgotPassword_Code';
-import ChangePassword from "./components/ChangePasswordPage/ChangePassword";
+import ForgotPassword_Email from './components/ChangePasswordPage/ForgotPassword_Email';
+import ForgotPassword_Code from './components/ChangePasswordPage/ForgotPassword_Code';
 
 function App() {
   return (
