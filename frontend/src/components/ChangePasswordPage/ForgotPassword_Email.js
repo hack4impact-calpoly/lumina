@@ -15,53 +15,72 @@ import {
 import LogoWithBack from "../SharedComponents/LogoWithBack";
 import FormInput from "../SharedComponents/FormInput";
 import { Card } from "../SharedComponents/Card";
+import { CenterBox } from "../SharedComponents/CenterBox";
+import { useHistory, useNavigate } from "react-router-dom";
+
+const EMAIL_REGEX =
+  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 const ForgotPassword_Email = () => {
     const [email, setEmail] = useState("");
+    const [validEmail, setValidEmail] = useState(true);
+
+    let navigate = useNavigate();
 
     function submit() {
-        const userEmail = {
-            email: email
-        }
+        const goodEmail = EMAIL_REGEX.test(email);
+        if (!goodEmail) setValidEmail(false);
+        else{
+            setValidEmail(true);
+            // userEmail in JSON to possibly send to backend later
+            const userEmail = {
+                email: email
+            }
+            navigate("/forgot-password/code");
+        } 
+        return (
+            email !== "" &&
+            goodEmail
+        );
     }
 
     return(
-        <Box>
+        <CenterBox textAlign="center">
             <LogoWithBack back="/"/>
 
-            <Center>
+
             <Heading>Forgot Password</Heading>
-            </Center>
-            <Center>
+
             <Text mb={2}>Please enter the email that your RISE volunteer account is associated with.</Text>
-            </Center>
             
-            <Center>
-            <Stack>
+
+        <Card>
                 
-                <FormInput 
+            <FormInput 
                 width="300px"
+                ml={260}
                 id="email" 
                 invalid={email === ""} 
                 label="Email" 
                 placeholder="example@example.com" 
                 onChange={(e) => setEmail(e.target.value)}
-                isRequired/>
-
-            </Stack>
-            </Center>           
+                isRequired
+            />
+            <Text color="red">{validEmail ? "" : "Invalid Email"}</Text>
 
             <Flex>
                 <Button 
                 mt= "30px" 
-                ml="725px" 
+                ml="425px" 
                 width="150px"
                 color={"white"} 
                 bg={"#E53E3E"}
                 variant="animated"  
-                onClick={() => submit()}> Sumbit </Button>
+                onClick={() => submit()}> Submit </Button>
             </Flex>
-        </Box>
+        </Card>
+
+        </CenterBox>
     );
 
 };
