@@ -36,7 +36,7 @@ const ForgotPassword_Email = () => {
             const userEmail = {
                 email: email
             }
-            navigate("/forgot-password/code");
+            navigate("/forgot-password/code", {state: userEmail});
         } 
         return (
             email !== "" &&

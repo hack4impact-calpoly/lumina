@@ -14,7 +14,7 @@ import {
   InputGroup,
   Spacer,
 } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ArrowBackIcon, ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import LogoWithBack from "../SharedComponents/LogoWithBack";
 import FormInput from "../SharedComponents/FormInput";
@@ -22,14 +22,27 @@ import { CenterBox } from "../SharedComponents/CenterBox";
 import { Card } from "../SharedComponents/Card";
 
 
-const ForgotPassword_Code = ({email}) => {
+function ForgotPassword_Code(props) {
     const [code, setCode] = useState("");
+    const [validCode, setValidCode] = useState(true);
+    const { state } = useLocation();
+    console.log(state);
+    const email = state.email;
 
     function submit() {
-        const userCode = {
-            email: email,
-            code: code
+        if (code !== "") setValidCode(false);
+        else {
+            setValidCode(true);
+
+            const userCode = {
+                email: email,
+                code: code
+            }
+
+            
+
         }
+        
     }
 
     return(
