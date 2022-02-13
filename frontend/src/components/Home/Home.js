@@ -1,4 +1,4 @@
-import { Box, Flex, Text, Icon, VStack, Divider } from "@chakra-ui/react";
+import { Box, Flex, Text, Icon, VStack, Divider, HStack, Stack, Center } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import { FiHome, FiCalendar, FiMenu, FiUser } from "react-icons/fi";
@@ -9,6 +9,7 @@ import Dashboard from "./Dashboard";
 import Profile from "./Profile";
 import { Card } from "../SharedComponents/Card";
 import { BrowserView, MobileView } from "react-device-detect";
+import { CenterBox } from "../SharedComponents/CenterBox";
 
 const Home = () => {
   const [mainContent, setMainContent] = useState("");
@@ -83,7 +84,63 @@ const HomeMobile = ({
   switchMainComponent,
   ...rest
 }) => {
-  return <Box {...rest}>MOBILE HOME</Box>;
+  return( 
+  <Box {...rest}>
+    <Flex>
+        <MobileNavBar
+          mainContent={mainContent}
+          setMainContent={setMainContent}
+          position="fixed"
+          zIndex="sticky"
+        />
+        <Flex mt="150px" ml="10px">
+          {switchMainComponent()}
+        </Flex>
+      </Flex>
+  </Box>);
+};
+
+const MobileNavBar = ({ mainContent, setMainContent, ...rest }) => {
+  return (
+    <Card {...rest} w="100%" h="100px" flexDir="row" ml={0} mt={510}>
+      <HStack>
+          <NavbarItem 
+            name={"Dashboard"} 
+            icon={FiHome}
+            w="100%"
+            onClick={() => setMainContent("")}
+            bg={mainContent === "" ? "teal.400" : "white"}
+            color={mainContent === "" ? "white" : "black"}
+          />
+          <NavbarItem
+          name="Calendar"
+          icon={FiCalendar}
+          w="100%"
+          onClick={() => setMainContent("calendar")}
+          bg={mainContent === "calendar" ? "teal.400" : "white"}
+          color={mainContent === "calendar" ? "white" : "black"}
+        />
+        <NavbarItem
+          name="Directory"
+          icon={FiMenu}
+          w="100%"
+          onClick={() => setMainContent("directory")}
+          bg={mainContent === "directory" ? "teal.400" : "white"}
+          color={mainContent === "directory" ? "white" : "black"}
+        />
+        <NavbarItem
+          name="Profile"
+          icon={FiUser}
+          w="100%"
+          onClick={() => setMainContent("profile")}
+          bg={mainContent === "profile" ? "teal.400" : "white"}
+          color={mainContent === "profile" ? "white" : "black"}
+        />
+      </HStack>
+    </Card>
+
+    
+    );
 };
 
 const Sidebar = ({ mainContent, setMainContent, ...rest }) => {
@@ -156,6 +213,30 @@ const SidebarItem = ({ icon, name, ...rest }) => {
       <Text fontSize="20px">{name}</Text>
     </Flex>
   );
+
+};
+
+const NavbarItem = ({ icon, name, ...rest }) => {
+  return (
+    <Stack
+      alignItems="baseline"
+      {...rest}
+      p="0.5"
+      borderRadius="lg"
+      cursor="pointer"
+      _hover={{
+        bg: "teal.400",
+        color: "white",
+      }}
+    >
+    <Box w="72px" h="50px" alignContent={"center"}>
+      <Icon fontSize="20" as={icon} />
+      <Text fontSize="14px">{name}</Text>
+    </Box>
+      
+    </Stack>
+  );
+
 };
 
 export default Home;
