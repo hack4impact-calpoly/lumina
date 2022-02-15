@@ -1,5 +1,6 @@
-import { Box, Text, Button } from "@chakra-ui/react";
+import { Box, Center, Text, Button, Heading } from "@chakra-ui/react";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import LogoWithBack from "../SharedComponents/LogoWithBack";
 import { CenterBox } from "../SharedComponents/CenterBox";
 import { Card } from "../SharedComponents/Card";
@@ -7,11 +8,12 @@ import FormInput from "../SharedComponents/FormInput";
 
 const ChangePassword = () => {
   const [successPasswordChange, setSuccessPasswordChange] = useState(false);
+  let navigate = useNavigate();
 
   return (
     <CenterBox>
       {successPasswordChange ? (
-        <ChangePasswordConfirm />
+        navigate("/change-password/confirm", { replace: false })
       ) : (
         <ChangePasswordForm
           setSuccessPasswordChange={setSuccessPasswordChange}
@@ -51,12 +53,16 @@ const ChangePasswordForm = ({ setSuccessPasswordChange }) => {
     );
   }
   return (
-    <Box>
+    <Center>
+    <Box textAlign="center">
       <LogoWithBack back="/" />
-      <Text textAlign="center" mb={5}>
+      <Heading as="h1" mb={8}>
+        Password Reset
+      </Heading>
+      <Text mb={5}>
         Password reset has been verified. Please set a new password.
       </Text>
-      <Card>
+      <Card textAlign="left">
         <FormInput
           id="password"
           label="Password"
@@ -92,11 +98,8 @@ const ChangePasswordForm = ({ setSuccessPasswordChange }) => {
         </Button>
       </Card>
     </Box>
+    </Center>
   );
-};
-
-const ChangePasswordConfirm = () => {
-  return <Box>GOOD PASSWORD</Box>;
 };
 
 export default ChangePassword;
