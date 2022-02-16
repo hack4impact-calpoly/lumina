@@ -1,36 +1,53 @@
 import React, { useState } from 'react';
+import { Link } from "react-router-dom";
+
 import {
   Box,
   Container,
-  VStack,
-  Flex,
-  Image,
+  Center,
   Heading,
   FormControl,
   FormLabel,
-  Input,
-  InputGroup,
-  InputRightElement,
-  Button
+  Button,
+  Text
 } from '@chakra-ui/react';
-import {
-  ViewIcon,
-  ViewOffIcon
-} from '@chakra-ui/icons';
 
-import logo from '../assets/images/RISE-logo-full-1.png';
+import { Card } from "../SharedComponents/Card";
+import LogoWithBack from "../SharedComponents/LogoWithBack";
+import FormInput from "../SharedComponents/FormInput";
 
-{/* !!! Add react-router to forgot password and create new account !!! */}
+const EMAIL_REGEX =
+  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
 export default function Login() {
   const [email, setEmail] = useState('');
+  const [validEmail, setValidEmail] = useState(true);
+
   const [password, setPassword] = useState('');
-  const [show, setShow] = useState(false);
+  const [validPassword, setValidPassword] = useState(true);
 
-  const handleClick = () => setShow(!show);
+  const [showPassword, setShowPassword] = useState(false);
 
-  let submitLogin = (email, password) => {
-    console.log('submitted email: ' + email);
-    console.log('submitted password: ' + password);
+  function submitLogin() {
+    if (isValidForm()) {
+      console.log('submitted email: ' + email);
+      console.log('submitted password: ' + password);
+    }
+  }
+
+  function isValidForm() {
+    const goodEmail = EMAIL_REGEX.test(email);
+    if (!goodEmail) setValidEmail(false);
+    else setValidEmail(true);
+    const goodPassword = password.length >= 6;
+    if (!goodPassword) setValidPassword(false);
+    else setValidPassword(true);
+    return (
+      email !== "" &&
+      goodEmail &&
+      password !== "" &&
+      goodPassword
+    );
   }
 
   const mainStyle = {
@@ -38,64 +55,58 @@ export default function Login() {
   }
 
   return (
-      <main style={ mainStyle }>
+      <Box style={ mainStyle }>
         <Container h='100vh'>
-          <VStack justify='center' h='100%'>
-            <Image id='logo' src={logo} alt='RISE logo in color.' mixBlendMode='multiply' mb='1rem'/>
-            <Heading as='h1' size='3xl' align='center' color='#024E6B'>Volunteer System</Heading>
-            <FormControl id='loginForm' mt='1rem' pt='2rem'>
+          <Center h='100%'>
+            <Card>
+              <LogoWithBack />
+              <Heading as='h1' size='2xl' align='center' color='#024E6B'>Volunteer System</Heading>
+              <FormControl id='loginForm' mt='1rem' pt='2rem'>
 
-              <FormLabel htmlFor='emailField'>Email</FormLabel>
-              <Input
-                type='email'
-                id='emailField'
-                placeholder=''
-                value={ email }
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                }}
+              <FormInput
+                id="email"
+                isInvalid={email === ""}
+                label="Email"
+                placeholder="example@example.com"
+                errorMessage="Email is required"
+                onChange={(e) => setEmail(e.target.value)}
                 isRequired
-                variant='filled'
-                background='white'
-                mb='1rem'
               />
+              <Text color="red">{validEmail ? "" : "Invalid Email"}</Text>
 
-              <FormLabel htmlFor='passwordField'>Password</FormLabel>
-              <InputGroup>
-                <Input
-                  type={show ? 'text' : 'password'}
-                  id='passwordField'
-                  placeholder=''
-                  value={ password }
-                  onChange={ (e) => {
-                    setPassword(e.target.value);
-                  }}
+                <FormInput
+                  id="password"
+                  isInvalid={password === ""}
+                  label="Password"
+                  errorMessage="Password is required"
+                  onChange={(e) => setPassword(e.target.value)}
+                  type="password"
+                  setPassword={setPassword}
+                  setShowPassword={setShowPassword}
+                  showPassword={showPassword}
                   isRequired
-                  variant='filled'
-                  background='white'
                 />
-                <InputRightElement width='auto' right='0.5rem'>
-                  <Button h='1.75rem' size='sm' leftIcon={show ? <ViewOffIcon /> : <ViewIcon />} onClick={ handleClick }>
-                    {show ? 'Hide' : 'Show'}
-                  </Button>
-                </InputRightElement>
-              </InputGroup>
-              
-              <FormLabel htmlFor='passwordField' id='forgotPassword' float='right'>Forgot your password?</FormLabel>
+                <FormLabel htmlFor='passwordField' id='forgotPassword' float='right'>
+                  <Link to="/forgot-password">
+                    Forgot your password?
+                  </Link>
+                </FormLabel>
 
-              <Button
-                isFullWidth
-                my='1rem'
-                onClick={ () => submitLogin(email, password) }
-                background='#024E6B'
-                color='white'
-              >
-                Log In
-              </Button>
-              <Box id='createAccount' textAlign='center'>First time? <a href='#' title='Create a new Lumina volunteer account'>Create a new account</a></Box>
-            </FormControl>
-          </VStack>
+                <Button
+                  variant='animated'
+                  isFullWidth
+                  my='1rem'
+                  onClick={ () => submitLogin() }
+                  background='#024E6B'
+                  color='white'
+                >
+                  Log In
+                </Button>
+                <Box id='createAccount' textAlign='center'>First time? <Link to='/sign-up' title='Create a new Lumina volunteer account'>Create a new account</Link></Box>
+              </FormControl>
+            </Card>
+          </Center>
         </Container>
-      </main>
+      </Box>
   );
 }
