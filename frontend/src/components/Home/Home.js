@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { FiHome, FiCalendar, FiMenu, FiUser } from "react-icons/fi";
 import Directory from "./Directory";
 import LogoWithBack from "../SharedComponents/LogoWithBack";
-import Calendar from "./Calendar";
+import ShiftCalendar from './ShiftCalendar';
 import Dashboard from "./Dashboard";
 import Profile from "./Profile";
 import { Card } from "../SharedComponents/Card";
@@ -18,7 +18,7 @@ const Home = () => {
       case "directory":
         return <Directory />;
       case "calendar":
-        return <Calendar />;
+        return <ShiftCalendar />;
       case "profile":
         return <Profile />;
       default:
