@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import {
   Box,
   Button,
+  Center,
   Flex,
   Heading,
   Spacer,
@@ -41,6 +42,7 @@ const months = [
 
 const ShiftCalendar = () => {
   const date = new Date();
+  const [view, setView] = useState("")
   const [currentEvent, setCurrentEvent] = useState({
     shifts: [
       {
@@ -60,6 +62,7 @@ const ShiftCalendar = () => {
       },
     },
   });
+
   const [events, setEvents] = useState([
     {
       start: new Date("February 14, 2022 12:00:00"),
@@ -67,6 +70,29 @@ const ShiftCalendar = () => {
       title: "Some title",
     },
   ]);
+
+  function switchView() {
+    switch (view) {
+      case "cancel":
+        return <CancelShiftView />
+      default:
+        return <DefaultView date={date} events={events} currentEvent={currentEvent} setView={setView} />;
+    }
+  }
+
+  return (
+    <Flex>
+      {switchView()}
+    </Flex>
+  );
+};
+
+const DefaultView = ({ date, events, currentEvent, setView }) => {
+  function cancelShift() {
+    //add verification and call
+    setView("cancel")
+  }
+
   return (
     <Flex flexDir="row">
       <Box minW="600px" mr="90px">
@@ -98,7 +124,7 @@ const ShiftCalendar = () => {
             variant="animated"
             bg="red.300"
             w="100%"
-            onClick={() => console.log("cancel shift")}
+            onClick={() => cancelShift()}
           >
             Cancel Shift
           </Button>
@@ -116,8 +142,8 @@ const ShiftCalendar = () => {
         />
       </Box>
     </Flex>
-  );
-};
+  )
+}
 
 const ShiftCard = ({ shift }) => {
   return (
@@ -142,5 +168,13 @@ const ShiftCard = ({ shift }) => {
     </Card>
   );
 };
+
+const CancelShiftView = ({}) => {
+  return (
+    <Center>
+      HELLO
+    </Center>
+  )
+}
 
 export default ShiftCalendar;
