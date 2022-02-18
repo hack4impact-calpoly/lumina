@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { Box, Flex, Heading, Spacer, Text, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Heading,
+  Spacer,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
@@ -86,16 +94,27 @@ const ShiftCalendar = () => {
               </Box>
             </VStack>
           </Card>
+          <Button
+            variant="animated"
+            bg="red.300"
+            w="100%"
+            onClick={() => console.log("cancel shift")}
+          >
+            Cancel Shift
+          </Button>
         </VStack>
       </Box>
-      <Calendar
-        localizer={localizer}
-        defaultDate={new Date()}
-        defaultView="month"
-        events={events}
-        style={{ height: "80vh", widthL: "800px" }}
-        onClick={() => console.log("CLICKED")}
-      />
+      <Box>
+        <Button bg="orange.100" mb={3}>+ New Shift</Button>
+        <Calendar
+          localizer={localizer}
+          defaultDate={new Date()}
+          defaultView="month"
+          events={events}
+          style={{ height: "80vh", width: "900px" }}
+          views={["month", "day"]}
+        />
+      </Box>
     </Flex>
   );
 };
