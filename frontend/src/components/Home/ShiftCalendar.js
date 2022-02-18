@@ -71,12 +71,12 @@ const ShiftCalendar = () => {
     <Flex flexDir="row">
       <Box minW="600px" mr="90px">
         <Box mb={3}>
-          <Heading>{daysOfWeek[date.getDay()]}</Heading>
-          <Heading>
+          <Text fontSize="30px">{daysOfWeek[date.getDay()]}</Text>
+          <Text fontWeight="bold" fontSize="40px">
             {`${
               months[date.getMonth()]
             } ${date.getDate()}, ${date.getFullYear()}`}
-          </Heading>
+          </Text>
         </Box>
         <VStack spacing={3}>
           {currentEvent.shifts.map((shift) => {
