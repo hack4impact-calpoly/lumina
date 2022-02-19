@@ -98,12 +98,12 @@ const ShiftCalendar = () => {
   ]);
   let date = currentEvent.date;
 
-  function cancelShift() {
+  function openCancelShiftModal() {
     //add verification and call
     onCancelOpen();
   }
 
-  function createShift() {
+  function openCreateShiftModal() {
     onCreateOpen();
   }
 
@@ -140,14 +140,19 @@ const ShiftCalendar = () => {
             variant="animated"
             bg="red.300"
             w="100%"
-            onClick={() => cancelShift()}
+            onClick={() => openCancelShiftModal()}
           >
             Cancel Shift
           </Button>
         </VStack>
       </Box>
       <Box>
-        <Button bg="orange.100" mb={3} onClick={() => createShift()}>
+        <Button
+          variant="animated"
+          bg="orange.100"
+          mb={3}
+          onClick={() => openCreateShiftModal()}
+        >
           + New Shift
         </Button>
         <Calendar
@@ -173,7 +178,7 @@ const ShiftCalendar = () => {
 const ShiftCard = ({ shift }) => {
   return (
     <Card flexDir="row" w="100%">
-      <Box w="100%">
+      <Box>
         <Heading fontSize="24px">{`${shift.startTime} - ${shift.endTime}`}</Heading>
       </Box>
       <Spacer />
@@ -218,13 +223,14 @@ const CancelShiftModal = ({ date, shift, isOpen, onClose }) => {
 const CreateShiftModal = ({ isOpen, onClose }) => {
   const [includeSecondBackup, setIncludeSecondBackup] = useState(false);
   const [includeAccompaniment, setIncludeAccompaniment] = useState(false);
-
   const [startDate, setStartDate] = useState(
     setHours(setMinutes(new Date(), 0), 9)
   );
   const [endDate, setEndDate] = useState(
     setHours(setMinutes(new Date(), 0), 9)
   );
+  const isWeekend =
+    startDate.getDay() == 6 || startDate.getDay() == 0 ? true : false;
   const filterPassedTime = (time) => {
     const currentDate = new Date();
     const selectedDate = new Date(time);
@@ -232,14 +238,26 @@ const CreateShiftModal = ({ isOpen, onClose }) => {
     return currentDate.getTime() < selectedDate.getTime();
   };
 
-  function closeModal() {
+  function resetStates() {
     setIncludeAccompaniment(false);
     setIncludeSecondBackup(false);
+    setStartDate(setHours(setMinutes(new Date(), 0), 9));
+    setEndDate(setHours(setMinutes(new Date(), 0), 9));
+  }
+
+  function closeModal() {
+    resetStates();
     onClose();
   }
 
   function createShift() {
-    closeModal();
+    if (validShift()) {
+      closeModal();
+    }
+  }
+
+  function validShift() {
+    return endDate.getTime() - startDate.getTime() >= 0;
   }
 
   return (
@@ -275,6 +293,11 @@ const CreateShiftModal = ({ isOpen, onClose }) => {
               />
             </Flex>
           </Box>
+          <Text color="red">
+            {validShift()
+              ? ""
+              : "End date and time must be after start date and time"}
+          </Text>
           <Flex align="center" mt={3}>
             <Icon as={BiGlobe} mr={3} w={6} h={6} />
             <Text>Pacific Daylight Time (GMT-7)</Text>
@@ -283,6 +306,21 @@ const CreateShiftModal = ({ isOpen, onClose }) => {
           <VStack align="left" spacing={3}>
             <AddVolunteer type="Primary" />
             <AddVolunteer type="Backup" />
+            {includeAccompaniment || isWeekend ? (
+              <AddVolunteer
+                type="Accompaniment"
+                removeable={!isWeekend}
+                onRemove={() => setIncludeAccompaniment(false)}
+              />
+            ) : (
+              <Flex
+                cursor="pointer"
+                onClick={() => setIncludeAccompaniment(true)}
+              >
+                <Icon as={AiOutlinePlusSquare} w={6} h={6} mr={3} />
+                <Text>Add Accompaniment</Text>
+              </Flex>
+            )}
             {includeSecondBackup ? (
               <AddVolunteer
                 type="Second Backup"
@@ -296,22 +334,6 @@ const CreateShiftModal = ({ isOpen, onClose }) => {
               >
                 <Icon as={AiOutlinePlusSquare} w={6} h={6} mr={3} />
                 <Text>Add Second Backup</Text>
-              </Flex>
-            )}
-
-            {includeAccompaniment ? (
-              <AddVolunteer
-                type="Accompaniment"
-                removeable
-                onRemove={() => setIncludeAccompaniment(false)}
-              />
-            ) : (
-              <Flex
-                cursor="pointer"
-                onClick={() => setIncludeAccompaniment(true)}
-              >
-                <Icon as={AiOutlinePlusSquare} w={6} h={6} mr={3} />
-                <Text>Add Accompaniment</Text>
               </Flex>
             )}
             <Button onClick={() => createShift()}>Create new shift</Button>

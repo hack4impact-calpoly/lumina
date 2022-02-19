@@ -141,7 +141,7 @@ const Sidebar = ({ mainContent, setMainContent, ...rest }) => {
 const SidebarItem = ({ icon, name, ...rest }) => {
   return (
     <Flex
-      alignItems="baseline"
+      alignItems="center"
       {...rest}
       p="4"
       mx="4"
