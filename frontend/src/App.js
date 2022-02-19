@@ -15,7 +15,7 @@ import NotFound from "./components/NotFound/NotFound";
 function App() {
   return (
     <ChakraProvider theme={theme}>
-      <Box>
+      <Box bg='#F6F6F6' minH="100vh">
         <Router>
           <Routes>
             <Route exact path="/" element={<Login />} />
