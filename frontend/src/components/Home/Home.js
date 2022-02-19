@@ -69,7 +69,7 @@ const HomeBrowser = ({
           position="fixed"
           zIndex="sticky"
         />
-        <Flex mt="90px" ml="370px">
+        <Flex pt="90px" pb="90px" ml="20%" w="100vw">
           {switchMainComponent()}
         </Flex>
       </Flex>
@@ -88,7 +88,7 @@ const HomeMobile = ({
 
 const Sidebar = ({ mainContent, setMainContent, ...rest }) => {
   return (
-    <Card {...rest} w="300px" h="100%" flexDir="column">
+    <Card {...rest} h="100%" flexDir="column">
       <Link to="/">
         <Text
           cursor="pointer"
