@@ -16,8 +16,9 @@ import {
   useDisclosure,
   Icon,
   Divider,
-  IconButton,
+  HStack,
 } from "@chakra-ui/react";
+import { AiFillCloseCircle } from "react-icons/ai";
 import { CloseIcon, SearchIcon } from "@chakra-ui/icons";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
@@ -31,6 +32,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { BiGlobe, BiTimeFive, BiTime, BiUser } from "react-icons/bi";
 import { AiOutlinePlusSquare, AiOutlineCloseSquare } from "react-icons/ai";
 import FormInput from "../SharedComponents/FormInput";
+import Select from "react-select";
 
 const localizer = momentLocalizer(moment);
 const daysOfWeek = [
@@ -57,7 +59,7 @@ const months = [
   "December",
 ];
 
-const ShiftCalendar = () => {
+const ShiftCalendar = ({ contactList }) => {
   const {
     isOpen: isCancelOpen,
     onOpen: onCancelOpen,
@@ -170,7 +172,11 @@ const ShiftCalendar = () => {
         isOpen={isCancelOpen}
         onClose={onCancelClose}
       />
-      <CreateShiftModal isOpen={isCreateOpen} onClose={onCreateClose} />
+      <CreateShiftModal
+        isOpen={isCreateOpen}
+        onClose={onCreateClose}
+        contactList={contactList}
+      />
     </Flex>
   );
 };
@@ -220,7 +226,7 @@ const CancelShiftModal = ({ date, shift, isOpen, onClose }) => {
   );
 };
 
-const CreateShiftModal = ({ isOpen, onClose }) => {
+const CreateShiftModal = ({ contactList, isOpen, onClose }) => {
   const [includeSecondBackup, setIncludeSecondBackup] = useState(false);
   const [includeAccompaniment, setIncludeAccompaniment] = useState(false);
   const [startDate, setStartDate] = useState(
@@ -294,9 +300,7 @@ const CreateShiftModal = ({ isOpen, onClose }) => {
             </Flex>
           </Box>
           <Text color="red">
-            {validShift()
-              ? ""
-              : "End date/time must be after start date/time"}
+            {validShift() ? "" : "End date/time must be after start date/time"}
           </Text>
           <Flex align="center" mt={3}>
             <Icon as={BiGlobe} mr={3} w={6} h={6} />
@@ -304,10 +308,11 @@ const CreateShiftModal = ({ isOpen, onClose }) => {
           </Flex>
           <Divider mt={3} mb={3} />
           <VStack align="left" spacing={3}>
-            <AddVolunteer type="Primary" />
-            <AddVolunteer type="Backup" />
+            <AddVolunteer contactList={contactList} type="Primary" />
+            <AddVolunteer contactList={contactList} type="Backup" />
             {includeAccompaniment || isWeekend ? (
               <AddVolunteer
+                contactList={contactList}
                 type="Accompaniment"
                 removeable={!isWeekend}
                 onRemove={() => setIncludeAccompaniment(false)}
@@ -323,6 +328,7 @@ const CreateShiftModal = ({ isOpen, onClose }) => {
             )}
             {includeSecondBackup ? (
               <AddVolunteer
+                contactList={contactList}
                 type="Second Backup"
                 removeable
                 onRemove={() => setIncludeSecondBackup(false)}
@@ -344,14 +350,25 @@ const CreateShiftModal = ({ isOpen, onClose }) => {
   );
 };
 
-const AddVolunteer = ({ type, removeable, onRemove }) => {
+const AddVolunteer = ({ contactList, type, removeable, onRemove }) => {
   const [searchVolunteer, setSearchVolunteer] = useState(false);
-  const [name, setName] = useState("");
+  var contactListSelectable = [];
+  contactList.map((contact) => {
+    contactListSelectable.push({ value: contact.name, label: contact.name });
+  });
   return (
     <Flex flexDir="column" align="left">
-      <Flex flexDir="row" align="center">
+      <Flex mb={3} flexDir="row" align="center">
         <Icon as={BiUser} w={6} h={6} mr={3} />
         <Text>{type}</Text>
+        {searchVolunteer ? (
+          <Button ml={3} size="xs" onClick={() => setSearchVolunteer(false)}>
+            Remove Assignment
+          </Button>
+        ) : (
+          <Box></Box>
+        )}
+
         <Spacer />
         {removeable ? (
           <Icon
@@ -366,20 +383,17 @@ const AddVolunteer = ({ type, removeable, onRemove }) => {
         )}
       </Flex>
       {searchVolunteer ? (
-        <FormInput
-          leftElement={<SearchIcon />}
-          rightElement={
-            <IconButton
-              icon={<CloseIcon />}
-              onClick={() => setSearchVolunteer(false)}
-            />
-          }
-          id="search"
-          onChange={(e) => setName(e.target.value)}
+        <Select
+          className="basic-single"
+          classNamePrefix="select"
+          isClearable
+          isSearchable
+          name="color"
+          style={{ width: "200px" }}
+          options={contactListSelectable}
         />
       ) : (
         <Button
-          mt={3}
           onClick={() => setSearchVolunteer(true)}
         >{`Assign ${type} Now (Optional)`}</Button>
       )}

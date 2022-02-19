@@ -8,7 +8,7 @@ import {
   Text,
   VStack,
   IconButton,
-  Icon
+  Icon,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { Card } from "../SharedComponents/Card";
@@ -16,16 +16,24 @@ import FormInput from "../SharedComponents/FormInput";
 import { BrowserView, MobileView } from "react-device-detect";
 import { AiFillCloseCircle } from "react-icons/ai";
 
-const Directory = ({ contactList, setContactList}) => {
+const Directory = ({ contactList, setContactList }) => {
   const [name, setName] = useState("");
 
   return (
     <Box>
       <BrowserView>
-        <DirectoryBrowser setName={setName} name={name} contactList={contactList} />
+        <DirectoryBrowser
+          setName={setName}
+          name={name}
+          contactList={contactList}
+        />
       </BrowserView>
       <MobileView>
-        <DirectoryMobile setName={setName} name={name} contactList={contactList} />
+        <DirectoryMobile
+          setName={setName}
+          name={name}
+          contactList={contactList}
+        />
       </MobileView>
     </Box>
   );
@@ -37,9 +45,13 @@ const DirectoryBrowser = ({ contactList, name, setName }) => {
       <HeaderAndSearch setName={setName} name={name} minW="400px" mr="90px" />
       <VStack spacing={4}>
         {contactList.map((contact) => {
-          if(contact.name.toLowerCase().includes(name.toLowerCase())) {
+          if (contact.name.toLowerCase().includes(name.toLowerCase())) {
             return (
-              <Contact name={contact.name} number={contact.phone} width="500px" />
+              <Contact
+                name={contact.name}
+                number={contact.phone}
+                width="500px"
+              />
             );
           }
         })}
@@ -81,15 +93,25 @@ const Contact = ({ name, number, ...rest }) => {
 
 const HeaderAndSearch = ({ setName, name, ...rest }) => {
   function clearInput() {
-    console.log(name)
-    setName("")
+    console.log(name);
+    setName("");
   }
   return (
     <Box {...rest}>
       <Heading>Directory</Heading>
       <FormInput
         leftElement={<SearchIcon />}
-        rightElement={<Icon as={AiFillCloseCircle} cursor="pointer" onClick={() => clearInput()} />}
+        rightElement={
+          name === "" ? (
+            <Box></Box>
+          ) : (
+            <Icon
+              as={AiFillCloseCircle}
+              cursor="pointer"
+              onClick={() => clearInput()}
+            />
+          )
+        }
         value={name}
         mt={5}
         id="search"

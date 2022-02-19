@@ -120,7 +120,7 @@ const Home = () => {
           />
         );
       case "calendar":
-        return <ShiftCalendar />;
+        return <ShiftCalendar contactList={contactList} />;
       case "profile":
         return <Profile />;
       default:
