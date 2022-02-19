@@ -45,6 +45,7 @@ const FormInput = (props) => {
           <PasswordInput {...props} />
         ) : (
           <Input
+            value={props.value}
             id={props.id}
             onChange={props.onChange}
             placeholder={props.placeholder}

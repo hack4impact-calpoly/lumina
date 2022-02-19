@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { FiHome, FiCalendar, FiMenu, FiUser } from "react-icons/fi";
 import Directory from "./Directory";
 import LogoWithBack from "../SharedComponents/LogoWithBack";
-import ShiftCalendar from './ShiftCalendar';
+import ShiftCalendar from "./ShiftCalendar";
 import Dashboard from "./Dashboard";
 import Profile from "./Profile";
 import { Card } from "../SharedComponents/Card";
@@ -12,11 +12,113 @@ import { BrowserView, MobileView } from "react-device-detect";
 
 const Home = () => {
   const [mainContent, setMainContent] = useState("");
-
+  const [contactList, setContactList] = useState([
+    {
+      name: "Lenna Hane",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "Bernita Collier",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "Eliane Schneider",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "Emmalee Stark",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "Adriel Bogan",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "Vergie Marquardt",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "Jerrod Gutkowski",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "Chaim Jones",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "Erling Mayert",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "Howell Torphy",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "Sylvester Bednar",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "Griffin Little",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "Rhett Fritsch",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "Ara Halvorson",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "Murphy Jacobson",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "Arianna Jewess",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "Kristy Kuhlman",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "Karli Frami",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "Mina Carroll",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "Jennifer Ziemann",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "Nikki Murray",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "Kelsi Cronin",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "Clifford Feeney",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "Rowland Cormier",
+      phone: "(805) 555-5555",
+    },
+  ]);
   function switchMainComponent() {
     switch (mainContent) {
       case "directory":
-        return <Directory />;
+        return (
+          <Directory
+            contactList={contactList}
+            setContactList={setContactList}
+          />
+        );
       case "calendar":
         return <ShiftCalendar />;
       case "profile":

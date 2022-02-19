@@ -257,7 +257,7 @@ const CreateShiftModal = ({ isOpen, onClose }) => {
   }
 
   function validShift() {
-    return endDate.getTime() - startDate.getTime() >= 0;
+    return endDate.getTime() - startDate.getTime() > 0;
   }
 
   return (
@@ -296,7 +296,7 @@ const CreateShiftModal = ({ isOpen, onClose }) => {
           <Text color="red">
             {validShift()
               ? ""
-              : "End date and time must be after start date and time"}
+              : "End date/time must be after start date/time"}
           </Text>
           <Flex align="center" mt={3}>
             <Icon as={BiGlobe} mr={3} w={6} h={6} />
