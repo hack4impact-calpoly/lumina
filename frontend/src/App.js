@@ -11,6 +11,7 @@ import ForgotPassword_Email from './components/ChangePasswordPage/ForgotPassword
 import ForgotPassword_Code from './components/ChangePasswordPage/ForgotPassword_Code';
 import Directory from "./components/Home/Directory";
 import NotFound from "./components/NotFound/NotFound";
+import ShiftCalendar from "./components/Home/ShiftCalendar";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route path="/forgot-password/code" element={<ForgotPassword_Code/>} />
             <Route path="/home" element={<Home />} />
             <Route path="/mobile-directory" element={<Directory />} />
+            <Route path="/calendar" element={<ShiftCalendar />} />
             <Route path="/change-password" element={<ChangePassword />} />
             <Route path="*" element={ <NotFound /> } />
           </Routes>
