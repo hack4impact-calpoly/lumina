@@ -744,7 +744,7 @@ const CreateShiftModal = ({
           </Text>
           <Flex align="center" mt={3}>
             <Icon as={BiGlobe} mr={3} w={6} h={6} />
-            <Text>Pacific Daylight Time (GMT-7)</Text>
+            <Text>Pacific Daylight Time (GMT-8)</Text>
           </Flex>
           <Divider mt={3} mb={3} />
           <VStack align="left" spacing={3}>
