@@ -65,15 +65,22 @@ const ShiftCalendar = ({ contactList }) => {
       end: new Date(2022, 1, 18, 13),
       title: "2/2",
       info: {
-        primary: "You",
+        primary: {
+          name: "Adriel Bogan",
+          phone: "(805) 555 - 555",
+        },
         backup: {
           name: "Lenna Hane",
-          number: "(805) 555 - 555",
+          phone: "(805) 555 - 555",
+        },
+        secondBackup: {
+          name: "Eliane Schneider",
+          phone: "(805) 555-5555",
         },
         allDay: {
           backup: {
             name: "Bernita Collier",
-            number: "(805) 555 - 555",
+            phone: "(805) 555 - 555",
           },
         },
       },
@@ -83,15 +90,22 @@ const ShiftCalendar = ({ contactList }) => {
       end: new Date(2022, 1, 19, 17),
       title: "2/2",
       info: {
-        primary: "You",
+        primary: {
+          name: "Adriel Bogan",
+          phone: "(805) 555 - 555",
+        },
         backup: {
           name: "Donna Cruz",
-          number: "(805) 555 - 555",
+          phone: "(805) 555 - 555",
+        },
+        accompaniment: {
+          name: "Emmalee Stark",
+          phone: "(805) 555-5555",
         },
         allDay: {
           backup: {
             name: "Madison Lee",
-            number: "(805) 555 - 555",
+            phone: "(805) 555 - 555",
           },
         },
       },
@@ -101,15 +115,18 @@ const ShiftCalendar = ({ contactList }) => {
       end: new Date(2022, 1, 20, 18),
       title: "2/2",
       info: {
-        primary: "You",
+        primary: {
+          name: "Adriel Bogan",
+          phone: "(805) 555 - 555",
+        },
         backup: {
-          name: "Emmalee Start",
-          number: "(805) 555 - 555",
+          name: "Emmalee Stark",
+          phone: "(805) 555 - 555",
         },
         allDay: {
           backup: {
             name: "Adriel Bogan",
-            number: "(805) 555 - 555",
+            phone: "(805) 555 - 555",
           },
         },
       },
@@ -178,7 +195,7 @@ const ShiftCalendarBrowser = ({
     //add verification and call
     let localEvents = events.map((event) => {
       if (event.start === date) {
-        event.info.primary = "";
+        event.info.primary = undefined;
       }
       return event;
     });
@@ -218,7 +235,7 @@ const ShiftCalendarBrowser = ({
               <Box w="100%">
                 <Text fontSize="20px">Backup</Text>
                 <Text fontSize="16px">
-                  {`${currentEvent.info.allDay.backup.name} - ${currentEvent.info.allDay.backup.number}`}
+                  {`${currentEvent.info.allDay.backup.name} - ${currentEvent.info.allDay.backup.phone}`}
                 </Text>
               </Box>
             </VStack>
@@ -261,6 +278,8 @@ const ShiftCalendarBrowser = ({
       />
       <CreateShiftModal
         isOpen={isCreateOpen}
+        events={events}
+        setEvents={setEvents}
         onClose={onCreateClose}
         contactList={contactList}
       />
@@ -286,11 +305,49 @@ const ShiftCalendarMobile = ({ contactList, date, currentEvent, events }) => {
 const ShiftCard = ({ contactList, date, events, setEvents, shift }) => {
   const startTime = moment(shift.start).format("hh:mmA");
   const endTime = moment(shift.end).format("hh:mmA");
+  const [includeSecondBackup, setIncludeSecondBackup] = useState(false);
+  const [includeAccompaniment, setIncludeAccompaniment] = useState(false);
+  var contactListSelectable = [];
+  contactList.map((contact) => {
+    contactListSelectable.push({ value: contact.name, label: contact.name });
+  });
 
-  function assignNewPrimary(primary) {
+  function assignNew(name, type) {
+    if (name !== "") {
+      const info = name
+        ? contactList.filter((contact) => contact.name === name)[0]
+        : undefined;
+      let localEvents = events.map((event) => {
+        if (event.start === date) {
+          switch (type) {
+            case "primary":
+              event.info.primary = info;
+              break;
+            case "backup":
+              event.info.backup = info;
+              break;
+            case "accompaniment":
+              setIncludeAccompaniment(false);
+              event.info.accompaniment = info;
+              break;
+            case "secondBackup":
+              setIncludeSecondBackup(false);
+              event.info.secondBackup = info;
+              break;
+            default:
+              break;
+          }
+        }
+        return event;
+      });
+      setEvents(localEvents);
+    }
+  }
+
+  function reassign(type) {
     let localEvents = events.map((event) => {
       if (event.start === date) {
-        event.info.primary = primary;
+        event.info[type] = undefined;
       }
       return event;
     });
@@ -304,56 +361,240 @@ const ShiftCard = ({ contactList, date, events, setEvents, shift }) => {
       </Box>
       <Spacer />
       <VStack w="100%" spacing="4px">
-        <Flex
-          bg={shift.info.primary === "" ? "orange.100" : "green.100"}
-          w="100%"
-          p={2}
-        >
-          {shift.info.primary === "" ? (
-            <NoPrimary contactList={contactList} assignNewPrimary={assignNewPrimary} />
-          ) : (
-            <Primary shift={shift} />
-          )}
-        </Flex>
-        <Box w="100%">
-          <Text fontSize="20px">Backup</Text>
-          <Text fontSize="16px">{`${shift.info.backup.name} - ${shift.info.backup.number}`}</Text>
-        </Box>
+        <Primary
+          primaryInfo={shift.info.primary}
+          contactListSelectable={contactListSelectable}
+          assignNew={assignNew}
+          reassign={reassign}
+        />
+        <Backup
+          backupInfo={shift.info.backup}
+          contactListSelectable={contactListSelectable}
+          assignNew={assignNew}
+          reassign={reassign}
+        />
+        {shift.info.accompaniment || isWeekend(date) ? (
+          <Accompaniment
+            date={date}
+            setIncludeAccompaniment={setIncludeAccompaniment}
+            accompanimentInfo={shift.info.accompaniment}
+            contactListSelectable={contactListSelectable}
+            assignNew={assignNew}
+            reassign={reassign}
+          />
+        ) : includeAccompaniment ? (
+          <RequestAssignment
+            required={isWeekend(date)}
+            type="accompaniment"
+            label="Accompaniment"
+            contactListSelectable={contactListSelectable}
+            assignNew={assignNew}
+            reassign={reassign}
+            setInclude={setIncludeAccompaniment}
+          />
+        ) : (
+          <Button w="100%" onClick={() => setIncludeAccompaniment(true)}>
+            Add Accompaniment
+          </Button>
+        )}
+        <SecondBackup
+          includeSecondBackup={includeSecondBackup}
+          setIncludeSecondBackup={setIncludeSecondBackup}
+          secondBackupInfo={shift.info.secondBackup}
+          contactListSelectable={contactListSelectable}
+          assignNew={assignNew}
+          reassign={reassign}
+        />
       </VStack>
     </Card>
   );
 };
 
-const Primary = ({ shift }) => {
+const Primary = ({
+  primaryInfo,
+  contactListSelectable,
+  assignNew,
+  reassign,
+}) => {
   return (
-    <Flex align="center">
-      <CheckIcon boxSize={7} mr="20px" />
-      <Box w="100%">
-        <Text fontWeight="bold" mr={3}>
-          Primary
-        </Text>
-        <Text>{shift.info.primary}</Text>
-      </Box>
+    <Flex bg={primaryInfo ? "green.100" : "orange.100"} w="100%" p={2}>
+      {primaryInfo ? (
+        <Flex align="center" w="100%">
+          <CheckIcon boxSize={7} mr="20px" />
+          <Box w="100%">
+            <Flex align="center" w="100%">
+              <Text fontWeight="bold" mr={3}>
+                Primary
+              </Text>
+              <Spacer />
+              <Button size="xs" onClick={() => reassign("primary")}>
+                Re-assign
+              </Button>
+            </Flex>
+            <Text>{primaryInfo.name}</Text>
+            <Text>{primaryInfo.phone}</Text>
+          </Box>
+        </Flex>
+      ) : (
+        <RequestAssignment
+          required
+          type="primary"
+          label="Primary"
+          contactListSelectable={contactListSelectable}
+          assignNew={assignNew}
+        />
+      )}
     </Flex>
   );
 };
 
-const NoPrimary = ({ contactList, assignNewPrimary }) => {
-  const [selectedPrimary, setSelectedPrimary] = useState("");
-  var contactListSelectable = [];
-  contactList.map((contact) => {
-    contactListSelectable.push({ value: contact.name, label: contact.name });
-  });
+const Backup = ({ backupInfo, contactListSelectable, assignNew, reassign }) => {
+  return (
+    <Box w="100%">
+      {backupInfo ? (
+        <Box>
+          <Flex>
+            <Text fontSize="20px" fontWeight="bold">
+              Backup
+            </Text>
+            <Spacer />
+            <Button size="xs" onClick={() => reassign("backup")}>
+              Re-assign
+            </Button>
+          </Flex>
+          <Text fontSize="16px">{`${backupInfo.name} - ${backupInfo.phone}`}</Text>
+        </Box>
+      ) : (
+        <RequestAssignment
+          required
+          type="backup"
+          label="Backup"
+          contactListSelectable={contactListSelectable}
+          assignNew={assignNew}
+        />
+      )}
+    </Box>
+  );
+};
+
+const Accompaniment = ({
+  date,
+  accompanimentInfo,
+  setIncludeAccompaniment,
+  contactListSelectable,
+  assignNew,
+  reassign,
+}) => {
+  return (
+    <Box w="100%">
+      {accompanimentInfo ? (
+        <Box>
+          <Flex>
+            <Text fontSize="20px" fontWeight="bold">
+              Accompaniment
+            </Text>
+            <Spacer />
+            <Button size="xs" onClick={() => reassign("accompaniment")}>
+              {isWeekend(date) ? "Re-assign" : "Remove"}
+            </Button>
+          </Flex>
+          <Text fontSize="16px">{`${accompanimentInfo.name} - ${accompanimentInfo.phone}`}</Text>
+        </Box>
+      ) : (
+        <RequestAssignment
+          required={isWeekend(date)}
+          type="accompaniment"
+          label="Accompaniment"
+          contactListSelectable={contactListSelectable}
+          assignNew={assignNew}
+          reassign={reassign}
+          setInclude={setIncludeAccompaniment}
+        />
+      )}
+    </Box>
+  );
+};
+
+const SecondBackup = ({
+  includeSecondBackup,
+  setIncludeSecondBackup,
+  secondBackupInfo,
+  contactListSelectable,
+  assignNew,
+  reassign,
+}) => {
+  return (
+    <Box w="100%">
+      {secondBackupInfo ? (
+        <Box w="100%">
+          <Box>
+            <Flex>
+              <Text fontSize="20px" fontWeight="bold">
+                Second Backup
+              </Text>
+              <Spacer />
+              <Button size="xs" onClick={() => reassign("secondBackup")}>
+                Remove
+              </Button>
+            </Flex>
+            <Text fontSize="16px">{`${secondBackupInfo.name} - ${secondBackupInfo.phone}`}</Text>
+          </Box>
+        </Box>
+      ) : includeSecondBackup ? (
+        <RequestAssignment
+          type="secondBackup"
+          label="Second Backup"
+          contactListSelectable={contactListSelectable}
+          assignNew={assignNew}
+          reassign={reassign}
+          setInclude={setIncludeSecondBackup}
+        />
+      ) : (
+        <Button w="100%" onClick={() => setIncludeSecondBackup(true)}>
+          Add Second Backup
+        </Button>
+      )}
+    </Box>
+  );
+};
+
+const RequestAssignment = ({
+  type,
+  label,
+  contactListSelectable,
+  assignNew,
+  reassign,
+  required,
+  setInclude,
+}) => {
+  const [selected, setSelected] = useState("");
+
+  function resetAssignment() {
+    reassign(type);
+    setInclude(false);
+  }
+
   return (
     <Flex align="center" w="100%">
-      <WarningIcon boxSize={7} mr="20px" />
+      {required ? (
+        <WarningIcon boxSize={7} mr="20px" color="red" />
+      ) : (
+        <Icon
+          as={AiOutlineCloseSquare}
+          boxSize={7}
+          mr="20px"
+          cursor="pointer"
+          onClick={() => resetAssignment()}
+        />
+      )}
+
       <Box w="100%">
         <Flex mb={1}>
           <Text fontWeight="bold" mr={3}>
-            Primary
+            {label}
           </Text>
-
-          <Button size="xs" onClick={() => assignNewPrimary(selectedPrimary)}>
+          <Spacer />
+          <Button size="xs" onClick={() => assignNew(selected, type)}>
             Assign
           </Button>
         </Flex>
@@ -365,7 +606,7 @@ const NoPrimary = ({ contactList, assignNewPrimary }) => {
           isSearchable
           name="color"
           options={contactListSelectable}
-          onChange={(e) => setSelectedPrimary(e.value)}
+          onChange={(e) => setSelected(e.value)}
         />
       </Box>
     </Flex>
@@ -383,9 +624,9 @@ const CancelShiftModal = ({ date, shift, isOpen, onClose }) => {
           <Text>
             {`You have cancelled your volunteer shift on ${
               months[date.getMonth()]
-            } ${date.getDate()}, ${date.getFullYear()} at ${shift.startTime}-${
-              shift.endTime
-            }`}
+            } ${date.getDate()}, ${date.getFullYear()} at ${moment(
+              shift.start
+            ).format("hh:mmA")}-${moment(shift.end).format("hh:mmA")}`}
           </Text>
         </ModalBody>
       </ModalContent>
@@ -393,7 +634,13 @@ const CancelShiftModal = ({ date, shift, isOpen, onClose }) => {
   );
 };
 
-const CreateShiftModal = ({ contactList, isOpen, onClose }) => {
+const CreateShiftModal = ({
+  contactList,
+  events,
+  setEvents,
+  isOpen,
+  onClose,
+}) => {
   const [includeSecondBackup, setIncludeSecondBackup] = useState(false);
   const [includeAccompaniment, setIncludeAccompaniment] = useState(false);
   const [startDate, setStartDate] = useState(
@@ -402,8 +649,11 @@ const CreateShiftModal = ({ contactList, isOpen, onClose }) => {
   const [endDate, setEndDate] = useState(
     setHours(setMinutes(new Date(), 0), 9)
   );
-  const isWeekend =
-    startDate.getDay() == 6 || startDate.getDay() == 0 ? true : false;
+  const [primary, setPrimary] = useState("");
+  const [backup, setBackup] = useState("");
+  const [accompaniment, setAccompaniment] = useState("");
+  const [secondBackup, setSecondBackup] = useState("");
+
   const filterPassedTime = (time) => {
     const currentDate = new Date();
     const selectedDate = new Date(time);
@@ -425,6 +675,29 @@ const CreateShiftModal = ({ contactList, isOpen, onClose }) => {
 
   function createShift() {
     if (validShift()) {
+      const primaryInfo = primary
+        ? contactList.filter((contact) => contact.name === primary)[0]
+        : undefined;
+      const backupInfo = backup
+        ? contactList.filter((contact) => contact.name === backup)[0]
+        : undefined;
+
+      let newShift = {
+        start: startDate,
+        end: endDate,
+        title: "2/2",
+        info: {
+          primary: primaryInfo,
+          backup: backupInfo,
+          allDay: {
+            backup: {
+              name: "Bernita Collier",
+              phone: "(805) 555 - 555",
+            },
+          },
+        },
+      };
+      setEvents([...events, newShift]);
       closeModal();
     }
   }
@@ -475,14 +748,23 @@ const CreateShiftModal = ({ contactList, isOpen, onClose }) => {
           </Flex>
           <Divider mt={3} mb={3} />
           <VStack align="left" spacing={3}>
-            <AddVolunteer contactList={contactList} type="Primary" />
-            <AddVolunteer contactList={contactList} type="Backup" />
-            {includeAccompaniment || isWeekend ? (
+            <AddVolunteer
+              contactList={contactList}
+              type="Primary"
+              setVolunteer={setPrimary}
+            />
+            <AddVolunteer
+              contactList={contactList}
+              type="Backup"
+              setVolunteer={setBackup}
+            />
+            {includeAccompaniment || isWeekend(startDate) ? (
               <AddVolunteer
                 contactList={contactList}
                 type="Accompaniment"
-                removeable={!isWeekend}
+                removeable={!isWeekend(startDate)}
                 onRemove={() => setIncludeAccompaniment(false)}
+                setVolunteer={setAccompaniment}
               />
             ) : (
               <Flex
@@ -499,6 +781,7 @@ const CreateShiftModal = ({ contactList, isOpen, onClose }) => {
                 type="Second Backup"
                 removeable
                 onRemove={() => setIncludeSecondBackup(false)}
+                setVolunteer={setSecondBackup}
               />
             ) : (
               <Flex
@@ -517,7 +800,13 @@ const CreateShiftModal = ({ contactList, isOpen, onClose }) => {
   );
 };
 
-const AddVolunteer = ({ contactList, type, removeable, onRemove }) => {
+const AddVolunteer = ({
+  contactList,
+  type,
+  removeable,
+  onRemove,
+  setVolunteer,
+}) => {
   const [searchVolunteer, setSearchVolunteer] = useState(false);
   var contactListSelectable = [];
   contactList.map((contact) => {
@@ -557,6 +846,7 @@ const AddVolunteer = ({ contactList, type, removeable, onRemove }) => {
           isSearchable
           name="color"
           options={contactListSelectable}
+          onChange={(e) => setVolunteer(e.value)}
         />
       ) : (
         <Button
@@ -566,5 +856,9 @@ const AddVolunteer = ({ contactList, type, removeable, onRemove }) => {
     </Flex>
   );
 };
+
+function isWeekend(date) {
+  return date.getDay() == 6 || date.getDay() == 0 ? true : false;
+}
 
 export default ShiftCalendar;
