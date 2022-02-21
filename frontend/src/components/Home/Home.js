@@ -86,8 +86,21 @@ const HomeMobile = ({
 }) => {
   return( 
   <Box {...rest}>
-    <Flex>
-        
+    <Flex> 
+        <LogoWithBack
+          position="fixed"
+          boxShadow="md"
+          as="header"
+          backgroundColor="white"
+          w="100%"
+          zIndex="sticky"
+          element={<MobileSignout />}
+          back = "/"
+        />
+       {/* <MobileSignout 
+        mainContent={mainContent} 
+        setMainContent={setMainContent}
+        /> */}
         <MobileNavBar
           mainContent={mainContent}
           setMainContent={setMainContent}
@@ -102,19 +115,21 @@ const HomeMobile = ({
 };
 
 const MobileSignout = ({ mainContent, setMainContent, ...rest }) => {
-  <Card {...rest} w="300px" h="100%" flexDir="row">
-    <Link to="/">
-        <Text
-          cursor="pointer"
-          textAlign="center"
-          fontWeight="bold"
-          fontSize="20px"
-        >
-          Sign out
-        </Text>
-      </Link>
-  </Card>
-}
+  return (  
+    <Card {...rest} w="110px" h="5px" mt= "1px" flexDir="column">
+      <Link to="/">
+          <Text
+            cursor="pointer"
+            textAlign="center"
+            fontWeight="bold"
+            fontSize="15px"
+          >
+            Sign out
+          </Text>
+        </Link>
+      </Card>   
+    );
+};
 
 const MobileNavBar = ({ mainContent, setMainContent, ...rest }) => {
   return (
