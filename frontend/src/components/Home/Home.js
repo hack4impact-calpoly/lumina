@@ -87,6 +87,7 @@ const HomeMobile = ({
   return( 
   <Box {...rest}>
     <Flex>
+        
         <MobileNavBar
           mainContent={mainContent}
           setMainContent={setMainContent}
@@ -100,9 +101,24 @@ const HomeMobile = ({
   </Box>);
 };
 
+const MobileSignout = ({ mainContent, setMainContent, ...rest }) => {
+  <Card {...rest} w="300px" h="100%" flexDir="row">
+    <Link to="/">
+        <Text
+          cursor="pointer"
+          textAlign="center"
+          fontWeight="bold"
+          fontSize="20px"
+        >
+          Sign out
+        </Text>
+      </Link>
+  </Card>
+}
+
 const MobileNavBar = ({ mainContent, setMainContent, ...rest }) => {
   return (
-    <Card {...rest} w="100%" h="100px" flexDir="row" ml={0} mt={510}>
+    <Card {...rest} w="100%" h="100px" flexDir="row" ml={0} mt={515} mb={0}>
       <HStack>
           <NavbarItem 
             name={"Dashboard"} 
@@ -141,6 +157,29 @@ const MobileNavBar = ({ mainContent, setMainContent, ...rest }) => {
 
     
     );
+};
+
+const NavbarItem = ({ icon, name, ...rest }) => {
+  return (
+    <Stack
+      alignItems="baseline"
+      {...rest}
+      p="0.5"
+      borderRadius="lg"
+      cursor="pointer"
+      _hover={{
+        bg: "teal.400",
+        color: "white",
+      }}
+    >
+    <Box w="72px" h="50px" alignContent={"center"}>
+      <Icon fontSize="20" as={icon} />
+      <Text fontSize="14px">{name}</Text>
+    </Box>
+      
+    </Stack>
+  );
+
 };
 
 const Sidebar = ({ mainContent, setMainContent, ...rest }) => {
@@ -216,27 +255,6 @@ const SidebarItem = ({ icon, name, ...rest }) => {
 
 };
 
-const NavbarItem = ({ icon, name, ...rest }) => {
-  return (
-    <Stack
-      alignItems="baseline"
-      {...rest}
-      p="0.5"
-      borderRadius="lg"
-      cursor="pointer"
-      _hover={{
-        bg: "teal.400",
-        color: "white",
-      }}
-    >
-    <Box w="72px" h="50px" alignContent={"center"}>
-      <Icon fontSize="20" as={icon} />
-      <Text fontSize="14px">{name}</Text>
-    </Box>
-      
-    </Stack>
-  );
 
-};
 
 export default Home;
