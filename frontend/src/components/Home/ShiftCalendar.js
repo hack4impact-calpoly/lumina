@@ -16,7 +16,6 @@ import {
   useDisclosure,
   Icon,
   Divider,
-  Spinner,
 } from "@chakra-ui/react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
@@ -132,14 +131,20 @@ const ShiftCalendar = ({ contactList }) => {
       },
     },
   ]);
-  const [currentEvent, setCurrentEvent] = useState(
-    events.filter(
-      (event) =>
-        event.start.getFullYear() === date.getFullYear() &&
-        event.start.getMonth() === date.getMonth() &&
-        event.start.getDate() === date.getDate()
-    )[0]
-  );
+  const [currentEvent, setCurrentEvent] = useState();
+
+  function findNearestEvent() {
+    let nearestIndex = 0;
+    let dateDifference = Math.abs(events[nearestIndex].start.getTime() - date.getTime());
+    events.forEach((event, index) => {
+      if (Math.abs(event.start.getTime() - date.getTime()) < dateDifference) {
+        nearestIndex = index;
+        dateDifference = Math.abs(event.start.getTime() - date.getTime());
+      }
+    });
+    setCurrentEvent(events[nearestIndex]);
+  }
+
   return (
     <Box>
       <BrowserView>
@@ -153,20 +158,11 @@ const ShiftCalendar = ({ contactList }) => {
             setEvents={setEvents}
           />
         ) : (
-          <Spinner />
+          findNearestEvent()
         )}
       </BrowserView>
       <MobileView>
-        {currentEvent ? (
-          <ShiftCalendarMobile
-            contactList={contactList}
-            date={currentEvent.start}
-            currentEvent={currentEvent}
-            events={events}
-          />
-        ) : (
-          <Spinner />
-        )}
+        Hello
       </MobileView>
     </Box>
   );
@@ -308,7 +304,7 @@ const ShiftCard = ({ contactList, date, events, setEvents, shift }) => {
   const [includeSecondBackup, setIncludeSecondBackup] = useState(false);
   const [includeAccompaniment, setIncludeAccompaniment] = useState(false);
   var contactListSelectable = [];
-  contactList.map((contact) => {
+  contactList.forEach((contact) => {
     contactListSelectable.push({ value: contact.name, label: contact.name });
   });
 
@@ -809,7 +805,7 @@ const AddVolunteer = ({
 }) => {
   const [searchVolunteer, setSearchVolunteer] = useState(false);
   var contactListSelectable = [];
-  contactList.map((contact) => {
+  contactList.forEach((contact) => {
     contactListSelectable.push({ value: contact.name, label: contact.name });
   });
   return (
@@ -858,7 +854,7 @@ const AddVolunteer = ({
 };
 
 function isWeekend(date) {
-  return date.getDay() == 6 || date.getDay() == 0 ? true : false;
+  return date.getDay() === 6 || date.getDay() === 0 ? true : false;
 }
 
 export default ShiftCalendar;
