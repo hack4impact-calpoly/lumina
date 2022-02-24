@@ -50,12 +50,8 @@ export default function Login() {
     );
   }
 
-  const mainStyle = {
-    backgroundColor: '#F6F6F6'
-  }
-
   return (
-      <Box style={ mainStyle }>
+      <Box>
         <Container h='100vh'>
           <Center h='100%'>
             <Card>
@@ -87,7 +83,7 @@ export default function Login() {
                   isRequired
                 />
                 <FormLabel htmlFor='passwordField' id='forgotPassword' float='right'>
-                  <Link to="/change-password">
+                  <Link to="/forgot-password">
                     Forgot your password?
                   </Link>
                 </FormLabel>

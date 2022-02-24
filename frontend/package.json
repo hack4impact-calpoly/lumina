@@ -15,7 +15,11 @@
     "moment": "^2.29.1",
     "react": "^17.0.2",
     "react-big-calendar": "^0.38.9",
+<<<<<<< HEAD
     "react-calendar": "^3.7.0",
+=======
+    "react-datepicker": "^4.6.0",
+>>>>>>> bdaf141c9a2c7467bd12bbf2919d866a2da16a7b
     "react-device-detect": "^2.1.2",
     "react-dnd": "^15.1.1",
     "react-dnd-html5-backend": "^15.1.2",
@@ -24,6 +28,7 @@
     "react-redux": "^7.2.6",
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
+    "react-select": "^5.2.2",
     "web-vitals": "^2.1.3"
   },
   "scripts": {

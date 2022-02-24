@@ -4,7 +4,11 @@ import React, { useState } from "react";
 import { FiHome, FiCalendar, FiMenu, FiUser } from "react-icons/fi";
 import Directory from "./Directory";
 import LogoWithBack from "../SharedComponents/LogoWithBack";
+<<<<<<< HEAD
 import Calendar from "./ShiftCalendar";
+=======
+import ShiftCalendar from "./ShiftCalendar";
+>>>>>>> bdaf141c9a2c7467bd12bbf2919d866a2da16a7b
 import Dashboard from "./Dashboard";
 import Profile from "./Profile";
 import { Card } from "../SharedComponents/Card";
@@ -12,13 +16,115 @@ import { BrowserView, MobileView } from "react-device-detect";
 
 const Home = () => {
   const [mainContent, setMainContent] = useState("");
-
+  const [contactList, setContactList] = useState([
+    {
+      name: "Lenna Hane",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "Bernita Collier",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "Eliane Schneider",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "Emmalee Stark",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "Adriel Bogan",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "Vergie Marquardt",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "Jerrod Gutkowski",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "Chaim Jones",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "Erling Mayert",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "Howell Torphy",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "Sylvester Bednar",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "Griffin Little",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "Rhett Fritsch",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "Ara Halvorson",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "Murphy Jacobson",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "Arianna Jewess",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "Kristy Kuhlman",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "Karli Frami",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "Mina Carroll",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "Jennifer Ziemann",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "Nikki Murray",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "Kelsi Cronin",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "Clifford Feeney",
+      phone: "(805) 555-5555",
+    },
+    {
+      name: "Rowland Cormier",
+      phone: "(805) 555-5555",
+    },
+  ]);
   function switchMainComponent() {
     switch (mainContent) {
       case "directory":
-        return <Directory />;
+        return (
+          <Directory
+            contactList={contactList}
+            setContactList={setContactList}
+          />
+        );
       case "calendar":
-        return <Calendar />;
+        return <ShiftCalendar contactList={contactList} />;
       case "profile":
         return <Profile />;
       default:
@@ -69,7 +175,7 @@ const HomeBrowser = ({
           position="fixed"
           zIndex="sticky"
         />
-        <Flex mt="90px" ml="370px">
+        <Flex pt="90px" pb="90px" ml="20%" w="100vw">
           {switchMainComponent()}
         </Flex>
       </Flex>
@@ -88,7 +194,7 @@ const HomeMobile = ({
 
 const Sidebar = ({ mainContent, setMainContent, ...rest }) => {
   return (
-    <Card {...rest} w="300px" h="100%" flexDir="column">
+    <Card {...rest} h="100%" flexDir="column">
       <Link to="/">
         <Text
           cursor="pointer"
@@ -141,7 +247,7 @@ const Sidebar = ({ mainContent, setMainContent, ...rest }) => {
 const SidebarItem = ({ icon, name, ...rest }) => {
   return (
     <Flex
-      alignItems="baseline"
+      alignItems="center"
       {...rest}
       p="4"
       mx="4"
