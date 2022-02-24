@@ -15,11 +15,7 @@
     "moment": "^2.29.1",
     "react": "^17.0.2",
     "react-big-calendar": "^0.38.9",
-<<<<<<< HEAD
-    "react-calendar": "^3.7.0",
-=======
     "react-datepicker": "^4.6.0",
->>>>>>> bdaf141c9a2c7467bd12bbf2919d866a2da16a7b
     "react-device-detect": "^2.1.2",
     "react-dnd": "^15.1.1",
     "react-dnd-html5-backend": "^15.1.2",

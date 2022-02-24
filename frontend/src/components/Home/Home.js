@@ -4,15 +4,32 @@ import React, { useState } from "react";
 import { FiHome, FiCalendar, FiMenu, FiUser } from "react-icons/fi";
 import Directory from "./Directory";
 import LogoWithBack from "../SharedComponents/LogoWithBack";
-<<<<<<< HEAD
-import Calendar from "./ShiftCalendar";
-=======
 import ShiftCalendar from "./ShiftCalendar";
->>>>>>> bdaf141c9a2c7467bd12bbf2919d866a2da16a7b
 import Dashboard from "./Dashboard";
 import Profile from "./Profile";
 import { Card } from "../SharedComponents/Card";
 import { BrowserView, MobileView } from "react-device-detect";
+
+const sidebarItems = [
+  {
+    name: "Dashboard", 
+    mainContent: "dashboard",
+    icon: FiHome
+  },{
+    name: "Calendar", 
+    mainContent: "calendar",
+    icon: FiCalendar
+  },
+  {
+    name: "Directory", 
+    mainContent: "directory",
+    icon: FiMenu
+  },
+  {
+    name: "Profile", 
+    mainContent: "profile",
+    icon: FiUser
+  }]
 
 const Home = () => {
   const [mainContent, setMainContent] = useState("");
@@ -175,7 +192,7 @@ const HomeBrowser = ({
           position="fixed"
           zIndex="sticky"
         />
-        <Flex pt="90px" pb="90px" ml="20%" w="100vw">
+        <Flex pt="90px" pb="90px" pl="300px" w="100vw">
           {switchMainComponent()}
         </Flex>
       </Flex>
@@ -207,38 +224,18 @@ const Sidebar = ({ mainContent, setMainContent, ...rest }) => {
       </Link>
       <Divider mt={3} />
       <VStack spacing="1" mt={3}>
-        <SidebarItem
-          name="Dashboard"
-          icon={FiHome}
-          w="100%"
-          onClick={() => setMainContent("")}
-          bg={mainContent === "" ? "teal.400" : "white"}
-          color={mainContent === "" ? "white" : "black"}
-        />
-        <SidebarItem
-          name="Calendar"
-          icon={FiCalendar}
-          w="100%"
-          onClick={() => setMainContent("calendar")}
-          bg={mainContent === "calendar" ? "teal.400" : "white"}
-          color={mainContent === "calendar" ? "white" : "black"}
-        />
-        <SidebarItem
-          name="Directory"
-          icon={FiMenu}
-          w="100%"
-          onClick={() => setMainContent("directory")}
-          bg={mainContent === "directory" ? "teal.400" : "white"}
-          color={mainContent === "directory" ? "white" : "black"}
-        />
-        <SidebarItem
-          name="Profile"
-          icon={FiUser}
-          w="100%"
-          onClick={() => setMainContent("profile")}
-          bg={mainContent === "profile" ? "teal.400" : "white"}
-          color={mainContent === "profile" ? "white" : "black"}
-        />
+        {sidebarItems.map(item => {
+          return (
+            <SidebarItem
+            name={item.name}
+            icon={item.icon}
+            w="100%"
+            onClick={() => setMainContent(item.mainContent)}
+            bg={mainContent === item.mainContent ? "teal.400" : "white"}
+            color={mainContent === item.mainContent ? "white" : "black"}
+          />
+          );
+        })}
       </VStack>
     </Card>
   );

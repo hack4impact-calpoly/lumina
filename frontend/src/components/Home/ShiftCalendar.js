@@ -27,7 +27,11 @@ import setHours from "date-fns/setHours";
 import setMinutes from "date-fns/setMinutes";
 import "react-datepicker/dist/react-datepicker.css";
 import { BiGlobe, BiTimeFive, BiTime, BiUser } from "react-icons/bi";
-import { AiOutlinePlusSquare, AiOutlineCloseSquare } from "react-icons/ai";
+import {
+  AiOutlinePlusSquare,
+  AiOutlineCloseSquare,
+  AiOutlineFileSearch,
+} from "react-icons/ai";
 import Select from "react-select";
 import { BrowserView, MobileView } from "react-device-detect";
 
@@ -135,7 +139,9 @@ const ShiftCalendar = ({ contactList }) => {
 
   function findNearestEvent() {
     let nearestIndex = 0;
-    let dateDifference = Math.abs(events[nearestIndex].start.getTime() - date.getTime());
+    let dateDifference = Math.abs(
+      events[nearestIndex].start.getTime() - date.getTime()
+    );
     events.forEach((event, index) => {
       if (Math.abs(event.start.getTime() - date.getTime()) < dateDifference) {
         nearestIndex = index;
@@ -162,7 +168,17 @@ const ShiftCalendar = ({ contactList }) => {
         )}
       </BrowserView>
       <MobileView>
-        Hello
+        {currentEvent ? (
+          <ShiftCalendarMobile
+            contactList={contactList}
+            date={currentEvent.start}
+            currentEvent={currentEvent}
+            setCurrentEvent={setCurrentEvent}
+            events={events}
+          />
+        ) : (
+          findNearestEvent()
+        )}
       </MobileView>
     </Box>
   );
@@ -255,16 +271,7 @@ const ShiftCalendarBrowser = ({
         >
           + New Shift
         </Button>
-        <Calendar
-          selectable
-          localizer={localizer}
-          defaultDate={new Date()}
-          defaultView="month"
-          events={events}
-          style={{ height: "80vh" }}
-          views={["month", "week"]}
-          onSelectEvent={(e) => setCurrentEvent(e)}
-        />
+        <LuminaCalendar events={events} setCurrentEvent={setCurrentEvent} />
       </Box>
       <CancelShiftModal
         date={date}
@@ -283,17 +290,30 @@ const ShiftCalendarBrowser = ({
   );
 };
 
-const ShiftCalendarMobile = ({ contactList, date, currentEvent, events }) => {
+const ShiftCalendarMobile = ({
+  contactList,
+  date,
+  currentEvent,
+  setCurrentEvent,
+  events,
+}) => {
   return (
-    <Flex w="100%">
-      <Calendar
-        localizer={localizer}
-        defaultDate={new Date()}
-        defaultView="month"
-        events={events}
-        style={{ height: "80vh" }}
-        views={["month"]}
-      />
+    <Flex w="100%" flexDir="column">
+      <LuminaCalendar events={events} setCurrentEvent={setCurrentEvent} />
+      <Flex p={2}>
+        <Box mb={3}>
+          <Text fontWeight="bold" fontSize="24px">
+            {`${
+              months[date.getMonth()]
+            } ${date.getDate()}, ${date.getFullYear()}`}
+          </Text>
+        </Box>
+        <Spacer />
+        <Button bg="blue.200">
+          <Icon as={AiOutlineFileSearch} mr={1} />
+          <Text>View Details</Text>
+        </Button>
+      </Flex>
     </Flex>
   );
 };
@@ -850,6 +870,21 @@ const AddVolunteer = ({
         >{`Assign ${type} Now (Optional)`}</Button>
       )}
     </Flex>
+  );
+};
+
+const LuminaCalendar = ({ events, setCurrentEvent }) => {
+  return (
+    <Calendar
+      selectable
+      localizer={localizer}
+      defaultDate={new Date()}
+      defaultView="month"
+      events={events}
+      style={{ height: "80vh" }}
+      views={["month", "week"]}
+      onSelectEvent={(e) => setCurrentEvent(e)}
+    />
   );
 };
 
