@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Login from "./components/LoginPage/Login";
 import Signup from "./components/SignupPage/Signup";
+import ConfirmSignup from "./components/SignupPage/ConfirmSignup";
 import HomePage from "./components/HomePage/HomePage";
 import Home from "./components/Home/Home";
 import ChangePassword from "./components/ChangePasswordPage/ChangePassword";
@@ -22,6 +23,7 @@ function App() {
             <Route exact path="/" element={<Login />} />
             <Route path="/placeholder" element={<HomePage />} />
             <Route path="/sign-up" element={<Signup />} />
+            <Route path="/sign-up/success" element={<ConfirmSignup />} />
             <Route path="/forgot-password" element={<ForgotPassword_Email/>} />
             <Route path="/forgot-password/code" element={<ForgotPassword_Code/>} />
             <Route path="/change-password" element={<ChangePassword />} />

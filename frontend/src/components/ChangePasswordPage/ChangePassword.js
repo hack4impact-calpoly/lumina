@@ -1,6 +1,6 @@
 import { Box, Center, Text, Button, Heading } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import LogoWithBack from "../SharedComponents/LogoWithBack";
 import { CenterBox } from "../SharedComponents/CenterBox";
 import { Card } from "../SharedComponents/Card";
@@ -8,12 +8,11 @@ import FormInput from "../SharedComponents/FormInput";
 
 const ChangePassword = () => {
   const [successPasswordChange, setSuccessPasswordChange] = useState(false);
-  let navigate = useNavigate();
 
   return (
     <CenterBox>
       {successPasswordChange ? (
-        navigate("/change-password/confirm", { replace: false })
+        <Navigate to="/change-password/confirm" replace={false} />
       ) : (
         <ChangePasswordForm
           setSuccessPasswordChange={setSuccessPasswordChange}
