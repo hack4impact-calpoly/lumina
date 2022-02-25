@@ -189,7 +189,7 @@ const NavbarItem = ({ icon, name, ...rest }) => {
         color: "white",
       }}
     >
-    <Box w="72px" h="50px"  alignContent={"center"}>
+    <Box w="65px" h="50px"  alignContent={"center"}>
       <Icon ml={4} mt={2} fontSize="30" as={icon} />
     </Box>
       
