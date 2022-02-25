@@ -106,6 +106,8 @@ const HomeMobile = ({
           setMainContent={setMainContent}
           position="fixed"
           zIndex="sticky"
+          mt={515}
+          height = "fixed"
         />
         <Flex mt="150px" ml="10px">
           {switchMainComponent()}
@@ -116,7 +118,7 @@ const HomeMobile = ({
 
 const MobileSignout = ({ mainContent, setMainContent, ...rest }) => {
   return (  
-    <Card {...rest} w="110px" h="5px" mt= "1px" flexDir="column">
+    <Card {...rest} w="110px" h="5px" flexDir="column">
       <Link to="/">
           <Text
             cursor="pointer"
@@ -133,10 +135,10 @@ const MobileSignout = ({ mainContent, setMainContent, ...rest }) => {
 
 const MobileNavBar = ({ mainContent, setMainContent, ...rest }) => {
   return (
-    <Card {...rest} w="100%" h="100px" flexDir="row" ml={0} mt={515} mb={0}>
+    <Card {...rest} w="100%" h="100px" flexDir="row">
       <HStack>
           <NavbarItem 
-            name={"Dashboard"} 
+            //name={"Dashboard"} 
             icon={FiHome}
             w="100%"
             onClick={() => setMainContent("")}
@@ -144,7 +146,7 @@ const MobileNavBar = ({ mainContent, setMainContent, ...rest }) => {
             color={mainContent === "" ? "white" : "black"}
           />
           <NavbarItem
-          name="Calendar"
+          //name="Calendar"
           icon={FiCalendar}
           w="100%"
           onClick={() => setMainContent("calendar")}
@@ -152,7 +154,7 @@ const MobileNavBar = ({ mainContent, setMainContent, ...rest }) => {
           color={mainContent === "calendar" ? "white" : "black"}
         />
         <NavbarItem
-          name="Directory"
+          //name="Directory"
           icon={FiMenu}
           w="100%"
           onClick={() => setMainContent("directory")}
@@ -160,7 +162,7 @@ const MobileNavBar = ({ mainContent, setMainContent, ...rest }) => {
           color={mainContent === "directory" ? "white" : "black"}
         />
         <NavbarItem
-          name="Profile"
+          //name="Profile"
           icon={FiUser}
           w="100%"
           onClick={() => setMainContent("profile")}
@@ -187,9 +189,8 @@ const NavbarItem = ({ icon, name, ...rest }) => {
         color: "white",
       }}
     >
-    <Box w="72px" h="50px" alignContent={"center"}>
-      <Icon fontSize="20" as={icon} />
-      <Text fontSize="14px">{name}</Text>
+    <Box w="72px" h="50px"  alignContent={"center"}>
+      <Icon ml={4} mt={2} fontSize="30" as={icon} />
     </Box>
       
     </Stack>
@@ -263,7 +264,7 @@ const SidebarItem = ({ icon, name, ...rest }) => {
         color: "white",
       }}
     >
-      <Icon mr="4" fontSize="16" as={icon} />
+      <Icon ml={0} fontSize="16" as={icon} />
       <Text fontSize="20px">{name}</Text>
     </Flex>
   );
