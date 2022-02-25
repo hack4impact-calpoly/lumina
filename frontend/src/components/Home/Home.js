@@ -97,16 +97,11 @@ const HomeMobile = ({
           element={<MobileSignout />}
           back = "/"
         />
-       {/* <MobileSignout 
-        mainContent={mainContent} 
-        setMainContent={setMainContent}
-        /> */}
         <MobileNavBar
           mainContent={mainContent}
           setMainContent={setMainContent}
           position="fixed"
           zIndex="sticky"
-          mt={515}
           height = "fixed"
         />
         <Flex mt="150px" ml="10px">
@@ -135,7 +130,7 @@ const MobileSignout = ({ mainContent, setMainContent, ...rest }) => {
 
 const MobileNavBar = ({ mainContent, setMainContent, ...rest }) => {
   return (
-    <Card {...rest} w="100%" h="100px" flexDir="row">
+    <Card {...rest} w="100%" h="100px" flexDir="row" bottom={0}>
       <HStack>
           <NavbarItem 
             //name={"Dashboard"} 
