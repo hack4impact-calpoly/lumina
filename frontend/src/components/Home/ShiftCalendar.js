@@ -882,7 +882,7 @@ const LuminaCalendar = ({ events, setCurrentEvent }) => {
       defaultView="month"
       events={events}
       style={{ height: "80vh" }}
-      views={["month", "week"]}
+      views={["month", "day"]}
       onSelectEvent={(e) => setCurrentEvent(e)}
     />
   );
