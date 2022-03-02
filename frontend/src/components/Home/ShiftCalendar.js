@@ -36,6 +36,7 @@ import Select from "react-select";
 import { BrowserView, MobileView } from "react-device-detect";
 
 const localizer = momentLocalizer(moment);
+
 const daysOfWeek = [
   "Sunday",
   "Monday",
@@ -136,6 +137,10 @@ const ShiftCalendar = ({ contactList }) => {
     },
   ]);
   const [currentEvent, setCurrentEvent] = useState();
+  var contactListSelectable = [];
+  contactList.forEach((contact) => {
+    contactListSelectable.push({ value: contact.name, label: contact.name });
+  });
 
   function findNearestEvent() {
     let nearestIndex = 0;
@@ -152,8 +157,8 @@ const ShiftCalendar = ({ contactList }) => {
   }
 
   return (
-    <Box>
-      <BrowserView>
+    <Box w="100%">
+      <BrowserView style={{width: "100%"}}>
         {currentEvent ? (
           <ShiftCalendarBrowser
             contactList={contactList}
@@ -162,6 +167,7 @@ const ShiftCalendar = ({ contactList }) => {
             setCurrentEvent={setCurrentEvent}
             events={events}
             setEvents={setEvents}
+            contactListSelectable={contactListSelectable}
           />
         ) : (
           findNearestEvent()
@@ -191,6 +197,7 @@ const ShiftCalendarBrowser = ({
   setCurrentEvent,
   events,
   setEvents,
+  contactListSelectable
 }) => {
   const {
     isOpen: isCancelOpen,
@@ -221,7 +228,7 @@ const ShiftCalendarBrowser = ({
 
   return (
     <Flex flexDir="row" w="100%">
-      <Box w="100%" maxW="500px" mr={10}>
+      <Box w="30%" mr={10}>
         <Box mb={3}>
           <Text fontSize="30px">{daysOfWeek[date.getDay()]}</Text>
           <Text fontWeight="bold" fontSize="40px">
@@ -237,6 +244,7 @@ const ShiftCalendarBrowser = ({
             events={events}
             setEvents={setEvents}
             shift={currentEvent}
+            contactListSelectable={contactListSelectable}
           />
           <Card flexDir="row" w="100%">
             <Box mr="20px">
@@ -262,7 +270,7 @@ const ShiftCalendarBrowser = ({
           </Button>
         </VStack>
       </Box>
-      <Box>
+      <Box w='100%'>
         <Button
           variant="animated"
           bg="orange.100"
@@ -318,15 +326,11 @@ const ShiftCalendarMobile = ({
   );
 };
 
-const ShiftCard = ({ contactList, date, events, setEvents, shift }) => {
+const ShiftCard = ({ contactList, date, events, setEvents, shift, contactListSelectable }) => {
   const startTime = moment(shift.start).format("hh:mmA");
   const endTime = moment(shift.end).format("hh:mmA");
   const [includeSecondBackup, setIncludeSecondBackup] = useState(false);
   const [includeAccompaniment, setIncludeAccompaniment] = useState(false);
-  var contactListSelectable = [];
-  contactList.forEach((contact) => {
-    contactListSelectable.push({ value: contact.name, label: contact.name });
-  });
 
   function assignNew(name, type) {
     if (name !== "") {
@@ -656,6 +660,7 @@ const CreateShiftModal = ({
   setEvents,
   isOpen,
   onClose,
+  contactListSelectable
 }) => {
   const [includeSecondBackup, setIncludeSecondBackup] = useState(false);
   const [includeAccompaniment, setIncludeAccompaniment] = useState(false);
@@ -765,22 +770,22 @@ const CreateShiftModal = ({
           <Divider mt={3} mb={3} />
           <VStack align="left" spacing={3}>
             <AddVolunteer
-              contactList={contactList}
               type="Primary"
               setVolunteer={setPrimary}
+              contactListSelectable={contactListSelectable}
             />
             <AddVolunteer
-              contactList={contactList}
               type="Backup"
               setVolunteer={setBackup}
+              contactListSelectable={contactListSelectable}
             />
             {includeAccompaniment || isWeekend(startDate) ? (
               <AddVolunteer
-                contactList={contactList}
                 type="Accompaniment"
                 removeable={!isWeekend(startDate)}
                 onRemove={() => setIncludeAccompaniment(false)}
                 setVolunteer={setAccompaniment}
+                contactListSelectable={contactListSelectable}
               />
             ) : (
               <Flex
@@ -793,11 +798,11 @@ const CreateShiftModal = ({
             )}
             {includeSecondBackup ? (
               <AddVolunteer
-                contactList={contactList}
                 type="Second Backup"
                 removeable
                 onRemove={() => setIncludeSecondBackup(false)}
                 setVolunteer={setSecondBackup}
+                contactListSelectable={contactListSelectable}
               />
             ) : (
               <Flex
@@ -817,17 +822,13 @@ const CreateShiftModal = ({
 };
 
 const AddVolunteer = ({
-  contactList,
   type,
   removeable,
   onRemove,
   setVolunteer,
+  contactListSelectable
 }) => {
   const [searchVolunteer, setSearchVolunteer] = useState(false);
-  var contactListSelectable = [];
-  contactList.forEach((contact) => {
-    contactListSelectable.push({ value: contact.name, label: contact.name });
-  });
   return (
     <Flex flexDir="column" align="left">
       <Flex mb={3} flexDir="row" align="center">
@@ -881,7 +882,7 @@ const LuminaCalendar = ({ events, setCurrentEvent }) => {
       defaultDate={new Date()}
       defaultView="month"
       events={events}
-      style={{ height: "80vh" }}
+      style={{ height: "80vh", width:"70%" }}
       views={["month", "day"]}
       onSelectEvent={(e) => setCurrentEvent(e)}
     />

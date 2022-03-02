@@ -12,24 +12,26 @@ import { BrowserView, MobileView } from "react-device-detect";
 
 const sidebarItems = [
   {
-    name: "Dashboard", 
+    name: "Dashboard",
     mainContent: "dashboard",
-    icon: FiHome
-  },{
-    name: "Calendar", 
+    icon: FiHome,
+  },
+  {
+    name: "Calendar",
     mainContent: "calendar",
-    icon: FiCalendar
+    icon: FiCalendar,
   },
   {
-    name: "Directory", 
+    name: "Directory",
     mainContent: "directory",
-    icon: FiMenu
+    icon: FiMenu,
   },
   {
-    name: "Profile", 
+    name: "Profile",
     mainContent: "profile",
-    icon: FiUser
-  }]
+    icon: FiUser,
+  },
+];
 
 const Home = () => {
   const [mainContent, setMainContent] = useState("");
@@ -150,8 +152,8 @@ const Home = () => {
   }
 
   return (
-    <Box>
-      <BrowserView>
+    <Box w="100%">
+      <BrowserView style={{width: "100%"}}>
         <HomeBrowser
           mainContent={mainContent}
           setMainContent={setMainContent}
@@ -176,7 +178,7 @@ const HomeBrowser = ({
   ...rest
 }) => {
   return (
-    <Box {...rest}>
+    <Box w="100%" {...rest}>
       <LogoWithBack
         position="fixed"
         boxShadow="md"
@@ -185,14 +187,14 @@ const HomeBrowser = ({
         w="100%"
         zIndex="sticky"
       />
-      <Flex>
+      <Flex w="100%">
         <Sidebar
           mainContent={mainContent}
           setMainContent={setMainContent}
           position="fixed"
           zIndex="sticky"
         />
-        <Flex pt="90px" pb="90px" pl="300px" w="100vw">
+        <Flex pt="90px" pb="90px" pl="300px" w="100%">
           {switchMainComponent()}
         </Flex>
       </Flex>
@@ -224,16 +226,16 @@ const Sidebar = ({ mainContent, setMainContent, ...rest }) => {
       </Link>
       <Divider mt={3} />
       <VStack spacing="1" mt={3}>
-        {sidebarItems.map(item => {
+        {sidebarItems.map((item) => {
           return (
-            <SidebarItem
-            name={item.name}
-            icon={item.icon}
-            w="100%"
-            onClick={() => setMainContent(item.mainContent)}
-            bg={mainContent === item.mainContent ? "teal.400" : "white"}
-            color={mainContent === item.mainContent ? "white" : "black"}
-          />
+              <SidebarItem
+                name={item.name}
+                icon={item.icon}
+                w="100%"
+                onClick={() => setMainContent(item.mainContent)}
+                bg={mainContent === item.mainContent ? "teal.400" : "white"}
+                color={mainContent === item.mainContent ? "white" : "black"}
+              />
           );
         })}
       </VStack>
