@@ -33,7 +33,7 @@ import {
   AiOutlineFileSearch,
 } from "react-icons/ai";
 import Select from "react-select";
-import { BrowserView, MobileView } from "react-device-detect";
+import { BrowserView, MobileView, isMobile } from "react-device-detect";
 
 const localizer = momentLocalizer(moment);
 
@@ -173,7 +173,7 @@ const ShiftCalendar = ({ contactList }) => {
           findNearestEvent()
         )}
       </BrowserView>
-      <MobileView>
+      <MobileView style={{width: "100%"}}>
         {currentEvent ? (
           <ShiftCalendarMobile
             contactList={contactList}
@@ -279,7 +279,7 @@ const ShiftCalendarBrowser = ({
         >
           + New Shift
         </Button>
-        <LuminaCalendar events={events} setCurrentEvent={setCurrentEvent} />
+        <LuminaCalendar events={events} setCurrentEvent={setCurrentEvent} w="70%" />
       </Box>
       <CancelShiftModal
         date={date}
@@ -307,7 +307,7 @@ const ShiftCalendarMobile = ({
 }) => {
   return (
     <Flex w="100%" flexDir="column">
-      <LuminaCalendar events={events} setCurrentEvent={setCurrentEvent} />
+      <LuminaCalendar events={events} setCurrentEvent={setCurrentEvent}  w="100%"/>
       <Flex p={2}>
         <Box mb={3}>
           <Text fontWeight="bold" fontSize="24px">
@@ -874,7 +874,7 @@ const AddVolunteer = ({
   );
 };
 
-const LuminaCalendar = ({ events, setCurrentEvent }) => {
+const LuminaCalendar = ({ events, setCurrentEvent, w }) => {
   return (
     <Calendar
       selectable
@@ -882,8 +882,8 @@ const LuminaCalendar = ({ events, setCurrentEvent }) => {
       defaultDate={new Date()}
       defaultView="month"
       events={events}
-      style={{ height: "80vh", width:"70%" }}
-      views={["month", "day"]}
+      style={{ height: "80vh", width: w }}
+      views={isMobile ? ["month"] : ["month", "day"]}
       onSelectEvent={(e) => setCurrentEvent(e)}
     />
   );

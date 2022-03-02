@@ -160,7 +160,7 @@ const Home = () => {
           switchMainComponent={switchMainComponent}
         />
       </BrowserView>
-      <MobileView>
+      <MobileView style={{width: "100%"}}>
         <HomeMobile
           mainContent={mainContent}
           setMainContent={setMainContent}
