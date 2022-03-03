@@ -1,3 +1,4 @@
+![example workflow](https://github.com/hack4impact-calpoly/lumina/blob/actions/.github/workflows/node.js.yml/badge.svg)
 # **Lumina :)** 
 
 ## **Team**
