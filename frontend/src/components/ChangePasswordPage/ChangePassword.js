@@ -31,8 +31,8 @@ const ChangePasswordForm = ({ setSuccessPasswordChange }) => {
     useState(true);
 
   function submitPasswordChange() {
-    if(isValidForm()) {
-      setSuccessPasswordChange(true)
+    if (isValidForm()) {
+      setSuccessPasswordChange(true);
     }
   }
 

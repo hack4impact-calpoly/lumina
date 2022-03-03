@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 // logoMr - margin right on the logo, value should be the width of your back element, default 40px for the back icon
 //          required if also passing in an element property
 
-const LogoWithBack = ({back, element, logoMr, ...rest}) => {
+const LogoWithBack = ({ back, element, logoMr, ...rest }) => {
   const backElement = useRef(null);
   return (
     <Flex mb={5} {...rest}>
@@ -32,16 +32,13 @@ const LogoWithBack = ({back, element, logoMr, ...rest}) => {
           <Box></Box>
         )}
       </Center>
-      <Center
-        flex="1"
-        mr={back ? (element ? logoMr : "40px") : "0px"}
-      >
+      <Center flex="1" mr={back ? (element ? logoMr : "40px") : "0px"}>
         <Image
           src="https://slochamber.org/wp-content/uploads/2018/12/RISE_1024.png"
           w="100px"
           h="50px"
-          alt='RISE logo in color.'
-          mixBlendMode='multiply'
+          alt="RISE logo in color."
+          mixBlendMode="multiply"
         />
       </Center>
     </Flex>

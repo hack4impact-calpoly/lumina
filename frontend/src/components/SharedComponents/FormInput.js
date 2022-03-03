@@ -9,7 +9,7 @@ import {
   InputLeftElement,
   Box,
   Button,
-  Text
+  Text,
 } from "@chakra-ui/react";
 import { ViewOffIcon, ViewIcon } from "@chakra-ui/icons";
 
@@ -27,7 +27,6 @@ import { ViewOffIcon, ViewIcon } from "@chakra-ui/icons";
 // isRequired (optional)
 // Also accepts all <PasswordInput> properties (required if type === 'password')
 // See signup page for examples
-
 
 const FormInput = (props) => {
   return (
@@ -89,6 +88,5 @@ const PasswordInput = ({
     </InputGroup>
   );
 };
-
 
 export default FormInput;
