@@ -133,6 +133,11 @@ const Home = () => {
       phone: "(805) 555-5555",
     },
   ]);
+  const [user, setUser] = useState({
+    name: "Lenna Hane",
+    email: "lenna.hane@gmail.com",
+    phone: "(805) 555-5555"
+  })
   function switchMainComponent() {
     switch (mainContent) {
       case "directory":
@@ -145,7 +150,7 @@ const Home = () => {
       case "calendar":
         return <ShiftCalendar contactList={contactList} />;
       case "profile":
-        return <Profile />;
+        return <Profile user={user} />;
       default:
         return <Dashboard />;
     }
@@ -186,6 +191,7 @@ const HomeBrowser = ({
         backgroundColor="white"
         w="100%"
         zIndex="sticky"
+        ml="150px"
       />
       <Flex w="100%">
         <Sidebar
@@ -194,7 +200,7 @@ const HomeBrowser = ({
           position="fixed"
           zIndex="sticky"
         />
-        <Flex pt="90px" pb="90px" pl="300px" w="100%">
+        <Flex pt="90px" pb="90px" ml="300px" w="100%">
           {switchMainComponent()}
         </Flex>
       </Flex>
