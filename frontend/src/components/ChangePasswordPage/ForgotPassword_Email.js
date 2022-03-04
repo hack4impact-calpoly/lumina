@@ -45,17 +45,10 @@ const ForgotPassword_Email = () => {
     }
 
     return(
-        <CenterBox>
-           <Center>
-               <Box textAlign="center">
-                  <LogoWithBack back="/"/>
-
-
-                  <Heading>Forgot Password</Heading>
-
-                  <Text mb={2}>Please enter the email that your RISE volunteer account is associated with.</Text>
-                  
-
+        <CenterBox textAlign="center">
+            <LogoWithBack back="/"/>
+            <Heading>Forgot Password</Heading>
+            <Text mb={2}>Please enter the email that your RISE volunteer account is associated with.</Text>
             <Card>
                      
                   <FormInput 
@@ -81,8 +74,6 @@ const ForgotPassword_Email = () => {
                      onClick={() => submit()}> Submit </Button>
                   </Flex>
             </Card>
-            </Box>
-         </Center>
         </CenterBox>
     );
 
