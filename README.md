@@ -1,3 +1,4 @@
+![example workflow](https://github.com/hack4impact-calpoly/lumina/actions/workflows/node.js.yml/badge.svg)
 # **Lumina :)** 
 
 ## **Team**
@@ -16,6 +17,14 @@ The Lumina project team consists of 6 Cal Poly students, including:
 3) Add ":3000" at the end
 
 Example: "192.168.1.234:3000"
+
+## **Prettier**
+
+This is going to be slightly controversial but so that our formatting doesn't look all over the place, all devs will have to use and comply to prettier formatting.
+
+This means that all of your future `npm run start` and `npm run build` will also require that your code conforms to prettier formatting.
+
+Run `npm run format` to automatically format your code. VSCode also has a Prettier plugin that you can install to format your code.
 
 ## **UI Tenants**
 
