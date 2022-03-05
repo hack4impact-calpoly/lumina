@@ -47,7 +47,12 @@ const Profile = ({ user }) => {
   return (
     <Flex w="100%" flexDir="column" align="center">
       <Box mb={3} align="center">
-        <Heading size="4xl" pb={5} bgGradient='linear(to-l, #7928CA, #FF0080)' bgClip='text'>
+        <Heading
+          size="4xl"
+          pb={5}
+          bgGradient="linear(to-l, #7928CA, #FF0080)"
+          bgClip="text"
+        >
           {`${user.firstName} ${user.lastName}`}
         </Heading>
         <Text pb={3}>{user.email}</Text>
@@ -65,10 +70,14 @@ const Profile = ({ user }) => {
           return <ShiftCard shift={shift} mb={3} />;
         })}
       </Box>
-        <Button color="blue.500" cursor="pointer" variant="animated">
-          <Text fontSize="20px" mr={3} >See all past shifts</Text>
+      <Button color="blue.500" cursor="pointer" variant="animated">
+        <Flex align="baseline">
+          <Text fontSize="20px" mr={3}>
+            See all past shifts
+          </Text>
           <ArrowForwardIcon h="100%" />
-        </Button>
+        </Flex>
+      </Button>
     </Flex>
   );
 };
@@ -92,7 +101,9 @@ const ShiftCard = ({ shift, ...rest }) => {
         </Box>
         <Spacer />
         <Flex color="blue.500" alignItems="center" cursor="pointer">
-          <Text fontSize="18px" mr={1} >Details</Text>
+          <Text fontSize="18px" mr={1}>
+            Details
+          </Text>
           <ArrowForwardIcon w={15} h={15} />
         </Flex>
       </Flex>
