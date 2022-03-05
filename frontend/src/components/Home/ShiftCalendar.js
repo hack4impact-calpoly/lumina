@@ -34,32 +34,9 @@ import {
 } from "react-icons/ai";
 import Select from "react-select";
 import { BrowserView, MobileView, isMobile } from "react-device-detect";
+import { daysOfWeek, months } from "../SharedComponents/DateTranslation";
 
 const localizer = momentLocalizer(moment);
-
-const daysOfWeek = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
-const months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
 
 const ShiftCalendar = ({ contactList }) => {
   const date = new Date();

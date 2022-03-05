@@ -134,7 +134,8 @@ const Home = () => {
     },
   ]);
   const [user, setUser] = useState({
-    name: "Lenna Hane",
+    firstName: "Lenna",
+    lastName: "Hane",
     email: "lenna.hane@gmail.com",
     phone: "(805) 555-5555"
   })
