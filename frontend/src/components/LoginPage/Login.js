@@ -28,16 +28,23 @@ export default function Login() {
   const [validPassword, setValidPassword] = useState(true);
 
   const [showPassword, setShowPassword] = useState(false);
+  
+  const [loggedIn, setLoggedIn] = useState(false);
 
-   const signIn = async () => {
-      const { data } = await Auth.signIn(email, password);
+   async function signIn() {
+      try {
+         const { user } = await Auth.signIn(email, password);
+
+         setLoggedIn(true);
+         console.log('Successfully logged in: ', email);
+      } catch (error) {
+         console.log('Error logging in: ', error);
+      }
    }
 
   function submitLogin() {
     if (isValidForm()) {
       signIn();
-      console.log('submitted email: ' + email);
-      console.log('submitted password: ' + password);
     }
   }
 
