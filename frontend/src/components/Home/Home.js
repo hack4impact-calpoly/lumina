@@ -113,7 +113,7 @@ const HomeMobile = ({
 
 const MobileSignout = ({ mainContent, setMainContent, ...rest }) => {
   return (  
-    <Card {...rest} w="110px" h="5px" flexDir="column">
+    <Box {...rest} ml={2} flexDir="column">
       <Link to="/">
           <Text
             cursor="pointer"
@@ -124,7 +124,7 @@ const MobileSignout = ({ mainContent, setMainContent, ...rest }) => {
             Sign out
           </Text>
         </Link>
-      </Card>   
+      </Box>   
     );
 };
 
