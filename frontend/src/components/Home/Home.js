@@ -131,7 +131,7 @@ const MobileSignout = ({ mainContent, setMainContent, ...rest }) => {
 const MobileNavBar = ({ mainContent, setMainContent, ...rest }) => {
   return (
     <Card {...rest} w="100%" h="100px" flexDir="row" bottom={0}>
-      <HStack>
+      <HStack w="100%">
           <NavbarItem 
             //name={"Dashboard"} 
             icon={FiHome}
