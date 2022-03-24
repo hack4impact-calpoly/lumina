@@ -184,8 +184,8 @@ const NavbarItem = ({ icon, name, ...rest }) => {
         color: "white",
       }}
     >
-    <Box w="65px" h="50px"  alignContent={"center"}>
-      <Icon ml={4} mt={2} fontSize="30" as={icon} />
+    <Box w="65px" h="50px"  align={"center"}>
+      <Icon mt={2} fontSize="30" as={icon} />
     </Box>
       
     </Stack>
