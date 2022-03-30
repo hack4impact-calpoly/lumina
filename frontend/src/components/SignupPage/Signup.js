@@ -88,8 +88,8 @@ const SignupForm = ({
     if (isValidForm()) {
       try {
         const { user } = await Auth.signUp({
-          email,
-          password
+          username: email,
+          password: password
         });
       
       setAccountCreated(true);
