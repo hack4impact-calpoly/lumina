@@ -1,4 +1,14 @@
-import { Box, Flex, Text, Icon, VStack, Divider, HStack, Stack, Center } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Text,
+  Icon,
+  VStack,
+  Divider,
+  HStack,
+  Stack,
+  Spacer,
+} from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import { FiHome, FiCalendar, FiMenu, FiUser } from "react-icons/fi";
@@ -9,7 +19,6 @@ import Dashboard from "./Dashboard";
 import Profile from "./Profile";
 import { Card } from "../SharedComponents/Card";
 import { BrowserView, MobileView } from "react-device-detect";
-import { CenterBox } from "../SharedComponents/CenterBox";
 
 const Home = () => {
   const [mainContent, setMainContent] = useState("");
@@ -186,9 +195,9 @@ const HomeMobile = ({
   switchMainComponent,
   ...rest
 }) => {
-  return( 
-  <Box {...rest}>
-    <Flex> 
+  return (
+    <Box {...rest}>
+      <Flex>
         <LogoWithBack
           position="fixed"
           boxShadow="md"
@@ -197,52 +206,53 @@ const HomeMobile = ({
           w="100%"
           zIndex="sticky"
           element={<MobileSignout />}
-          back = "/"
+          back="/"
         />
         <MobileNavBar
           mainContent={mainContent}
           setMainContent={setMainContent}
           position="fixed"
           zIndex="sticky"
-          height = "fixed"
+          height="fixed"
         />
         <Flex mt="150px" ml="10px">
           {switchMainComponent()}
         </Flex>
       </Flex>
-  </Box>);
+    </Box>
+  );
 };
 
 const MobileSignout = ({ mainContent, setMainContent, ...rest }) => {
-  return (  
+  return (
     <Box {...rest} ml={2} flexDir="column">
       <Link to="/">
-          <Text
-            cursor="pointer"
-            textAlign="center"
-            fontWeight="bold"
-            fontSize="15px"
-          >
-            Sign out
-          </Text>
-        </Link>
-      </Box>   
-    );
+        <Text
+          cursor="pointer"
+          textAlign="center"
+          fontWeight="bold"
+          fontSize="15px"
+        >
+          Sign out
+        </Text>
+      </Link>
+    </Box>
+  );
 };
 
 const MobileNavBar = ({ mainContent, setMainContent, ...rest }) => {
   return (
     <Card {...rest} w="100%" h="100px" flexDir="row" bottom={0}>
       <HStack w="100%">
-          <NavbarItem 
-            //name={"Dashboard"} 
-            icon={FiHome}
-            w="100%"
-            onClick={() => setMainContent("")}
-            bg={mainContent === "" ? "teal.400" : "white"}
-            color={mainContent === "" ? "white" : "black"}
-          />
-          <NavbarItem
+        <NavbarItem
+          //name={"Dashboard"}
+          icon={FiHome}
+          w="100%"
+          onClick={() => setMainContent("")}
+          bg={mainContent === "" ? "teal.400" : "white"}
+          color={mainContent === "" ? "white" : "black"}
+        />
+        <NavbarItem
           //name="Calendar"
           icon={FiCalendar}
           w="100%"
@@ -268,9 +278,7 @@ const MobileNavBar = ({ mainContent, setMainContent, ...rest }) => {
         />
       </HStack>
     </Card>
-
-    
-    );
+  );
 };
 
 const NavbarItem = ({ icon, name, ...rest }) => {
@@ -286,13 +294,11 @@ const NavbarItem = ({ icon, name, ...rest }) => {
         color: "white",
       }}
     >
-    <Box w="65px" h="50px"  align={"center"}>
-      <Icon mt={2} fontSize="30" as={icon} />
-    </Box>
-      
+      <Box w="65px" h="50px" align={"center"}>
+        <Icon mt={2} fontSize="30" as={icon} />
+      </Box>
     </Stack>
   );
-
 };
 
 const Sidebar = ({ mainContent, setMainContent, ...rest }) => {
@@ -362,12 +368,9 @@ const SidebarItem = ({ icon, name, ...rest }) => {
       }}
     >
       <Icon ml={0} fontSize="16" as={icon} />
-      <Text fontSize="20px">{name}</Text>
+      <Text fontSize="20px" ml={3}>{name}</Text>
     </Flex>
   );
-
 };
-
-
 
 export default Home;
