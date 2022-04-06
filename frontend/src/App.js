@@ -124,6 +124,10 @@ function App() {
             <Route path="/forgot-password" element={<ForgotPassword_Email/>} />
             <Route path="/forgot-password/code" element={<ForgotPassword_Code/>} />
             <Route path="/home" element={<Home />} />
+            <Route path="/home/dashboard" element={<Home />} />
+            <Route path="/home/calendar" element={<Home />} />
+            <Route path="/home/directory" element={<Home />} />
+            <Route path="/home/profile" element={<Home />} />
             <Route path="/mobile-directory" element={<Directory />} />
             <Route path="/calendar" element={<ShiftCalendar contactList={contactList} />} />
             <Route path="/change-password" element={<ChangePassword />} />
