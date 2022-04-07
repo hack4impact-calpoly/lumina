@@ -269,7 +269,7 @@ const ShiftCalendarBrowser = ({
         events={events}
         setEvents={setEvents}
         onClose={onCreateClose}
-        contactList={contactList}
+        contactListSelectable={contactListSelectable}
       />
     </Flex>
   );

@@ -8,6 +8,7 @@ import {
   HStack,
   Stack,
   Spacer,
+  Center,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
@@ -147,8 +148,8 @@ const Home = () => {
     firstName: "Lenna",
     lastName: "Hane",
     email: "lenna.hane@gmail.com",
-    phone: "(805) 555-5555"
-  })
+    phone: "(805) 555-5555",
+  });
   function switchMainComponent() {
     switch (mainContent) {
       case "directory":
@@ -169,14 +170,14 @@ const Home = () => {
 
   return (
     <Box w="100%">
-      <BrowserView style={{width: "100%"}}>
+      <BrowserView style={{ width: "100%" }}>
         <HomeBrowser
           mainContent={mainContent}
           setMainContent={setMainContent}
           switchMainComponent={switchMainComponent}
         />
       </BrowserView>
-      <MobileView style={{width: "100%"}}>
+      <MobileView style={{ width: "100%" }}>
         <HomeMobile
           mainContent={mainContent}
           setMainContent={setMainContent}
@@ -245,7 +246,7 @@ const HomeMobile = ({
           zIndex="sticky"
           height="fixed"
         />
-        <Flex mt="150px" ml="10px">
+        <Flex mt="80px" ml="10px">
           {switchMainComponent()}
         </Flex>
       </Flex>
@@ -275,45 +276,40 @@ const MobileNavBar = ({ mainContent, setMainContent, ...rest }) => {
     <Card {...rest} w="100%" h="100px" flexDir="row" bottom={0}>
       <HStack w="100%">
         <NavbarItem
-          //name={"Dashboard"}
           icon={FiHome}
-          w="100%"
           onClick={() => setMainContent("")}
-          bg={mainContent === "" ? "teal.400" : "white"}
-          color={mainContent === "" ? "white" : "black"}
+          mainContent={mainContent}
+          currentContent=""
         />
         <NavbarItem
-          //name="Calendar"
           icon={FiCalendar}
-          w="100%"
           onClick={() => setMainContent("calendar")}
-          bg={mainContent === "calendar" ? "teal.400" : "white"}
-          color={mainContent === "calendar" ? "white" : "black"}
+          mainContent={mainContent}
+          currentContent="calendar"
         />
         <NavbarItem
-          //name="Directory"
           icon={FiMenu}
-          w="100%"
           onClick={() => setMainContent("directory")}
-          bg={mainContent === "directory" ? "teal.400" : "white"}
-          color={mainContent === "directory" ? "white" : "black"}
+          mainContent={mainContent}
+          currentContent="directory"
         />
         <NavbarItem
-          //name="Profile"
           icon={FiUser}
-          w="100%"
           onClick={() => setMainContent("profile")}
-          bg={mainContent === "profile" ? "teal.400" : "white"}
-          color={mainContent === "profile" ? "white" : "black"}
+          mainContent={mainContent}
+          currentContent="profile"
         />
       </HStack>
     </Card>
   );
 };
 
-const NavbarItem = ({ icon, name, ...rest }) => {
+const NavbarItem = ({ icon, name, mainContent, currentContent, ...rest }) => {
   return (
-    <Stack
+    <Center
+      w="100%"
+      bg={mainContent === currentContent ? "teal.400" : "white"}
+      color={mainContent === currentContent ? "white" : "black"}
       alignItems="baseline"
       {...rest}
       p="0.5"
@@ -324,10 +320,10 @@ const NavbarItem = ({ icon, name, ...rest }) => {
         color: "white",
       }}
     >
-      <Box w="65px" h="50px" align={"center"}>
+      <Box w="65px" h="50px" align="center">
         <Icon mt={2} fontSize="30" as={icon} />
       </Box>
-    </Stack>
+    </Center>
   );
 };
 
@@ -348,14 +344,14 @@ const Sidebar = ({ mainContent, setMainContent, ...rest }) => {
       <VStack spacing="1" mt={3}>
         {sidebarItems.map((item) => {
           return (
-              <SidebarItem
-                name={item.name}
-                icon={item.icon}
-                w="100%"
-                onClick={() => setMainContent(item.mainContent)}
-                bg={mainContent === item.mainContent ? "teal.400" : "white"}
-                color={mainContent === item.mainContent ? "white" : "black"}
-              />
+            <SidebarItem
+              name={item.name}
+              icon={item.icon}
+              w="100%"
+              onClick={() => setMainContent(item.mainContent)}
+              bg={mainContent === item.mainContent ? "teal.400" : "white"}
+              color={mainContent === item.mainContent ? "white" : "black"}
+            />
           );
         })}
       </VStack>
@@ -378,7 +374,9 @@ const SidebarItem = ({ icon, name, ...rest }) => {
       }}
     >
       <Icon ml={0} fontSize="16" as={icon} />
-      <Text fontSize="20px" ml={3}>{name}</Text>
+      <Text fontSize="20px" ml={3}>
+        {name}
+      </Text>
     </Flex>
   );
 };
