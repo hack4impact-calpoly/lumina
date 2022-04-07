@@ -1,16 +1,9 @@
 import React, { useState } from "react";
 import {
-  Box,
   Button,
   Heading,
-  Stack,
-  Input,
   Text,
-  Image,
-  Center,
   Flex,
-  InputRightElement,
-  InputGroup,
 } from "@chakra-ui/react";
 import LogoWithBack from "../SharedComponents/LogoWithBack";
 import FormInput from "../SharedComponents/FormInput";
@@ -47,39 +40,31 @@ const ForgotPassword_Email = () => {
     return(
         <CenterBox textAlign="center">
             <LogoWithBack back="/"/>
-
-
             <Heading>Forgot Password</Heading>
-
             <Text mb={2}>Please enter the email that your RISE volunteer account is associated with.</Text>
-            
-
-        <Card>
-                
+         <Card>         
             <FormInput 
-                width="300px"
-                ml={260}
-                id="email" 
-                invalid={email === ""} 
-                label="Email" 
-                placeholder="example@example.com" 
-                onChange={(e) => setEmail(e.target.value)}
-                isRequired
+               width="300px"
+               ml={260}
+               id="email" 
+               invalid={email === ""} 
+               label="Email" 
+               placeholder="example@example.com" 
+               onChange={(e) => setEmail(e.target.value)}
+               isRequired
             />
             <Text color="red">{validEmail ? "" : "Invalid Email"}</Text>
-
             <Flex>
-                <Button 
-                mt= "30px" 
-                ml="425px" 
-                width="150px"
-                color={"white"} 
-                bg={"#E53E3E"}
-                variant="animated"  
-                onClick={() => submit()}> Submit </Button>
+               <Button 
+               mt= "30px" 
+               ml="425px" 
+               width="150px"
+               color={"white"} 
+               bg={"#E53E3E"}
+               variant="animated"  
+               onClick={() => submit()}> Submit </Button>
             </Flex>
-        </Card>
-
+         </Card>
         </CenterBox>
     );
 
