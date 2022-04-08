@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
+import { Auth } from 'aws-amplify';
 
 import {
   Box,
@@ -28,10 +29,22 @@ export default function Login() {
 
   const [showPassword, setShowPassword] = useState(false);
 
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  async function signIn() {
+      try {
+         const { user } = await Auth.signIn(email, password);
+
+         setLoggedIn(true);
+         console.log('Successfully logged in: ', email);
+      } catch (error) {
+         console.log('Error logging in: ', error);
+      }
+   }
+
   function submitLogin() {
     if (isValidForm()) {
-      console.log('submitted email: ' + email);
-      console.log('submitted password: ' + password);
+      signIn();
     }
   }
 
