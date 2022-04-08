@@ -1,18 +1,9 @@
 import React, { useState } from "react";
 import {
-  Box,
   Button,
   Heading,
-  Stack,
-  VStack,
-  Input,
   Text,
-  Image,
-  Center,
   Flex,
-  InputRightElement,
-  InputGroup,
-  Spacer,
 } from "@chakra-ui/react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ArrowBackIcon, ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
