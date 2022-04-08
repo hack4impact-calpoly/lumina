@@ -4,9 +4,15 @@ import LogoWithBack from "../SharedComponents/LogoWithBack";
 import { CenterBox } from "../SharedComponents/CenterBox";
 import { Card } from "../SharedComponents/Card";
 import FormInput from "../SharedComponents/FormInput";
+import { Auth } from 'aws-amplify';
 
-const ChangePassword = () => {
+const ChangePassword = (props) => {
   const [successPasswordChange, setSuccessPasswordChange] = useState(false);
+
+  const { state } = useLocation();
+  console.log(state);
+  const email = state.email;
+  const code = state.code;
 
   return (
     <CenterBox>
@@ -33,6 +39,12 @@ const ChangePasswordForm = ({ setSuccessPasswordChange }) => {
   function submitPasswordChange() {
     if(isValidForm()) {
       setSuccessPasswordChange(true)
+
+
+      //update password through amplify
+      Auth.forgotPasswordSubmit(email, code, password)
+        .then(data => console.log(data))
+        .catch(err => console.log(err));
     }
   }
 

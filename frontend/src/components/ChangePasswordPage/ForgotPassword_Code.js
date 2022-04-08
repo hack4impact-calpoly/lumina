@@ -20,6 +20,7 @@ import LogoWithBack from "../SharedComponents/LogoWithBack";
 import FormInput from "../SharedComponents/FormInput";
 import { CenterBox } from "../SharedComponents/CenterBox";
 import { Card } from "../SharedComponents/Card";
+import { Auth } from 'aws-amplify';
 
 
 function ForgotPassword_Code(props) {
@@ -41,7 +42,9 @@ function ForgotPassword_Code(props) {
                 email: email,
                 code: code
             }
-            navigate("/change-password");
+
+            // send email and code to next page
+            navigate("/change-password", {state: userCode}); // update ChangePassword.js
         }
         return (
             code !== "" &&
