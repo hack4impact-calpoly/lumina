@@ -20,7 +20,7 @@ const Directory = ({ contactList, setContactList }) => {
   const [name, setName] = useState("");
 
   return (
-    <Box>
+    <Box w="100%">
       <BrowserView>
         <DirectoryBrowser
           setName={setName}
@@ -62,7 +62,7 @@ const DirectoryBrowser = ({ contactList, name, setName }) => {
 
 const DirectoryMobile = ({ contactList, name, setName }) => {
   return (
-    <VStack align="left" w="95%" ml="2.5%" spacing={4}>
+    <VStack align="left" w="95%" ml="2.5%" mr="2.5%" spacing={4}>
       <HeaderAndSearch setName={setName} name={name} mb="30px" />
       {contactList.map((contact) => {
         return <Contact name={contact.name} number={contact.phone} w="100%" />;

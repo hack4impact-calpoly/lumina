@@ -16,7 +16,7 @@ import { FiHome, FiCalendar, FiMenu, FiUser } from "react-icons/fi";
 import Directory from "./Directory";
 import LogoWithBack from "../SharedComponents/LogoWithBack";
 import ShiftCalendar from "./ShiftCalendar";
-import Dashboard from "./Dashboard";
+import Dashboard from "./Dashboard/Dashboard";
 import Profile from "./Profile";
 import { Card } from "../SharedComponents/Card";
 import { BrowserView, MobileView } from "react-device-detect";
@@ -246,7 +246,7 @@ const HomeMobile = ({
           zIndex="sticky"
           height="fixed"
         />
-        <Flex mt="80px" ml="10px">
+        <Flex mt="80px" ml="10px" w="100%" pb="150px">
           {switchMainComponent()}
         </Flex>
       </Flex>

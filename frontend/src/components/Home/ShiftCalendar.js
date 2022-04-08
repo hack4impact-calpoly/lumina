@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Button,
@@ -18,7 +18,7 @@ import {
   Divider,
 } from "@chakra-ui/react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
-import moment from "moment";
+import moment, { locale } from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { Card } from "../SharedComponents/Card";
 import { CheckIcon, WarningIcon } from "@chakra-ui/icons";
@@ -38,108 +38,195 @@ import { daysOfWeek, months } from "../SharedComponents/DateTranslation";
 
 const localizer = momentLocalizer(moment);
 
+const datesAreOnSameDay = (first, second) =>
+  new Date(first).getFullYear() === new Date(second).getFullYear() &&
+  new Date(first).getMonth() === new Date(second).getMonth() &&
+  new Date(first).getDate() === new Date(second).getDate();
+
+const emptyEvent = {
+  id: 0,
+  title: "2/2",
+  start: new Date(),
+  end: new Date(),
+  shifts: [],
+  allDay: true,
+};
+
 const ShiftCalendar = ({ contactList }) => {
-  const date = new Date();
-  const [events, setEvents] = useState([
-    {
-      start: new Date(2022, 1, 18, 10),
-      end: new Date(2022, 1, 18, 13),
-      title: "2/2",
-      info: {
-        primary: {
-          name: "Adriel Bogan",
-          phone: "(805) 555 - 555",
-        },
-        backup: {
-          name: "Lenna Hane",
-          phone: "(805) 555 - 555",
-        },
-        secondBackup: {
-          name: "Eliane Schneider",
-          phone: "(805) 555-5555",
-        },
-        allDay: {
-          backup: {
-            name: "Bernita Collier",
-            phone: "(805) 555 - 555",
-          },
-        },
-      },
-    },
-    {
-      start: new Date(2022, 1, 19, 9),
-      end: new Date(2022, 1, 19, 17),
-      title: "2/2",
-      info: {
-        primary: {
-          name: "Adriel Bogan",
-          phone: "(805) 555 - 555",
-        },
-        backup: {
-          name: "Donna Cruz",
-          phone: "(805) 555 - 555",
-        },
-        accompaniment: {
-          name: "Emmalee Stark",
-          phone: "(805) 555-5555",
-        },
-        allDay: {
-          backup: {
-            name: "Madison Lee",
-            phone: "(805) 555 - 555",
-          },
-        },
-      },
-    },
-    {
-      start: new Date(2022, 1, 20, 10),
-      end: new Date(2022, 1, 20, 18),
-      title: "2/2",
-      info: {
-        primary: {
-          name: "Adriel Bogan",
-          phone: "(805) 555 - 555",
-        },
-        backup: {
-          name: "Emmalee Stark",
-          phone: "(805) 555 - 555",
-        },
-        allDay: {
-          backup: {
-            name: "Adriel Bogan",
-            phone: "(805) 555 - 555",
-          },
-        },
-      },
-    },
-  ]);
+  const [events, setEvents] = useState([]);
   const [currentEvent, setCurrentEvent] = useState();
+
+  useEffect(() => {
+    let sessionStorageEvents = window.sessionStorage.getItem("events");
+    if (sessionStorageEvents === null) {
+      //insert API call
+      let tempEvents = [
+        {
+          id: 0,
+          title: "2/2",
+          start: new Date(2022, 1, 18),
+          end: new Date(2022, 1, 19),
+          shifts: [
+            {
+              start: new Date(2022, 1, 18, 10),
+              end: new Date(2022, 1, 18, 13),
+              title: "2/2",
+              info: {
+                primary: {
+                  name: "Adriel Bogan",
+                  phone: "(805) 555 - 555",
+                },
+                backup: {
+                  name: "Lenna Hane",
+                  phone: "(805) 555 - 555",
+                },
+                secondBackup: {
+                  name: "Eliane Schneider",
+                  phone: "(805) 555-5555",
+                },
+              },
+            },
+            {
+              start: new Date(2022, 1, 18, 9),
+              end: new Date(2022, 1, 18, 17),
+              title: "2/2",
+              info: {
+                primary: {
+                  name: "Adriel Bogan",
+                  phone: "(805) 555 - 555",
+                },
+                backup: {
+                  name: "Donna Cruz",
+                  phone: "(805) 555 - 555",
+                },
+                accompaniment: {
+                  name: "Emmalee Stark",
+                  phone: "(805) 555-5555",
+                },
+              },
+            },
+            {
+              start: new Date(2022, 1, 18, 10),
+              end: new Date(2022, 1, 18, 18),
+              title: "2/2",
+              info: {
+                primary: {
+                  name: "Adriel Bogan",
+                  phone: "(805) 555 - 555",
+                },
+                backup: {
+                  name: "Emmalee Stark",
+                  phone: "(805) 555 - 555",
+                },
+              },
+            },
+          ],
+          allDay: true,
+          allDayShift: {
+            backup: {
+              name: "Bernita Collier",
+              phone: "(805) 555 - 555",
+            },
+          },
+        },
+        {
+          id: 0,
+          title: "2/2",
+          start: new Date(2022, 2, 18),
+          end: new Date(2022, 2, 19),
+          shifts: [
+            {
+              start: new Date(2022, 2, 18, 10),
+              end: new Date(2022, 2, 18, 13),
+              title: "2/2",
+              info: {
+                primary: {
+                  name: "Adriel Bogan",
+                  phone: "(805) 555 - 555",
+                },
+                backup: {
+                  name: "Lenna Hane",
+                  phone: "(805) 555 - 555",
+                },
+                secondBackup: {
+                  name: "Eliane Schneider",
+                  phone: "(805) 555-5555",
+                },
+              },
+            },
+            {
+              start: new Date(2022, 2, 18, 9),
+              end: new Date(2022, 2, 18, 17),
+              title: "2/2",
+              info: {
+                primary: {
+                  name: "Adriel Bogan",
+                  phone: "(805) 555 - 555",
+                },
+                backup: {
+                  name: "Donna Cruz",
+                  phone: "(805) 555 - 555",
+                },
+                accompaniment: {
+                  name: "Emmalee Stark",
+                  phone: "(805) 555-5555",
+                },
+              },
+            },
+            {
+              start: new Date(2022, 2, 18, 10),
+              end: new Date(2022, 2, 18, 18),
+              title: "2/2",
+              info: {
+                primary: {
+                  name: "Adriel Bogan",
+                  phone: "(805) 555 - 555",
+                },
+                backup: {
+                  name: "Emmalee Stark",
+                  phone: "(805) 555 - 555",
+                },
+              },
+            },
+          ],
+          allDay: true,
+          allDayShift: {
+            backup: {
+              name: "Bernita Collier",
+              phone: "(805) 555 - 555",
+            },
+          },
+        },
+      ];
+      setEvents(tempEvents);
+      window.sessionStorage.setItem("events", JSON.stringify(tempEvents));
+    } else {
+      setEvents(JSON.parse(sessionStorageEvents));
+    }
+  }, []);
+
   var contactListSelectable = [];
   contactList.forEach((contact) => {
     contactListSelectable.push({ value: contact.name, label: contact.name });
   });
 
   function findNearestEvent() {
-    let nearestIndex = 0;
-    let dateDifference = Math.abs(
-      events[nearestIndex].start.getTime() - date.getTime()
-    );
-    events.forEach((event, index) => {
-      if (Math.abs(event.start.getTime() - date.getTime()) < dateDifference) {
-        nearestIndex = index;
-        dateDifference = Math.abs(event.start.getTime() - date.getTime());
+    events.forEach((event) => {
+      if (datesAreOnSameDay(new Date(event.start), new Date())) {
+        setCurrentEvent(event);
+        return;
       }
     });
-    setCurrentEvent(events[nearestIndex]);
+    setCurrentEvent(emptyEvent);
   }
 
   return (
     <Box w="100%">
-      <BrowserView style={{width: "100%"}}>
+      <BrowserView style={{ width: "100%" }}>
         {currentEvent ? (
           <ShiftCalendarBrowser
             contactList={contactList}
-            date={currentEvent.start}
+            date={new Date(currentEvent.start)}
             currentEvent={currentEvent}
             setCurrentEvent={setCurrentEvent}
             events={events}
@@ -150,11 +237,11 @@ const ShiftCalendar = ({ contactList }) => {
           findNearestEvent()
         )}
       </BrowserView>
-      <MobileView style={{width: "100%"}}>
+      <MobileView style={{ width: "100%" }}>
         {currentEvent ? (
           <ShiftCalendarMobile
             contactList={contactList}
-            date={currentEvent.start}
+            date={new Date(currentEvent.start)}
             currentEvent={currentEvent}
             setCurrentEvent={setCurrentEvent}
             events={events}
@@ -174,7 +261,7 @@ const ShiftCalendarBrowser = ({
   setCurrentEvent,
   events,
   setEvents,
-  contactListSelectable
+  contactListSelectable,
 }) => {
   const {
     isOpen: isCancelOpen,
@@ -204,7 +291,7 @@ const ShiftCalendarBrowser = ({
   }
 
   return (
-    <Flex flexDir="row" w="100%">
+    <Flex flexDir="row" w="100%" h="80vh">
       <Box w="30%" mr={10}>
         <Box mb={3}>
           <Text fontSize="30px">{daysOfWeek[date.getDay()]}</Text>
@@ -215,28 +302,41 @@ const ShiftCalendarBrowser = ({
           </Text>
         </Box>
         <VStack spacing={3}>
-          <ShiftCard
-            contactList={contactList}
-            date={date}
-            events={events}
-            setEvents={setEvents}
-            shift={currentEvent}
-            contactListSelectable={contactListSelectable}
-          />
-          <Card flexDir="row" w="100%">
-            <Box mr="20px">
-              <Heading fontSize="24px">All day</Heading>
-            </Box>
-            <Spacer />
-            <VStack w="300px" spacing="4px">
-              <Box w="100%">
-                <Text fontSize="20px">Backup</Text>
-                <Text fontSize="16px">
-                  {`${currentEvent.info.allDay.backup.name} - ${currentEvent.info.allDay.backup.phone}`}
-                </Text>
+          {currentEvent.shifts.length !== 0 ? (
+            currentEvent.shifts.map((shift) => {
+              return (
+                <ShiftCard
+                  contactList={contactList}
+                  date={date}
+                  events={events}
+                  setEvents={setEvents}
+                  shift={shift}
+                  contactListSelectable={contactListSelectable}
+                />
+              );
+            })
+          ) : (
+            <Box></Box>
+          )}
+          {currentEvent.allDayShift !== undefined ? (
+            <Card flexDir="row" w="100%">
+              <Box mr="20px">
+                <Heading fontSize="24px">All day</Heading>
               </Box>
-            </VStack>
-          </Card>
+              <Spacer />
+              <VStack w="300px" spacing="4px">
+                <Box w="100%">
+                  <Text fontSize="20px">Backup</Text>
+                  <Text fontSize="16px">
+                    {`${currentEvent.allDayShift.backup.name} - ${currentEvent.allDayShift.backup.phone}`}
+                  </Text>
+                </Box>
+              </VStack>
+            </Card>
+          ) : (
+            <Box></Box>
+          )}
+
           <Button
             variant="animated"
             bg="red.300"
@@ -247,7 +347,7 @@ const ShiftCalendarBrowser = ({
           </Button>
         </VStack>
       </Box>
-      <Box w='100%'>
+      <Box w="100%">
         <Button
           variant="animated"
           bg="orange.100"
@@ -256,7 +356,11 @@ const ShiftCalendarBrowser = ({
         >
           + New Shift
         </Button>
-        <LuminaCalendar events={events} setCurrentEvent={setCurrentEvent} w="70%" />
+        <LuminaCalendar
+          events={events}
+          setCurrentEvent={setCurrentEvent}
+          w="70%"
+        />
       </Box>
       <CancelShiftModal
         date={date}
@@ -265,6 +369,7 @@ const ShiftCalendarBrowser = ({
         onClose={onCancelClose}
       />
       <CreateShiftModal
+        contactList={contactList}
         isOpen={isCreateOpen}
         events={events}
         setEvents={setEvents}
@@ -283,8 +388,12 @@ const ShiftCalendarMobile = ({
   events,
 }) => {
   return (
-    <Flex w="100%" flexDir="column">
-      <LuminaCalendar events={events} setCurrentEvent={setCurrentEvent}  w="100%"/>
+    <Flex w="100%" flexDir="column" h="65vh">
+      <LuminaCalendar
+        events={events}
+        setCurrentEvent={setCurrentEvent}
+        w="100%"
+      />
       <Flex p={2}>
         <Box mb={3}>
           <Text fontWeight="bold" fontSize="24px">
@@ -303,7 +412,14 @@ const ShiftCalendarMobile = ({
   );
 };
 
-const ShiftCard = ({ contactList, date, events, setEvents, shift, contactListSelectable }) => {
+const ShiftCard = ({
+  contactList,
+  date,
+  events,
+  setEvents,
+  shift,
+  contactListSelectable,
+}) => {
   const startTime = moment(shift.start).format("hh:mmA");
   const endTime = moment(shift.end).format("hh:mmA");
   const [includeSecondBackup, setIncludeSecondBackup] = useState(false);
@@ -315,39 +431,58 @@ const ShiftCard = ({ contactList, date, events, setEvents, shift, contactListSel
         ? contactList.filter((contact) => contact.name === name)[0]
         : undefined;
       let localEvents = events.map((event) => {
-        if (event.start === date) {
-          switch (type) {
-            case "primary":
-              event.info.primary = info;
-              break;
-            case "backup":
-              event.info.backup = info;
-              break;
-            case "accompaniment":
-              setIncludeAccompaniment(false);
-              event.info.accompaniment = info;
-              break;
-            case "secondBackup":
-              setIncludeSecondBackup(false);
-              event.info.secondBackup = info;
-              break;
-            default:
-              break;
-          }
+        if (datesAreOnSameDay(event.start, date)) {
+          event.shifts.forEach((eventShift) => {
+            if (
+              new Date(eventShift.start).getTime() ===
+                new Date(shift.start).getTime() &&
+              new Date(eventShift.end).getTime() ===
+                new Date(shift.end).getTime()
+            ) {
+              switch (type) {
+                case "primary":
+                  eventShift.info.primary = info;
+                  break;
+                case "backup":
+                  eventShift.info.backup = info;
+                  break;
+                case "accompaniment":
+                  setIncludeAccompaniment(false);
+                  eventShift.info.accompaniment = info;
+                  break;
+                case "secondBackup":
+                  setIncludeSecondBackup(false);
+                  eventShift.info.secondBackup = info;
+                  break;
+                default:
+                  break;
+              }
+            }
+          });
         }
         return event;
       });
+      window.sessionStorage.setItem("events", JSON.stringify(localEvents));
       setEvents(localEvents);
     }
   }
 
   function reassign(type) {
     let localEvents = events.map((event) => {
-      if (event.start === date) {
-        event.info[type] = undefined;
+      if (datesAreOnSameDay(event.start, date)) {
+        event.shifts.forEach((eventShift) => {
+          if (
+            new Date(eventShift.start).getTime() ===
+              new Date(shift.start).getTime() &&
+            new Date(eventShift.end).getTime() === new Date(shift.end).getTime()
+          ) {
+            eventShift.info[type] = undefined;
+          }
+        });
       }
       return event;
     });
+    window.sessionStorage.setItem("events", JSON.stringify(localEvents));
     setEvents(localEvents);
   }
 
@@ -637,7 +772,7 @@ const CreateShiftModal = ({
   setEvents,
   isOpen,
   onClose,
-  contactListSelectable
+  contactListSelectable,
 }) => {
   const [includeSecondBackup, setIncludeSecondBackup] = useState(false);
   const [includeAccompaniment, setIncludeAccompaniment] = useState(false);
@@ -695,7 +830,36 @@ const CreateShiftModal = ({
           },
         },
       };
-      setEvents([...events, newShift]);
+      let localEvents = events;
+
+      localEvents.forEach((event) => {
+        if (datesAreOnSameDay(new Date(event.start), newShift.start)) {
+          event.shifts.push(newShift);
+          setEvents(localEvents);
+          window.sessionStorage.setItem("events", JSON.stringify(localEvents));
+          closeModal();
+          return;
+        }
+      });
+      const newEvent = {
+        id: "1",
+        title: "2/2",
+        start: new Date(
+          newShift.start.getFullYear(),
+          newShift.start.getMonth(),
+          newShift.start.getDate()
+        ),
+        end: new Date(
+          newShift.start.getFullYear(),
+          newShift.start.getMonth(),
+          newShift.start.getDate()
+        ),
+        shifts: [newShift],
+        allDay: true,
+      };
+      const newEvents = [...events, newEvent];
+      setEvents(newEvents);
+      window.sessionStorage.setItem("events", JSON.stringify(newEvents));
       closeModal();
     }
   }
@@ -803,7 +967,7 @@ const AddVolunteer = ({
   removeable,
   onRemove,
   setVolunteer,
-  contactListSelectable
+  contactListSelectable,
 }) => {
   const [searchVolunteer, setSearchVolunteer] = useState(false);
   return (
@@ -859,7 +1023,7 @@ const LuminaCalendar = ({ events, setCurrentEvent, w }) => {
       defaultDate={new Date()}
       defaultView="month"
       events={events}
-      style={{ height: "80vh", width: w }}
+      style={{ width: w }}
       views={isMobile ? ["month"] : ["month", "day"]}
       onSelectEvent={(e) => setCurrentEvent(e)}
     />
