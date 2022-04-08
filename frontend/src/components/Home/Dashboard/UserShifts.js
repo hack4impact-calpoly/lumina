@@ -19,6 +19,7 @@ import { BrowserView, MobileView } from "react-device-detect";
 import { AiOutlineRight } from "react-icons/ai";
 import { daysOfWeek, months } from "../../SharedComponents/DateTranslation";
 import moment from "moment";
+import MoreInfo from "../../SharedComponents/MoreInfo";
 
 const UserShifts = ({ ...rest }) => {
   return (
@@ -34,14 +35,7 @@ const UserShifts = ({ ...rest }) => {
           end={new Date(2022, 3, 9, 14)}
         />
       </VStack>
-      <Center cursor="pointer" mt={5}>
-        <Flex>
-          <Text fontWeight="bold" fontSize="20px">
-            See all upcoming shifts
-          </Text>
-          <Icon as={AiOutlineRight} w={8} h={8} ml={1} />
-        </Flex>
-      </Center>
+      <MoreInfo text="See all your upcoming shifts"/>
     </Box>
   );
 };

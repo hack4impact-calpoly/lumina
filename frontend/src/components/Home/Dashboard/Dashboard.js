@@ -21,6 +21,7 @@ import { daysOfWeek, months } from "../../SharedComponents/DateTranslation";
 import moment from "moment";
 import UserShifts from "./UserShifts";
 import Annoucements from "./Annoucements";
+import CreateAnnoucement from "./CreateAnnoucement";
 
 const Dashboard = ({ contactList, setContactList }) => {
   return (
@@ -36,15 +37,22 @@ const Dashboard = ({ contactList, setContactList }) => {
 };
 
 const DashboardBrowser = ({}) => {
+  const [createAnnoucement, setCreateAnnoucement] = useState(false);
   return (
-    <Box>
-      <Heading mb={20} size="4xl">
-        Hi First Name!
-      </Heading>
-      <Flex flexDir="row">
-        <UserShifts w="35%" />
-        <Annoucements ml="5%" w="35%" />
-      </Flex>
+    <Box mr="10%">
+      {createAnnoucement ? (
+        <CreateAnnoucement setCreateAnnoucement={setCreateAnnoucement} />
+      ) : (
+        <Box>
+          <Heading mb={20} size="4xl">
+            Hi First Name!
+          </Heading>
+          <Flex flexDir="row">
+            <UserShifts w="35%" />
+            <Annoucements ml="5%" w="35%" setCreateAnnoucement={setCreateAnnoucement} />
+          </Flex>
+        </Box>
+      )}
     </Box>
   );
 };
