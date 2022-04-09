@@ -309,7 +309,7 @@ export const PrepoulateConfirmModal = ({prepopulate, isOpen, onClose}) => {
           <ModalCloseButton />
           <ModalBody>
             <Text>You are about to prepopulate the entire current month with the <b>default</b> shifts. Are you sure?</Text>
-            <Button bg="red.300" onClick={() => prepopulate()}>
+            <Button bg="red.300" onClick={() => prepopulateClose()}>
               Yes
             </Button>
             <Button ml={3} onClick={() => onClose()}>
