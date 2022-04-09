@@ -1,4 +1,7 @@
-import { EmailIcon, PhoneIcon, SearchIcon } from "@chakra-ui/icons";
+import React, { useState, useEffect } from "react";
+import Amplify, { API, graphqlOperation } from 'aws-amplify';
+import { BrowserView, MobileView } from "react-device-detect";
+import { ArrowUpIcon, EmailIcon, PhoneIcon, SearchIcon } from "@chakra-ui/icons";
 import {
   Box,
   Heading,
@@ -9,111 +12,31 @@ import {
   VStack,
   IconButton,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
 import { Card } from "../SharedComponents/Card";
 import FormInput from "../SharedComponents/FormInput";
-import { BrowserView, MobileView } from "react-device-detect";
+import listContactList from '../../graphql/queries.graphql';
 
 const Directory = () => {
   const [name, setName] = useState("");
-  const [contactList, setContactList] = useState([
-    {
+  const [contactList, setContactList] = useState([]);
+  /*{
       name: "First Last",
       phone: "(805) 555-5555",
-    },
-    {
-      name: "First Last",
-      phone: "(805) 555-5555",
-    },
-    {
-      name: "First Last",
-      phone: "(805) 555-5555",
-    },
-    {
-      name: "First Last",
-      phone: "(805) 555-5555",
-    },
-    {
-      name: "First Last",
-      phone: "(805) 555-5555",
-    },
-    {
-      name: "First Last",
-      phone: "(805) 555-5555",
-    },
-    {
-      name: "First Last",
-      phone: "(805) 555-5555",
-    },
-    {
-      name: "First Last",
-      phone: "(805) 555-5555",
-    },
-    {
-      name: "First Last",
-      phone: "(805) 555-5555",
-    },
-    {
-      name: "First Last",
-      phone: "(805) 555-5555",
-    },
-    {
-      name: "First Last",
-      phone: "(805) 555-5555",
-    },
-    {
-      name: "First Last",
-      phone: "(805) 555-5555",
-    },
-    {
-      name: "First Last",
-      phone: "(805) 555-5555",
-    },
-    {
-      name: "First Last",
-      phone: "(805) 555-5555",
-    },
-    {
-      name: "First Last",
-      phone: "(805) 555-5555",
-    },
-    {
-      name: "First Last",
-      phone: "(805) 555-5555",
-    },
-    {
-      name: "First Last",
-      phone: "(805) 555-5555",
-    },
-    {
-      name: "First Last",
-      phone: "(805) 555-5555",
-    },
-    {
-      name: "First Last",
-      phone: "(805) 555-5555",
-    },
-    {
-      name: "First Last",
-      phone: "(805) 555-5555",
-    },
-    {
-      name: "First Last",
-      phone: "(805) 555-5555",
-    },
-    {
-      name: "First Last",
-      phone: "(805) 555-5555",
-    },
-    {
-      name: "First Last",
-      phone: "(805) 555-5555",
-    },
-    {
-      name: "First Last",
-      phone: "(805) 555-5555",
-    },
-  ]);
+    },*/
+  
+  useEffect(() => {
+    fetchContactList();
+  }, []);
+
+  async function fetchContactList() {
+    try {
+      const contactListData = await API.graphql(graphqlOperation(listContactList));
+      const contactList = contactListData.data.contactList;
+      setContactList(contactList);
+    } catch (err) {
+      console.log("Error fetching contact list: " + err);
+    }
+  }
 
   return (
     <Box>

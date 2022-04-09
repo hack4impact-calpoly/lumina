@@ -1,0 +1,9 @@
+query listContactList {
+   contactList {
+      id
+      firstname
+      lastname
+      AWSPhone
+      AWSEmail
+   }
+}
