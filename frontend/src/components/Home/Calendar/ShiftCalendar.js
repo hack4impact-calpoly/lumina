@@ -14,7 +14,6 @@ import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { Card } from "../../SharedComponents/Card";
-import "react-datepicker/dist/react-datepicker.css";
 import { AiOutlineFileSearch } from "react-icons/ai";
 import { BrowserView, MobileView, isMobile } from "react-device-detect";
 import { daysOfWeek, months } from "../../SharedComponents/DateTranslation";
@@ -272,8 +271,8 @@ const ShiftCalendarBrowser = ({
   }
 
   return (
-    <Flex flexDir="row" w="100%" h="80vh">
-      <Box w="30%" mr={10}>
+    <Flex flexDir="row" w="100%" minH="75vh">
+      <Box minW="40%" mr={10}>
         <Box mb={3}>
           <Text fontSize="30px">{daysOfWeek[date.getDay()]}</Text>
           <Text fontWeight="bold" fontSize="40px">
@@ -340,7 +339,7 @@ const ShiftCalendarBrowser = ({
         <LuminaCalendar
           events={events}
           setCurrentEvent={setCurrentEvent}
-          w="70%"
+          w="90%"
         />
       </Box>
       <CancelShiftModal
@@ -401,7 +400,7 @@ const LuminaCalendar = ({ events, setCurrentEvent, w }) => {
       defaultDate={new Date()}
       defaultView="month"
       events={events}
-      style={{ width: w }}
+      style={{ maxHeight: "75vh", width: w }}
       views={isMobile ? ["month"] : ["month", "day"]}
       onSelectEvent={(e) => setCurrentEvent(e)}
     />
