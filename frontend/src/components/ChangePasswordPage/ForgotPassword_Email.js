@@ -18,6 +18,7 @@ import { Card } from "../SharedComponents/Card";
 import { CenterBox } from "../SharedComponents/CenterBox";
 import { useHistory, useNavigate } from "react-router-dom";
 import { Auth } from 'aws-amplify';
+import aws_exports from './aws-exports';
 
 const EMAIL_REGEX =
   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -43,7 +44,7 @@ const ForgotPassword_Email = () => {
                 email: email
             }
             // send email to forgot password code verification page
-            navigate("/forgot-password/code", {state: userEmail});
+            //navigate("/forgot-password/code", {state: userEmail});
         } 
         return (
             email !== "" &&
