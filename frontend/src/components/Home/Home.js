@@ -6,8 +6,6 @@ import {
   VStack,
   Divider,
   HStack,
-  Stack,
-  Spacer,
   Center,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
