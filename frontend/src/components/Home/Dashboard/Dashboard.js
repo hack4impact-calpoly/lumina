@@ -44,12 +44,12 @@ const DashboardBrowser = ({}) => {
         <CreateAnnoucement setCreateAnnoucement={setCreateAnnoucement} />
       ) : (
         <Box>
-          <Heading mb={20} size="4xl">
+          <Heading mb="3%" size="4xl">
             Hi First Name!
           </Heading>
           <Flex flexDir="row">
-            <UserShifts w="35%" />
-            <Annoucements ml="5%" w="35%" setCreateAnnoucement={setCreateAnnoucement} />
+            <UserShifts w="45%" />
+            <Annoucements ml="5%" w="45%" setCreateAnnoucement={setCreateAnnoucement} />
           </Flex>
         </Box>
       )}

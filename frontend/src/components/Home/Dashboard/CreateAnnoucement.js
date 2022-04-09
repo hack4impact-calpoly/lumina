@@ -12,7 +12,7 @@ const CreateAnnoucement = ({setCreateAnnoucement, ...rest}) => {
           New Annoucement
         </Heading>
         <Spacer />
-        <Button bg="red.200">
+        <Button bg="red.200" variant="animated">
           Post
         </Button>
       </Flex>

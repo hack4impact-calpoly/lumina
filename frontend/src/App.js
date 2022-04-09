@@ -12,7 +12,6 @@ import ForgotPassword_Email from './components/ChangePasswordPage/ForgotPassword
 import ForgotPassword_Code from './components/ChangePasswordPage/ForgotPassword_Code';
 import Directory from "./components/Home/Directory";
 import NotFound from "./components/NotFound/NotFound";
-import ShiftCalendar from "./components/Home/ShiftCalendar";
 
 function App() {
   const [contactList, setContactList] = useState([
@@ -129,7 +128,6 @@ function App() {
             <Route path="/home/directory" element={<Home />} />
             <Route path="/home/profile" element={<Home />} />
             <Route path="/mobile-directory" element={<Directory />} />
-            <Route path="/calendar" element={<ShiftCalendar contactList={contactList} />} />
             <Route path="/change-password" element={<ChangePassword />} />
             <Route path="*" element={ <NotFound /> } />
           </Routes>

@@ -15,7 +15,7 @@ import React, { useState } from "react";
 import { FiHome, FiCalendar, FiMenu, FiUser } from "react-icons/fi";
 import Directory from "./Directory";
 import LogoWithBack from "../SharedComponents/LogoWithBack";
-import ShiftCalendar from "./ShiftCalendar";
+import ShiftCalendar from "./Calendar/ShiftCalendar";
 import Dashboard from "./Dashboard/Dashboard";
 import Profile from "./Profile";
 import { Card } from "../SharedComponents/Card";

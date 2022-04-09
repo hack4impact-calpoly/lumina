@@ -52,9 +52,9 @@ const Annoucements = ({ setCreateAnnoucement, ...rest }) => {
 
 const AnnoucementCard = ({ date, header, body, ...rest }) => {
   return (
-    <Card {...rest}>
+    <Card w="100%" {...rest}>
       <Flex>
-        <Text fontWeight="bold" fontSize="20px" isTruncated>
+        <Text fontWeight="bold" fontSize="20px" isTruncated maxW="300px">
           {header}
         </Text>
         <Spacer />
