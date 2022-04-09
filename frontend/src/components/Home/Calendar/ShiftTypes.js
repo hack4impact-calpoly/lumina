@@ -17,7 +17,7 @@ export const Primary = ({
   reassign,
 }) => {
   return (
-    <Flex bg={primaryInfo ? "green.100" : "orange.100"} w="100%" p={2}>
+    <Flex bg={primaryInfo ? "yellow.100" : "orange.100"} w="100%" p={2}>
       {primaryInfo ? (
         <Flex align="center" w="100%">
           <CheckIcon boxSize={7} mr="20px" />
@@ -55,7 +55,7 @@ export const Backup = ({
   reassign,
 }) => {
   return (
-    <Box w="100%">
+    <Box bg="green.100" w="100%" p={2}>
       {backupInfo ? (
         <Box>
           <Flex>
@@ -93,7 +93,7 @@ export const Accompaniment = ({
   return (
     <Box w="100%">
       {accompanimentInfo ? (
-        <Box>
+        <Box bg="pink.100" p={2}>
           <Flex>
             <Text fontSize="20px" fontWeight="bold">
               Accompaniment
@@ -131,7 +131,7 @@ export const SecondBackup = ({
   return (
     <Box w="100%">
       {secondBackupInfo ? (
-        <Box w="100%">
+        <Box bg="blue.100" w="100%" p={2}>
           <Box>
             <Flex>
               <Text fontSize="20px" fontWeight="bold">

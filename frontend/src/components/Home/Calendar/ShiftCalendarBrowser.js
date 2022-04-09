@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Button, Flex, Text, useDisclosure } from "@chakra-ui/react";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { daysOfWeek, months } from "../../SharedComponents/DateTranslation";
-import { CreateShiftModal, CancelShiftModal } from "./CalendarModals";
+import { CreateShiftModal, PrepoulateConfirmModal } from "./CalendarModals";
 import LuminaCalendar from "./LuminaCalendar";
 import Shifts from "./Shifts";
 
@@ -16,30 +16,27 @@ const ShiftCalendarBrowser = ({
   contactListSelectable,
 }) => {
   const {
-    isOpen: isCancelOpen,
-    onOpen: onCancelOpen,
-    onClose: onCancelClose,
-  } = useDisclosure();
-  const {
     isOpen: isCreateOpen,
     onOpen: onCreateOpen,
     onClose: onCreateClose,
   } = useDisclosure();
 
-  function openCancelShiftModal() {
-    //add verification and call
-    let localEvents = events.map((event) => {
-      if (event.start === date) {
-        event.info.primary = undefined;
-      }
-      return event;
-    });
-    setEvents(localEvents);
-    onCancelOpen();
+  const {
+    isOpen: isPrepopulateOpen,
+    onOpen: onPrepopulateOpen,
+    onClose: onPrepopulateClose,
+  } = useDisclosure();
+
+  function cancelShift() {
+    //nothing
   }
 
   function openCreateShiftModal() {
     onCreateOpen();
+  }
+
+  function prepopulate() {
+    console.log("ol");
   }
 
   return (
@@ -60,16 +57,8 @@ const ShiftCalendarBrowser = ({
           events={events}
           setEvents={setEvents}
           contactListSelectable={contactListSelectable}
-          onCancelOpen={onCancelOpen}
+          cancelShift={cancelShift}
         />
-        <Button
-          variant="animated"
-          bg="red.300"
-          w="100%"
-          onClick={() => openCancelShiftModal()}
-        >
-          Cancel Shift
-        </Button>
       </Box>
       <Box w="100%">
         <Button
@@ -80,18 +69,21 @@ const ShiftCalendarBrowser = ({
         >
           + New Shift
         </Button>
+        <Button
+          variant="animated"
+          bg="orange.100"
+          mb={3}
+          ml={3}
+          onClick={() => onPrepopulateOpen()}
+        >
+          Prepopulate
+        </Button>
         <LuminaCalendar
           events={events}
           setCurrentEvent={setCurrentEvent}
           w="90%"
         />
       </Box>
-      <CancelShiftModal
-        date={date}
-        shift={currentEvent}
-        isOpen={isCancelOpen}
-        onClose={onCancelClose}
-      />
       <CreateShiftModal
         contactList={contactList}
         isOpen={isCreateOpen}
@@ -99,6 +91,11 @@ const ShiftCalendarBrowser = ({
         setEvents={setEvents}
         onClose={onCreateClose}
         contactListSelectable={contactListSelectable}
+      />
+      <PrepoulateConfirmModal
+        prepopulate={prepopulate}
+        isOpen={isPrepopulateOpen}
+        onClose={onPrepopulateClose}
       />
     </Flex>
   );

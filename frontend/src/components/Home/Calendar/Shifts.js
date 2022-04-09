@@ -3,6 +3,7 @@ import { Box, Button, Heading, Spacer, Text, VStack } from "@chakra-ui/react";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { Card } from "../../SharedComponents/Card";
 import ShiftCard from "./ShiftCard";
+import AllDayShift from "./AllDayShift";
 
 const Shifts = ({
   currentEvent,
@@ -11,6 +12,7 @@ const Shifts = ({
   events,
   setEvents,
   contactListSelectable,
+  cancelShift,
   ...rest
 }) => {
   return (
@@ -25,6 +27,7 @@ const Shifts = ({
               setEvents={setEvents}
               shift={shift}
               contactListSelectable={contactListSelectable}
+              cancelShift={cancelShift}
             />
           );
         })
@@ -32,20 +35,7 @@ const Shifts = ({
         <Box></Box>
       )}
       {currentEvent.allDayShift !== undefined ? (
-        <Card flexDir="row" w="100%">
-          <Box mr="20px">
-            <Heading fontSize="24px">All day</Heading>
-          </Box>
-          <Spacer />
-          <VStack w="300px" spacing="4px">
-            <Box w="100%">
-              <Text fontSize="20px">Backup</Text>
-              <Text fontSize="16px">
-                {`${currentEvent.allDayShift.backup.name} - ${currentEvent.allDayShift.backup.phone}`}
-              </Text>
-            </Box>
-          </VStack>
-        </Card>
+        <AllDayShift currentEvent={currentEvent} />
       ) : (
         <Box></Box>
       )}

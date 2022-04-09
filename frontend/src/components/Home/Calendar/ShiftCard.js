@@ -1,11 +1,20 @@
 import React, { useState } from "react";
-import { Box, Button, Heading, Spacer, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Heading,
+  Spacer,
+  VStack,
+  Flex,
+  useDisclosure,
+} from "@chakra-ui/react";
 import moment from "moment";
 import { Card } from "../../SharedComponents/Card";
 import datesAreOnSameDay from "./DateFunctions";
 import { isWeekend } from "./DateFunctions";
 import RequestAssignment from "./RequestAssignment";
 import { Primary, SecondBackup, Backup, Accompaniment } from "./ShiftTypes";
+import { CancelShiftConfirmModal } from "./CalendarModals";
 
 const ShiftCard = ({
   contactList,
@@ -14,12 +23,14 @@ const ShiftCard = ({
   setEvents,
   shift,
   contactListSelectable,
+  cancelShift,
   ...rest
 }) => {
   const startTime = moment(shift.start).format("hh:mmA");
   const endTime = moment(shift.end).format("hh:mmA");
   const [includeSecondBackup, setIncludeSecondBackup] = useState(false);
   const [includeAccompaniment, setIncludeAccompaniment] = useState(false);
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   function assignNew(name, type) {
     if (name !== "") {
@@ -83,57 +94,69 @@ const ShiftCard = ({
   }
 
   return (
-    <Card flexDir="row" w="100%" {...rest}>
-      <Box>
-        <Heading fontSize="24px">{`${startTime} - ${endTime}`}</Heading>
-      </Box>
-      <Spacer />
-      <VStack w="100%" spacing="4px">
-        <Primary
-          primaryInfo={shift.info.primary}
-          contactListSelectable={contactListSelectable}
-          assignNew={assignNew}
-          reassign={reassign}
-        />
-        <Backup
-          backupInfo={shift.info.backup}
-          contactListSelectable={contactListSelectable}
-          assignNew={assignNew}
-          reassign={reassign}
-        />
-        {shift.info.accompaniment || isWeekend(date) ? (
-          <Accompaniment
-            date={date}
-            setIncludeAccompaniment={setIncludeAccompaniment}
-            accompanimentInfo={shift.info.accompaniment}
+    <Card w="100%" {...rest}>
+      <Flex flexDir="row">
+        <Box>
+          <Heading fontSize="24px">{`${startTime} - ${endTime}`}</Heading>
+        </Box>
+        <Spacer />
+        <VStack w="100%" spacing="4px">
+          <Primary
+            primaryInfo={shift.info.primary}
             contactListSelectable={contactListSelectable}
             assignNew={assignNew}
             reassign={reassign}
           />
-        ) : includeAccompaniment ? (
-          <RequestAssignment
-            required={isWeekend(date)}
-            type="accompaniment"
-            label="Accompaniment"
+          <Backup
+            backupInfo={shift.info.backup}
             contactListSelectable={contactListSelectable}
             assignNew={assignNew}
             reassign={reassign}
-            setInclude={setIncludeAccompaniment}
           />
-        ) : (
-          <Button w="100%" onClick={() => setIncludeAccompaniment(true)}>
-            Add Accompaniment
-          </Button>
-        )}
-        <SecondBackup
-          includeSecondBackup={includeSecondBackup}
-          setIncludeSecondBackup={setIncludeSecondBackup}
-          secondBackupInfo={shift.info.secondBackup}
-          contactListSelectable={contactListSelectable}
-          assignNew={assignNew}
-          reassign={reassign}
-        />
-      </VStack>
+          {shift.info.accompaniment || isWeekend(date) ? (
+            <Accompaniment
+              date={date}
+              setIncludeAccompaniment={setIncludeAccompaniment}
+              accompanimentInfo={shift.info.accompaniment}
+              contactListSelectable={contactListSelectable}
+              assignNew={assignNew}
+              reassign={reassign}
+            />
+          ) : includeAccompaniment ? (
+            <RequestAssignment
+              required={isWeekend(date)}
+              type="accompaniment"
+              label="Accompaniment"
+              contactListSelectable={contactListSelectable}
+              assignNew={assignNew}
+              reassign={reassign}
+              setInclude={setIncludeAccompaniment}
+            />
+          ) : (
+            <Button w="100%" onClick={() => setIncludeAccompaniment(true)}>
+              Add Accompaniment
+            </Button>
+          )}
+          <SecondBackup
+            includeSecondBackup={includeSecondBackup}
+            setIncludeSecondBackup={setIncludeSecondBackup}
+            secondBackupInfo={shift.info.secondBackup}
+            contactListSelectable={contactListSelectable}
+            assignNew={assignNew}
+            reassign={reassign}
+          />
+        </VStack>
+      </Flex>
+      <Button mt={3} bg="red.300" onClick={() => onOpen()}>
+        Cancel Shift
+      </Button>
+      <CancelShiftConfirmModal
+        date={date}
+        shift={shift}
+        isCancelOpen={isOpen}
+        onCancelClose={onClose}
+        cancelShift={cancelShift}
+      />
     </Card>
   );
 };

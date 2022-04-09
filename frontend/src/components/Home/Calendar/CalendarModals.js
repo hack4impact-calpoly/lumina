@@ -13,6 +13,7 @@ import {
   ModalCloseButton,
   Icon,
   Divider,
+  useDisclosure,
 } from "@chakra-ui/react";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
@@ -27,7 +28,57 @@ import datesAreOnSameDay from "./DateFunctions";
 import { isWeekend } from "./DateFunctions";
 import AddVolunteer from "./AddVolunteer";
 
-export const CancelShiftModal = ({ date, shift, isOpen, onClose }) => {
+export const CancelShiftConfirmModal = ({
+  date,
+  shift,
+  isCancelOpen,
+  onCancelClose,
+  cancelShift
+}) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  function openCancelShiftModal() {
+    //add verification and call
+    cancelShift();
+    onCancelClose();
+    onOpen();
+  }
+
+  return (
+    <Box>
+      <Modal isOpen={isCancelOpen} onClose={onCancelClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Are you sure?</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Text>
+              {`You are going to cancel your volunteer shift on ${
+                months[date.getMonth()]
+              } ${date.getDate()}, ${date.getFullYear()} at ${moment(
+                shift.start
+              ).format("hh:mmA")}-${moment(shift.end).format(
+                "hh:mmA"
+              )}. Are you sure?`}
+            </Text>
+            <Button bg="red.300" mr={3} onClick={() => openCancelShiftModal()}>
+              Yes
+            </Button>
+            <Button onClick={() => onCancelClose()}>No</Button>
+          </ModalBody>
+        </ModalContent>
+      </Modal>
+      <CancelShiftModal
+        date={date}
+        shift={shift}
+        isOpen={isOpen}
+        onClose={onClose}
+      />
+    </Box>
+  );
+};
+
+const CancelShiftModal = ({ date, shift, isOpen, onClose }) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
@@ -243,3 +294,29 @@ export const CreateShiftModal = ({
     </Modal>
   );
 };
+
+export const PrepoulateConfirmModal = ({prepopulate, isOpen, onClose}) => {
+  function prepopulateClose() {
+    prepopulate()
+    onClose();
+  }
+
+  return (
+    <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Are you sure?</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Text>You are about to prepopulate the entire current month with the <b>default</b> shifts. Are you sure?</Text>
+            <Button bg="red.300" onClick={() => prepopulate()}>
+              Yes
+            </Button>
+            <Button ml={3} onClick={() => onClose()}>
+              No
+            </Button>
+          </ModalBody>
+        </ModalContent>
+      </Modal>
+  )
+}
