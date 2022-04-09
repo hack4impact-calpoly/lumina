@@ -33,7 +33,7 @@ export const CancelShiftConfirmModal = ({
   shift,
   isCancelOpen,
   onCancelClose,
-  cancelShift
+  cancelShift,
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -53,7 +53,7 @@ export const CancelShiftConfirmModal = ({
           <ModalCloseButton />
           <ModalBody>
             <Text>
-              {`You are going to cancel your volunteer shift on ${
+              {`You are going to delete the shift on ${
                 months[date.getMonth()]
               } ${date.getDate()}, ${date.getFullYear()} at ${moment(
                 shift.start
@@ -295,28 +295,36 @@ export const CreateShiftModal = ({
   );
 };
 
-export const PrepoulateConfirmModal = ({prepopulate, isOpen, onClose}) => {
+export const PrepoulateConfirmModal = ({ prepopulate, isOpen, onClose }) => {
   function prepopulateClose() {
-    prepopulate()
+    prepopulate();
     onClose();
   }
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Are you sure?</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <Text>You are about to prepopulate the entire current month with the <b>default</b> shifts. Are you sure?</Text>
-            <Button bg="red.300" onClick={() => prepopulateClose()}>
-              Yes
-            </Button>
-            <Button ml={3} onClick={() => onClose()}>
-              No
-            </Button>
-          </ModalBody>
-        </ModalContent>
-      </Modal>
-  )
-}
+      <ModalOverlay />
+      <ModalContent>
+        <ModalHeader>Are you sure?</ModalHeader>
+        <ModalCloseButton />
+        <ModalBody>
+          <Text>
+            You are about to prepopulate the entire current month with the{" "}
+            <b>default</b> shifts.{" "} <br />
+            <b>
+              This will remove any existing shifts and events from the current
+              months.
+            </b>{" "}<br />
+            Are you sure?
+          </Text>
+          <Button bg="red.300" onClick={() => prepopulateClose()}>
+            Yes
+          </Button>
+          <Button ml={3} onClick={() => onClose()}>
+            No
+          </Button>
+        </ModalBody>
+      </ModalContent>
+    </Modal>
+  );
+};

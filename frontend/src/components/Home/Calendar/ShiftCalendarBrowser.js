@@ -40,7 +40,7 @@ const ShiftCalendarBrowser = ({
     const currentYear = new Date().getFullYear();
     const currentMonth = new Date().getMonth();
     const daysInMonth = getDaysInMonth(currentYear, currentMonth + 1);
-    let newEvents = events
+    let newEvents = deleteCurrentMonthShifts(currentMonth);;
     for (let i = 1; i < daysInMonth + 1; i++) {
       const startDate = new Date(currentYear, currentMonth, i);
       const endDate = new Date(currentYear, currentMonth, i + 1);
@@ -175,9 +175,16 @@ const ShiftCalendarBrowser = ({
         end: endDate,
         shifts: shifts,
       };
-      newEvents.push(newEvent)
+      newEvents.push(newEvent);
     }
-    setEvents(newEvents)
+    setEvents(newEvents);
+    sessionStorage.setItem("events", JSON.stringify(newEvents));
+  }
+
+  function deleteCurrentMonthShifts(currentMonth) {
+    let newEvents = events;
+    newEvents = newEvents.filter((event) => new Date(event.start).getMonth() !== currentMonth);
+    return newEvents
   }
 
   return (

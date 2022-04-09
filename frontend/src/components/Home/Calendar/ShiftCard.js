@@ -148,7 +148,7 @@ const ShiftCard = ({
         </VStack>
       </Flex>
       <Button mt={3} bg="red.300" onClick={() => onOpen()}>
-        Cancel Shift
+        Delete Shift
       </Button>
       <CancelShiftConfirmModal
         date={date}
