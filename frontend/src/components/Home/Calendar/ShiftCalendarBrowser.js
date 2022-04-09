@@ -15,6 +15,8 @@ const ShiftCalendarBrowser = ({
   events,
   setEvents,
   contactListSelectable,
+  cancelShift,
+  prepopulate
 }) => {
   const {
     isOpen: isCreateOpen,
@@ -28,163 +30,8 @@ const ShiftCalendarBrowser = ({
     onClose: onPrepopulateClose,
   } = useDisclosure();
 
-  function cancelShift() {
-    //nothing
-  }
-
   function openCreateShiftModal() {
     onCreateOpen();
-  }
-
-  function prepopulate() {
-    const currentYear = new Date().getFullYear();
-    const currentMonth = new Date().getMonth();
-    const daysInMonth = getDaysInMonth(currentYear, currentMonth + 1);
-    let newEvents = deleteCurrentMonthShifts(currentMonth);;
-    for (let i = 1; i < daysInMonth + 1; i++) {
-      const startDate = new Date(currentYear, currentMonth, i);
-      const endDate = new Date(currentYear, currentMonth, i + 1);
-      let shifts = [];
-      switch (startDate.getDay()) {
-        case 0:
-          shifts = [
-            {
-              start: new Date(currentYear, currentMonth, i, 0),
-              end: new Date(currentYear, currentMonth, i, 8),
-              title: "2/2",
-              info: {
-                primary: undefined,
-                backup: undefined,
-                accompaniment: undefined,
-                secondBackup: undefined,
-              },
-            },
-            {
-              start: new Date(currentYear, currentMonth, i, 8),
-              end: new Date(currentYear, currentMonth, i, 12),
-              title: "2/2",
-              info: {
-                primary: undefined,
-                backup: undefined,
-                accompaniment: undefined,
-                secondBackup: undefined,
-              },
-            },
-            {
-              start: new Date(currentYear, currentMonth, i, 12),
-              end: new Date(currentYear, currentMonth, i, 16),
-              title: "2/2",
-              info: {
-                primary: undefined,
-                backup: undefined,
-                accompaniment: undefined,
-                secondBackup: undefined,
-              },
-            },
-            {
-              start: new Date(currentYear, currentMonth, i, 16),
-              end: new Date(currentYear, currentMonth, i + 1, 0),
-              title: "2/2",
-              info: {
-                primary: undefined,
-                backup: undefined,
-                accompaniment: undefined,
-                secondBackup: undefined,
-              },
-            },
-          ];
-          break;
-        case 1:
-          shifts = [
-            {
-              start: new Date(currentYear, currentMonth, i, 0),
-              end: new Date(currentYear, currentMonth, i, 8, 30),
-              title: "2/2",
-              info: {
-                primary: undefined,
-                backup: undefined,
-                accompaniment: undefined,
-                secondBackup: undefined,
-              },
-            },
-            {
-              start: new Date(currentYear, currentMonth, i, 17),
-              end: new Date(currentYear, currentMonth, i + 1, 8, 30),
-              title: "2/2",
-              info: {
-                primary: undefined,
-                backup: undefined,
-                accompaniment: undefined,
-                secondBackup: undefined,
-              },
-            },
-          ];
-          break;
-        case 2:
-        case 3:
-        case 4:
-        case 5:
-          shifts = [
-            {
-              start: new Date(currentYear, currentMonth, i, 17),
-              end: new Date(currentYear, currentMonth, i + 1, 8, 30),
-              title: "2/2",
-              info: {
-                primary: undefined,
-                backup: undefined,
-                accompaniment: undefined,
-                secondBackup: undefined,
-              },
-            },
-          ];
-          break;
-        case 6:
-          shifts = [
-            {
-              start: new Date(currentYear, currentMonth, i, 8),
-              end: new Date(currentYear, currentMonth, i, 16),
-              title: "2/2",
-              info: {
-                primary: undefined,
-                backup: undefined,
-                accompaniment: undefined,
-                secondBackup: undefined,
-              },
-            },
-            {
-              start: new Date(currentYear, currentMonth, i, 16),
-              end: new Date(currentYear, currentMonth, i + 1, 0),
-              title: "2/2",
-              info: {
-                primary: undefined,
-                backup: undefined,
-                accompaniment: undefined,
-                secondBackup: undefined,
-              },
-            },
-          ];
-          break;
-        default:
-          console.log("Invalid day");
-          break;
-      }
-      const newEvent = {
-        id: 0,
-        title: "2/2",
-        start: startDate,
-        end: endDate,
-        shifts: shifts,
-      };
-      newEvents.push(newEvent);
-    }
-    setEvents(newEvents);
-    sessionStorage.setItem("events", JSON.stringify(newEvents));
-  }
-
-  function deleteCurrentMonthShifts(currentMonth) {
-    let newEvents = events;
-    newEvents = newEvents.filter((event) => new Date(event.start).getMonth() !== currentMonth);
-    return newEvents
   }
 
   return (

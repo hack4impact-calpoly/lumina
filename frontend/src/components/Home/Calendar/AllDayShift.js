@@ -10,7 +10,7 @@ const AllDayShift = ({ currentEvent, ...rest }) => {
         <Heading fontSize="24px">All day</Heading>
       </Box>
       <Spacer />
-      <VStack w="300px" spacing="4px">
+      <VStack w="100%" maxW="300px" spacing="4px">
         <Box bg="green.100" w="100%" p={3}>
           <Text fontWeight="bold" fontSize="20px">Backup</Text>
           <Text fontSize="16px">

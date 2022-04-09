@@ -19,6 +19,9 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import { AiOutlineFileSearch } from "react-icons/ai";
 import { daysOfWeek, months } from "../../SharedComponents/DateTranslation";
 import LuminaCalendar from "./LuminaCalendar";
+import Shifts from "./Shifts";
+import { ShiftDetailsDrawer } from "./CalendarDrawers";
+import { PrepoulateConfirmModal } from "./CalendarModals";
 
 const ShiftCalendarMobile = ({
   contactList,
@@ -26,11 +29,29 @@ const ShiftCalendarMobile = ({
   currentEvent,
   setCurrentEvent,
   events,
+  setEvents,
+  contactListSelectable,
+  cancelShift,
+  prepopulate
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
+
+  const {
+    isOpen: isPrepopulateOpen,
+    onOpen: onPrepopulateOpen,
+    onClose: onPrepopulateClose,
+  } = useDisclosure();
+
   return (
-    <Flex w="100%" flexDir="column" h="65vh">
+    <Flex w="98%" flexDir="column" h="65vh">
+      <Button variant="animated" bg="orange.100" mb={3} onClick={() => onPrepopulateOpen()}>
+        Prepopulate
+      </Button>
+      <Button variant="animated" bg="orange.100" mb={3} >
+        + New Shift
+      </Button>
+
       <LuminaCalendar
         events={events}
         setCurrentEvent={setCurrentEvent}
@@ -50,28 +71,23 @@ const ShiftCalendarMobile = ({
           <Text>View Details</Text>
         </Button>
       </Flex>
-      <Drawer
+      <ShiftDetailsDrawer
+        date={date}
+        currentEvent={currentEvent}
+        contactList={contactList}
+        events={events}
+        setEvents={setEvents}
+        contactListSelectable={contactListSelectable}
+        cancelShift={cancelShift}
         isOpen={isOpen}
-        placement="right"
         onClose={onClose}
-        finalFocusRef={btnRef}
-      >
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerCloseButton />
-          <DrawerHeader>
-            <Text>{daysOfWeek[date.getDay()]}</Text>
-            <Text fontWeight="bold" fontSize="24px">
-              {`${
-                months[date.getMonth()]
-              } ${date.getDate()}, ${date.getFullYear()}`}
-            </Text>
-          </DrawerHeader>
-          <DrawerBody>
-            <Heading>HELLO!</Heading>
-          </DrawerBody>
-        </DrawerContent>
-      </Drawer>
+        btnRef={btnRef}
+      />
+      <PrepoulateConfirmModal
+        prepopulate={prepopulate}
+        isOpen={isPrepopulateOpen}
+        onClose={onPrepopulateClose}
+      />
     </Flex>
   );
 };
