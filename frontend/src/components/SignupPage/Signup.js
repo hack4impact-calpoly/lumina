@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Button, Heading, Text } from "@chakra-ui/react";
+import { Box, Button, Heading, Text, Flex } from "@chakra-ui/react";
 import { Card } from "../SharedComponents/Card";
 import LogoWithBack from "../SharedComponents/LogoWithBack";
 import FormInput from "../SharedComponents/FormInput";
@@ -21,7 +21,8 @@ const Signup = () => {
   return (
     <CenterBox>
       {accountCreated ? (
-        <AccountCreated name={firstName} email={email} />
+        // <AccountCreated name={firstName} email={email} />
+        <SignupCode name={firstName} email={email} />
       ) : (
         <SignupForm
           firstName={firstName}
@@ -65,6 +66,79 @@ const AccountCreated = ({ name, email }) => {
   );
 };
 
+const ConfirmSignUpCode = ({email, code, setCode, codeVerified, setCodeVerified}) => {
+
+  async function sendCode() {
+    try {
+      await Auth.confirmSignUp(email, code);
+      // console.log(email);
+      // console.log(name);
+      // console.log(code);
+      // console.log(response);
+      setCodeVerified(true);
+    } catch (error) {
+        console.log('error confirming sign up', error);
+    }
+  }
+  
+  return (
+    <CenterBox textAlign="center">
+      <LogoWithBack />
+      <Heading as="h1" mb={8}>
+        Account Created
+      </Heading>
+      <Text mb={6}>
+        Please check your email for the verification code. Input the code below.
+      </Text>
+      <Card>
+        <FormInput 
+            width="300px"
+            ml={260} 
+            id="code" 
+            invalid={code === ""}
+            label="Please enter the verification code:"
+            onChange={(e) => setCode(e.target.value)}
+            isRequired
+        />
+        <Text color="red">{codeVerified ? "" : "Invalid Code"}</Text>
+       </Card>
+       <Flex>
+          <Button 
+            mt= "30px" 
+            ml="425px"
+            width="150px"
+            color={"white"}
+            bg={"#E53E3E"}
+            variant="animated"
+            onClick={() => sendCode()}> Submit 
+          </Button>
+        </Flex>
+    </CenterBox>
+  );
+  
+}
+
+const SignupCode = ({name, email}) => {
+  const [code, setCode] = useState("");
+  //const [validCode, setValidCode] = useState(true);
+  const [codeVerified, setCodeVerified] = useState(false);
+
+  return (
+    <CenterBox>
+      {codeVerified ? (
+        <AccountCreated name={name} email={email} />
+      ) : (
+        <ConfirmSignUpCode 
+        email={email} 
+        code={code} 
+        setCode={setCode} 
+        codeVerified = {codeVerified}
+        setCodeVerified={setCodeVerified}/>
+      )}
+    </CenterBox>
+  );
+};
+
 const SignupForm = ({
   firstName,
   setFirstName,
@@ -87,13 +161,14 @@ const SignupForm = ({
   async function register() {
     if (isValidForm()) {
       try {
+        /// FIX:: AWS gives an error and does not create user if password is not a certain length
         const { user } = await Auth.signUp({
           username: email,
           password: password
         });
       
       setAccountCreated(true);
-      console.log(user);
+      //console.log(user);
       } catch (error) {
         console.log('error signing up: ', error);
       }
