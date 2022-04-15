@@ -16,7 +16,8 @@ import LogoWithBack from "../SharedComponents/LogoWithBack";
 import FormInput from "../SharedComponents/FormInput";
 import { Card } from "../SharedComponents/Card";
 import { CenterBox } from "../SharedComponents/CenterBox";
-import { useHistory, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { Auth } from "aws-amplify";
 
 const EMAIL_REGEX =
   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -36,6 +37,11 @@ const ForgotPassword_Email = () => {
             const userEmail = {
                 email: email
             }
+
+            // Send confirmation code to user's email
+            Auth.forgotPassword(email)
+                .then(data => console.log(data))
+                .catch(err => console.log(err));
             navigate("/forgot-password/code", {state: userEmail});
         } 
         return (

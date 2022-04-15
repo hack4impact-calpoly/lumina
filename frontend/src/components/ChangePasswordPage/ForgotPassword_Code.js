@@ -5,13 +5,11 @@ import {
   Text,
   Flex,
 } from "@chakra-ui/react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { ArrowBackIcon, ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
+import { useLocation, useNavigate } from "react-router-dom";
 import LogoWithBack from "../SharedComponents/LogoWithBack";
 import FormInput from "../SharedComponents/FormInput";
 import { CenterBox } from "../SharedComponents/CenterBox";
 import { Card } from "../SharedComponents/Card";
-
 
 function ForgotPassword_Code(props) {
     const [code, setCode] = useState("");
@@ -32,7 +30,8 @@ function ForgotPassword_Code(props) {
                 email: email,
                 code: code
             }
-            navigate("/change-password");
+
+            navigate("/change-password", {state: userCode});
         }
         return (
             code !== "" &&
