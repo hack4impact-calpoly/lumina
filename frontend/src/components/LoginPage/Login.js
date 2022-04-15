@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { Auth } from 'aws-amplify';
 
 import {
@@ -31,12 +31,17 @@ export default function Login() {
 
   const [loggedIn, setLoggedIn] = useState(false);
 
+  if (loggedIn) {
+    return <Navigate to="/home" replace="false" />
+  }
+
   async function signIn() {
       try {
          const { user } = await Auth.signIn(email, password);
 
          setLoggedIn(true);
          console.log('Successfully logged in: ', email);
+         // redirect to dashboard
       } catch (error) {
          console.log('Error logging in: ', error);
       }
