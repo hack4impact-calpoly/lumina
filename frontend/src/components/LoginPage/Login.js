@@ -31,17 +31,18 @@ export default function Login() {
 
   const [loggedIn, setLoggedIn] = useState(false);
 
-  if (loggedIn) {
-    return <Navigate to="/home" replace="false" />
-  }
+  let user;
+   // redirect to dashboard
+   if (loggedIn) {
+    return <Navigate to="/home" replace="false" state={{user: user}}/>
+   }
 
   async function signIn() {
       try {
-         const { user } = await Auth.signIn(email, password);
+         user = await Auth.signIn(email, password);
 
          setLoggedIn(true);
          console.log('Successfully logged in: ', email);
-         // redirect to dashboard
       } catch (error) {
          console.log('Error logging in: ', error);
       }
