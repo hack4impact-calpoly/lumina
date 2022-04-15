@@ -10,8 +10,6 @@ import LogoWithBack from "../SharedComponents/LogoWithBack";
 import FormInput from "../SharedComponents/FormInput";
 import { CenterBox } from "../SharedComponents/CenterBox";
 import { Card } from "../SharedComponents/Card";
-import { Auth } from "aws-amplify";
-
 
 function ForgotPassword_Code(props) {
     const [code, setCode] = useState("");
@@ -32,21 +30,14 @@ function ForgotPassword_Code(props) {
                 email: email,
                 code: code
             }
-            navigate("/change-password");
+
+            navigate("/change-password", {state: userCode});
         }
         return (
             code !== "" &&
             validCode
         );
         
-    }
-    
-    async function confirmSignUp(email) {
-        try {
-          //await Auth.confirmSignUp(email, code);
-        } catch (error) {
-            console.log('error confirming sign up', error);
-        }
     }
 
     return(

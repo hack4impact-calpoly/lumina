@@ -4,6 +4,8 @@ import LogoWithBack from "../SharedComponents/LogoWithBack";
 import { CenterBox } from "../SharedComponents/CenterBox";
 import { Card } from "../SharedComponents/Card";
 import FormInput from "../SharedComponents/FormInput";
+import { useLocation } from "react-router-dom";
+import { Auth } from "aws-amplify";
 
 const ChangePassword = () => {
   const [successPasswordChange, setSuccessPasswordChange] = useState(false);
@@ -30,9 +32,21 @@ const ChangePasswordForm = ({ setSuccessPasswordChange }) => {
   const [samePasswordConfirmPassword, setSamePasswordConfirmPassword] =
     useState(true);
 
+
+  const { state } = useLocation();
+  console.log(state);
+  const email = state.email;
+  const code = state.code;
+  console.log(code)
+
   function submitPasswordChange() {
     if(isValidForm()) {
       setSuccessPasswordChange(true)
+
+      // Collect confirmation code and new password, then
+      Auth.forgotPasswordSubmit(email, code, password)
+      .then(data => console.log(data))
+      .catch(err => console.log(err));
     }
   }
 
