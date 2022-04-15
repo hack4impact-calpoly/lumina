@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Amplify, { API, graphqlOperation } from 'aws-amplify';
+import { API, graphqlOperation } from 'aws-amplify';
 import { BrowserView, MobileView } from "react-device-detect";
 import { ArrowUpIcon, EmailIcon, PhoneIcon, SearchIcon } from "@chakra-ui/icons";
 import {
@@ -30,7 +30,7 @@ const Directory = () => {
 
   async function fetchContactList() {
     try {
-      const contactListData = await API.graphql(graphqlOperation(listContactList));
+      const contactListData = await API.graphql(listContactList);
       const contactList = contactListData.data.contactList;
       setContactList(contactList);
     } catch (err) {

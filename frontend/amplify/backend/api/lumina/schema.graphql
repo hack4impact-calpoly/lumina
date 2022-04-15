@@ -1,4 +1,14 @@
-type Users @model @auth(rules: [{allow: public}]) {
+type Query {
+  getUser(id: ID!): User
+  listUsers(filter: UserFilterInput, limit: Int, nextToken: String): UsersConnection
+}
+
+type UsersConnection {
+  users: [User]
+  nextToken: String
+}
+
+type User @model @auth(rules: [{allow: public}]) {
   id: ID!
   firstname: String
   lastname: String

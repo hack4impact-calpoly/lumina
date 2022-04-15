@@ -1,9 +1,11 @@
 query listContactList {
-   contactList {
-      id
-      firstname
-      lastname
-      AWSPhone
-      AWSEmail
+   Users {
+      items {
+         id
+         firstname
+         lastname
+         AWSPhone
+         AWSEmail
+      }
    }
 }
