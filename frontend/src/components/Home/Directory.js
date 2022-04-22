@@ -30,7 +30,19 @@ const Directory = () => {
 
   async function fetchContactList() {
     try {
-      const contactListData = await API.graphql(listContactList);
+      const contactListData = await API.graphql(graphqlOperation(`
+        query listContactList {
+          Users {
+            items {
+                id
+                firstname
+                lastname
+                AWSPhone
+                AWSEmail
+            }
+          }
+        }
+      `));
       const contactList = contactListData.data.contactList;
       setContactList(contactList);
     } catch (err) {
@@ -57,7 +69,7 @@ const DirectoryBrowser = ({ contactList, setName }) => {
       <VStack spacing={4}>
         {contactList.map((contact) => {
           return (
-            <Contact name={contact.name} number={contact.phone} width="500px" />
+            <Contact name={contact.firstname} number={contact.phone} width="500px" />
           );
         })}
       </VStack>
