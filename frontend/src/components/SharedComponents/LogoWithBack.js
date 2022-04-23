@@ -37,9 +37,9 @@ const LogoWithBack = ({back, element, logoMr, ...rest}) => {
         mr={back ? (element ? logoMr : "40px") : "0px"}
       >
         <Image
-          src="https://slochamber.org/wp-content/uploads/2018/12/RISE_1024.png"
+          src="https://luminaalliance.org/wp-content/uploads/2021/07/LA_Logo.svg"
           w="100px"
-          h="50px"
+          h="150px"
           alt='RISE logo in color.'
           mixBlendMode='multiply'
         />
