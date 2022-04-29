@@ -14,17 +14,12 @@ import {
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { Card } from "../../SharedComponents/Card";
-import FormInput from "../../SharedComponents/FormInput";
-import { BrowserView, MobileView } from "react-device-detect";
-import { AiOutlineRight } from "react-icons/ai";
 import { daysOfWeek, months } from "../../SharedComponents/DateTranslation";
 import moment from "moment";
-import MoreInfo from "../../SharedComponents/MoreInfo";
 
-const UserShifts = ({ ...rest }) => {
+const UserShiftsM = ({ ...rest }) => {
   return (
     <Box {...rest}>
-      <Heading mb={5}>Your next shifts</Heading>
       <VStack>
         <UserShiftCard
           start={new Date(2022, 3, 8, 11)}
@@ -35,7 +30,6 @@ const UserShifts = ({ ...rest }) => {
           end={new Date(2022, 3, 9, 14)}
         />
       </VStack>
-      <MoreInfo text="See all your upcoming shifts"/>
     </Box>
   );
 };
@@ -44,20 +38,20 @@ const UserShiftCard = ({ start, end, ...rest }) => {
   const startTime = moment(start).format("hh:mmA");
   const endTime = moment(end).format("hh:mmA");
   return (
-    <Card w="100%" {...rest}>
-      <Center fontWeight="bold" fontSize="30px">
+    <Card mt={4} w={80}>
+    <Text ml="25%" fontWeight="bold" fontSize="20px">
         {daysOfWeek[start.getDay()]},{" "}
         {`${months[start.getMonth()]} ${start.getDate()}`}
-      </Center>
-      <Text fontSize="20px">{startTime}</Text>
-      <Text>|</Text>
-      <Text fontSize="20px">{endTime}</Text>
-      <Center fontSize="30px">
+      </Text>
+      <Text mt="5%" ml="40%" fontSize="15px">{startTime}</Text>
+      <Text ml="50%">|</Text>
+      <Text ml="40%" fontSize="15px">{endTime}</Text>
+      <Text mt="5%" marginLeft="20%" fontSize="20px">
         {daysOfWeek[end.getDay()]},{" "}
         {`${months[end.getMonth()]} ${end.getDate()}`}
-      </Center>
+      </Text>
     </Card>
   );
 };
 
-export default UserShifts;
+export default UserShiftsM;
