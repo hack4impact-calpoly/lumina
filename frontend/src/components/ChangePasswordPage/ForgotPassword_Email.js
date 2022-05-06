@@ -1,22 +1,15 @@
 import React, { useState } from "react";
 import {
-  Box,
   Button,
   Heading,
-  Stack,
-  Input,
   Text,
-  Image,
-  Center,
   Flex,
-  InputRightElement,
-  InputGroup,
 } from "@chakra-ui/react";
 import LogoWithBack from "../SharedComponents/LogoWithBack";
 import FormInput from "../SharedComponents/FormInput";
 import { Card } from "../SharedComponents/Card";
 import { CenterBox } from "../SharedComponents/CenterBox";
-import { useHistory, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const EMAIL_REGEX =
   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

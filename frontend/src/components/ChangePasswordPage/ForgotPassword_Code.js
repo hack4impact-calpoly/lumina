@@ -5,8 +5,7 @@ import {
   Text,
   Flex,
 } from "@chakra-ui/react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { ArrowBackIcon, ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
+import { useLocation, useNavigate } from "react-router-dom";
 import LogoWithBack from "../SharedComponents/LogoWithBack";
 import FormInput from "../SharedComponents/FormInput";
 import { CenterBox } from "../SharedComponents/CenterBox";
