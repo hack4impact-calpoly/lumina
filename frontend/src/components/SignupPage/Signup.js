@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
-import { Box, Button, Heading, Text } from '@chakra-ui/react'
-import { Card } from '../SharedComponents/Card'
-import LogoWithBack from '../SharedComponents/LogoWithBack'
-import FormInput from '../SharedComponents/FormInput'
-import { Link } from 'react-router-dom'
-import { CenterBox } from '../SharedComponents/CenterBox'
+import React, { useState } from "react";
+import { Box, Button, Heading, Text } from "@chakra-ui/react";
+import { Card } from "../SharedComponents/Card";
+import LogoWithBack from "../SharedComponents/LogoWithBack";
+import FormInput from "../SharedComponents/FormInput";
+import { Link } from "react-router-dom";
+import { CenterBox } from "../SharedComponents/CenterBox";
+import { Auth } from "aws-amplify";
 
 const EMAIL_REGEX =
     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -83,11 +84,21 @@ const SignupForm = ({
         useState(true)
     const [showPassword, setShowPassword] = useState(false)
 
-    function register() {
-        if (isValidForm()) {
-            setAccountCreated(true)
-        }
+  async function register() {
+    if (isValidForm()) {
+      try {
+        const { user } = await Auth.signUp({
+          username: email,
+          password: password
+        });
+      
+      setAccountCreated(true);
+      console.log(user);
+      } catch (error) {
+        console.log('error signing up: ', error);
+      }
     }
+}
 
     function isValidForm() {
         const goodName = firstName !== '' && lastName !== ''

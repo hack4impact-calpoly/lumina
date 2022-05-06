@@ -1,16 +1,19 @@
-import { ChakraProvider, Box } from '@chakra-ui/react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import './App.css'
-import Login from './components/LoginPage/Login'
-import Signup from './components/SignupPage/Signup'
-import HomePage from './components/HomePage/HomePage'
-import Home from './components/Home/Home'
-import ChangePassword from './components/ChangePasswordPage/ChangePassword'
-import theme from './theme'
-import ForgotPassword_Email from './components/ChangePasswordPage/ForgotPassword_Email'
-import ForgotPassword_Code from './components/ChangePasswordPage/ForgotPassword_Code'
-import Directory from './components/Home/Directory'
-import NotFound from './components/NotFound/NotFound'
+import { ChakraProvider, Box } from "@chakra-ui/react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import "./App.css";
+import Login from "./components/LoginPage/Login";
+import Signup from "./components/SignupPage/Signup";
+import HomePage from "./components/HomePage/HomePage";
+import Home from "./components/Home/Home";
+import ChangePassword from "./components/ChangePasswordPage/ChangePassword";
+import theme from "./theme";
+import ForgotPassword_Email from './components/ChangePasswordPage/ForgotPassword_Email';
+import ForgotPassword_Code from './components/ChangePasswordPage/ForgotPassword_Code';
+import Directory from "./components/Home/Directory";
+import NotFound from "./components/NotFound/NotFound";
+import Amplify, { Auth } from "aws-amplify";
+import awsconfig from './aws-exports';
+Amplify.configure(awsconfig);
 
 function App() {
     return (
