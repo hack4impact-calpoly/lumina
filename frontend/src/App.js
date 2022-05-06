@@ -11,6 +11,9 @@ import ForgotPassword_Email from './components/ChangePasswordPage/ForgotPassword
 import ForgotPassword_Code from './components/ChangePasswordPage/ForgotPassword_Code';
 import Directory from "./components/Home/Directory";
 import NotFound from "./components/NotFound/NotFound";
+import Amplify, { Auth } from "aws-amplify";
+import awsconfig from './aws-exports';
+Amplify.configure(awsconfig);
 
 function App() {
   const [contactList, setContactList] = useState([
