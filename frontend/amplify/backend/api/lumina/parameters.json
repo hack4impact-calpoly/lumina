@@ -1,5 +1,5 @@
 {
-  "AppSyncApiName": "lumina",
-  "DynamoDBBillingMode": "PAY_PER_REQUEST",
-  "DynamoDBEnableServerSideEncryption": false
+    "AppSyncApiName": "lumina",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "DynamoDBEnableServerSideEncryption": false
 }

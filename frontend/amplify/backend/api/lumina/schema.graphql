@@ -1,7 +1,7 @@
-type Users @model @auth(rules: [{allow: public}]) {
-  id: ID!
-  firstname: String
-  lastname: String
-  phone: AWSPhone
-  email: AWSEmail
+type Users @model @auth(rules: [{ allow: public }]) {
+    id: ID!
+    firstname: String
+    lastname: String
+    phone: AWSPhone
+    email: AWSEmail
 }
