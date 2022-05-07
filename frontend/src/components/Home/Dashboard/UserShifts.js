@@ -49,9 +49,11 @@ const UserShiftCard = ({ start, end, ...rest }) => {
         {daysOfWeek[start.getDay()]},{" "}
         {`${months[start.getMonth()]} ${start.getDate()}`}
       </Center>
+      <Box align="center">
       <Text fontSize="20px">{startTime}</Text>
       <Text>|</Text>
       <Text fontSize="20px">{endTime}</Text>
+      </Box>
       <Center fontSize="30px">
         {daysOfWeek[end.getDay()]},{" "}
         {`${months[end.getMonth()]} ${end.getDate()}`}

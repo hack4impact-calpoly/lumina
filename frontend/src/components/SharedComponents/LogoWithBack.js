@@ -35,12 +35,13 @@ const LogoWithBack = ({back, element, logoMr, ...rest}) => {
       <Center
         flex="1"
         mr={back ? (element ? logoMr : "40px") : "0px"}
+        m={2}
       >
         <Image
           src="https://luminaalliance.org/wp-content/uploads/2021/07/LA_Logo.svg"
           w="100px"
-          h="150px"
-          alt='RISE logo in color.'
+          h="70px"
+          alt='Lumina logo in color.'
           mixBlendMode='multiply'
         />
       </Center>
