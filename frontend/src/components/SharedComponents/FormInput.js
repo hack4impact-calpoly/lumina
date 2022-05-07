@@ -29,36 +29,37 @@ import { ViewOffIcon, ViewIcon } from '@chakra-ui/icons'
 // See signup page for examples
 
 const FormInput = (props) => {
-    return (
-        <FormControl {...props} isInvalid={props.isInvalid}>
-            <FormLabel htmlFor={props.id} fontWeight="bold">
-                {props.label}
-            </FormLabel>
-            <InputGroup>
-                {props.leftElement ? (
-                    <InputLeftElement>{props.leftElement}</InputLeftElement>
-                ) : (
-                    <Box></Box>
-                )}
-                {props.type === 'password' ? (
-                    <PasswordInput {...props} />
-                ) : (
-                    <Input
-                        id={props.id}
-                        onChange={props.onChange}
-                        placeholder={props.placeholder}
-                    />
-                )}
-                {props.rightElement ? (
-                    <InputRightElement>{props.rightElement}</InputRightElement>
-                ) : (
-                    <Box></Box>
-                )}
-            </InputGroup>
-            <FormErrorMessage>{props.errorMessage}</FormErrorMessage>
-        </FormControl>
-    )
-}
+  return (
+    <FormControl {...props} isInvalid={props.isInvalid}>
+      <FormLabel htmlFor={props.id} fontWeight="bold">
+        {props.label}
+      </FormLabel>
+      <InputGroup>
+        {props.leftElement ? (
+          <InputLeftElement>{props.leftElement}</InputLeftElement>
+        ) : (
+          <Box></Box>
+        )}
+        {props.type === "password" ? (
+          <PasswordInput {...props} />
+        ) : (
+          <Input
+            value={props.value}
+            id={props.id}
+            onChange={props.onChange}
+            placeholder={props.placeholder}
+          />
+        )}
+        {props.rightElement ? (
+          <InputRightElement>{props.rightElement}</InputRightElement>
+        ) : (
+          <Box></Box>
+        )}
+      </InputGroup>
+      <FormErrorMessage>{props.errorMessage}</FormErrorMessage>
+    </FormControl>
+  );
+};
 
 const PasswordInput = ({
     placeholder,

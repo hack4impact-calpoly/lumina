@@ -27,22 +27,27 @@ const LogoWithBack = ({ back, element, logoMr, ...rest }) => {
                                 />
                             )}
                         </Center>
-                    </Link>
-                ) : (
-                    <Box></Box>
-                )}
-            </Center>
-            <Center flex="1" mr={back ? (element ? logoMr : '40px') : '0px'}>
-                <Image
-                    src="https://slochamber.org/wp-content/uploads/2018/12/RISE_1024.png"
-                    w="100px"
-                    h="50px"
-                    alt="RISE logo in color."
-                    mixBlendMode="multiply"
-                />
-            </Center>
-        </Flex>
-    )
-}
+                    
+          </Link>
+        ) : (
+          <Box></Box>
+        )}
+      </Center>
+      <Center
+        flex="1"
+        mr={back ? (element ? logoMr : "40px") : "0px"}
+        m={2}
+      >
+        <Image
+          src="https://luminaalliance.org/wp-content/uploads/2021/07/LA_Logo.svg"
+          w="100px"
+          h="70px"
+          alt='Lumina logo in color.'
+          mixBlendMode='multiply'
+        />
+      </Center>
+    </Flex>
+  );
+};
 
 export default LogoWithBack

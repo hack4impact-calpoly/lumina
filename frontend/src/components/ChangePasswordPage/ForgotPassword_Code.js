@@ -1,11 +1,16 @@
-import React, { useState } from 'react'
-import { Button, Heading, Text, Flex } from '@chakra-ui/react'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { ArrowBackIcon, ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
-import LogoWithBack from '../SharedComponents/LogoWithBack'
-import FormInput from '../SharedComponents/FormInput'
-import { CenterBox } from '../SharedComponents/CenterBox'
-import { Card } from '../SharedComponents/Card'
+import React, { useState } from "react";
+import {
+  Button,
+  Heading,
+  Text,
+  Flex,
+} from "@chakra-ui/react";
+import { useLocation, useNavigate } from "react-router-dom";
+import LogoWithBack from "../SharedComponents/LogoWithBack";
+import FormInput from "../SharedComponents/FormInput";
+import { CenterBox } from "../SharedComponents/CenterBox";
+import { Card } from "../SharedComponents/Card";
+
 
 function ForgotPassword_Code(props) {
     const [code, setCode] = useState('')

@@ -9,10 +9,10 @@ export function Card(props) {
 
     const styles = useStyleConfig('Card', { variant })
 
-    // Pass the computed styles into the `__css` prop
-    return (
-        <Flex __css={styles} {...rest} alig>
-            {props.children}
-        </Flex>
-    )
+  // Pass the computed styles into the `__css` prop
+  return (
+    <Flex __css={styles} {...rest}>
+      {props.children}
+    </Flex>
+  );
 }

@@ -35,19 +35,20 @@ export default function Login() {
         }
     }
 
-    function isValidForm() {
-        const goodEmail = EMAIL_REGEX.test(email)
-        if (!goodEmail) setValidEmail(false)
-        else setValidEmail(true)
-        const goodPassword = password.length >= 6
-        if (!goodPassword) setValidPassword(false)
-        else setValidPassword(true)
-        return email !== '' && goodEmail && password !== '' && goodPassword
-    }
-
-    const mainStyle = {
-        backgroundColor: '#F6F6F6',
-    }
+  function isValidForm() {
+    const goodEmail = EMAIL_REGEX.test(email);
+    if (!goodEmail) setValidEmail(false);
+    else setValidEmail(true);
+    const goodPassword = password.length >= 6;
+    if (!goodPassword) setValidPassword(false);
+    else setValidPassword(true);
+    return (
+      email !== "" &&
+      goodEmail &&
+      password !== "" &&
+      goodPassword
+    );
+  }
 
     return (
         <Box style={mainStyle}>
