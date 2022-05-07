@@ -1,4 +1,4 @@
-import { EmailIcon, PhoneIcon, SearchIcon } from "@chakra-ui/icons";
+import { EmailIcon, PhoneIcon, SearchIcon } from '@chakra-ui/icons'
 import {
   Box,
   Heading,
@@ -72,24 +72,30 @@ const DirectoryMobile = ({ contactList, name, setName }) => {
 };
 
 const Contact = ({ name, number, ...rest }) => {
-  return (
-    <Card {...rest}>
-      <HStack>
-        <VStack align="left">
-          <Text fontWeight="bold" fontSize="20px">
-            {name}
-          </Text>
-          <Text>{number}</Text>
-        </VStack>
-        <Spacer />
-        <HStack align="right" spacing={8}>
-          <IconButton variant="animated" icon={<PhoneIcon w={8} h={8} />} />
-          <IconButton variant="animated" icon={<EmailIcon w={8} h={8} />} />
-        </HStack>
-      </HStack>
-    </Card>
-  );
-};
+    return (
+        <Card {...rest}>
+            <HStack>
+                <VStack align="left">
+                    <Text fontWeight="bold" fontSize="20px">
+                        {name}
+                    </Text>
+                    <Text>{number}</Text>
+                </VStack>
+                <Spacer />
+                <HStack align="right" spacing={8}>
+                    <IconButton
+                        variant="animated"
+                        icon={<PhoneIcon w={8} h={8} />}
+                    />
+                    <IconButton
+                        variant="animated"
+                        icon={<EmailIcon w={8} h={8} />}
+                    />
+                </HStack>
+            </HStack>
+        </Card>
+    )
+}
 
 const HeaderAndSearch = ({ setName, name, ...rest }) => {
   function clearInput() {
@@ -122,4 +128,4 @@ const HeaderAndSearch = ({ setName, name, ...rest }) => {
   );
 };
 
-export default Directory;
+export default Directory

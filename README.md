@@ -18,6 +18,14 @@ The Lumina project team consists of 6 Cal Poly students, including:
 
 Example: "192.168.1.234:3000"
 
+## **Prettier**
+
+This is going to be slightly controversial but so that our formatting doesn't look all over the place, all devs will have to use and comply to prettier formatting.
+
+This means that all of your future `npm run start` and `npm run build` will also require that your code conforms to prettier formatting.
+
+Run `npm run format` to automatically format your code. VSCode also has a Prettier plugin that you can install to format your code.
+
 ## **UI Tenants**
 
 Figured that if we had some over arching rules and guides to how we handle UI/Frontend work, it might be really helpful so that everyone is on the same page. This would allow us to easily switch out devs as well from backend to frontend work without having them be completely lost.

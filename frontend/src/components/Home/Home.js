@@ -187,10 +187,10 @@ const Home = () => {
 };
 
 const HomeBrowser = ({
-  mainContent,
-  setMainContent,
-  switchMainComponent,
-  ...rest
+    mainContent,
+    setMainContent,
+    switchMainComponent,
+    ...rest
 }) => {
   return (
     <Box w="100%" {...rest}>
@@ -219,10 +219,10 @@ const HomeBrowser = ({
 };
 
 const HomeMobile = ({
-  mainContent,
-  setMainContent,
-  switchMainComponent,
-  ...rest
+    mainContent,
+    setMainContent,
+    switchMainComponent,
+    ...rest
 }) => {
   return (
     <Box {...rest}>

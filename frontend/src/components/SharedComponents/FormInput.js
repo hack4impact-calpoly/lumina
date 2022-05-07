@@ -1,17 +1,17 @@
-import React from "react";
+import React from 'react'
 import {
-  FormControl,
-  Input,
-  FormLabel,
-  FormErrorMessage,
-  InputGroup,
-  InputRightElement,
-  InputLeftElement,
-  Box,
-  Button,
-  Text
-} from "@chakra-ui/react";
-import { ViewOffIcon, ViewIcon } from "@chakra-ui/icons";
+    FormControl,
+    Input,
+    FormLabel,
+    FormErrorMessage,
+    InputGroup,
+    InputRightElement,
+    InputLeftElement,
+    Box,
+    Button,
+    Text,
+} from '@chakra-ui/react'
+import { ViewOffIcon, ViewIcon } from '@chakra-ui/icons'
 
 // Generic Input for a form, includes a <FormControl>, <FormLabel>, <Input>, <FormErrorMessage>, etc.
 // Available props:
@@ -27,7 +27,6 @@ import { ViewOffIcon, ViewIcon } from "@chakra-ui/icons";
 // isRequired (optional)
 // Also accepts all <PasswordInput> properties (required if type === 'password')
 // See signup page for examples
-
 
 const FormInput = (props) => {
   return (
@@ -63,33 +62,32 @@ const FormInput = (props) => {
 };
 
 const PasswordInput = ({
-  placeholder,
-  onChange,
-  showPassword,
-  setShowPassword,
+    placeholder,
+    onChange,
+    showPassword,
+    setShowPassword,
 }) => {
-  return (
-    <InputGroup>
-      <Input
-        placeholder={placeholder}
-        type={showPassword ? "text" : "password"}
-        onChange={onChange}
-      />
-      <InputRightElement w="5.5rem">
-        <Button
-          bg="rgba(255, 255, 255, 0)"
-          onClick={() => setShowPassword(!showPassword)}
-          _hover={{
-            bg: "rgba(255, 255, 255, 0)",
-          }}
-        >
-          <Text mr="9px">{showPassword ? "Hide" : "Show"}</Text>
-          {showPassword ? <ViewOffIcon /> : <ViewIcon />}
-        </Button>
-      </InputRightElement>
-    </InputGroup>
-  );
-};
+    return (
+        <InputGroup>
+            <Input
+                placeholder={placeholder}
+                type={showPassword ? 'text' : 'password'}
+                onChange={onChange}
+            />
+            <InputRightElement w="5.5rem">
+                <Button
+                    bg="rgba(255, 255, 255, 0)"
+                    onClick={() => setShowPassword(!showPassword)}
+                    _hover={{
+                        bg: 'rgba(255, 255, 255, 0)',
+                    }}
+                >
+                    <Text mr="9px">{showPassword ? 'Hide' : 'Show'}</Text>
+                    {showPassword ? <ViewOffIcon /> : <ViewIcon />}
+                </Button>
+            </InputRightElement>
+        </InputGroup>
+    )
+}
 
-
-export default FormInput;
+export default FormInput
