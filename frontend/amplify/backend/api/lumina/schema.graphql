@@ -1,7 +1,17 @@
-type Users @model @auth(rules: [{ allow: public }]) {
-    id: ID!
-    firstname: String
-    lastname: String
-    phone: AWSPhone
-    email: AWSEmail
+type Shifts @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  start_datetime: AWSDateTime!
+  end_datetime: AWSDateTime!
+  primary: String
+  backup: String
+  accompaniment: String
+  second_backeup: String
+}
+
+type Users @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  firstname: String
+  lastname: String
+  phone: AWSPhone
+  email: AWSEmail
 }
