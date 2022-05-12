@@ -15,6 +15,8 @@ import { isWeekend } from "./DateFunctions";
 import RequestAssignment from "./RequestAssignment";
 import { Primary, SecondBackup, Backup, Accompaniment } from "./ShiftTypes";
 import { CancelShiftConfirmModal } from "./CalendarModals";
+import { API, graphqlOperation } from 'aws-amplify';
+
 
 const ShiftCard = ({
   contactList,
