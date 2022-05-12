@@ -5,6 +5,7 @@ import { Card } from "../SharedComponents/Card";
 import LogoWithBack from "../SharedComponents/LogoWithBack";
 import FormInput from "../SharedComponents/FormInput";
 import { CenterBox } from "../SharedComponents/CenterBox";
+import { Auth } from "aws-amplify";
 
 const EMAIL_REGEX =
     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -55,17 +56,19 @@ const SignupForm = ({
     const [showPassword, setShowPassword] = useState(false)
 
     async function register() {
-        if (isValidForm()) {
-            try {
-                const { user } = await Auth.signUp({
-                    username: email,
-                    password: password,
-                })
-
-  function register() {
-    if (isValidForm()) {
-         console.log(firstName)
-         setAccountCreated(true);
+      if (isValidForm()) {
+        try {
+          const { user } = await Auth.signUp({
+            username: email,
+            password: password
+          });
+        
+        setAccountCreated(true);
+        console.log(user);
+        } catch (error) {
+          console.log('error signing up: ', error);
+        }
+      }
     }
 
     function isValidForm() {
@@ -83,6 +86,7 @@ const SignupForm = ({
         const identicalPassword = password === confirmPassword
         if (!identicalPassword) setSamePasswordConfirmPassword(false)
         else setSamePasswordConfirmPassword(true)
+
         return (
             goodName &&
             email !== '' &&

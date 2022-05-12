@@ -51,13 +51,6 @@ const ChangePasswordForm = ({ setSuccessPasswordChange }) => {
             goodPassword
         )
     }
-    return (
-      password !== "" &&
-      confirmPassword !== "" &&
-      identicalPassword &&
-      goodPassword
-    );
-  }
   return (
      <Center>
          <Box textAlign="center">
