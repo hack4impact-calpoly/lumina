@@ -41,7 +41,7 @@ const ForgotPassword_Email = () => {
         <CenterBox textAlign="center">
             <LogoWithBack back="/"/>
             <Heading>Forgot Password</Heading>
-            <Text mb={2}>Please enter the email that your RISE volunteer account is associated with.</Text>
+            <Text mb={2}>Please enter the email that your Lumina Alliance volunteer account is associated with.</Text>
          <Card>         
             <FormInput 
                width="300px"

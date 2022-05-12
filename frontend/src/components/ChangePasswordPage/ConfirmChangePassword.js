@@ -9,10 +9,10 @@ export default function ConfirmChangePassword() {
     <CenterBox textAlign="center">
       <LogoWithBack />
       <Heading as="h1" mb={8}>
-         Account Created
+         Password Changed
       </Heading>
       <Text mb={6}>
-        Your password has been successfully changed. A confirmation of this change has been sent to your associated email account.
+        Your password has been successfully changed. You can start using this new password.
       </Text>
       <Text mb={6}>Thank you for volunteering with Lumina Alliance!</Text>
       <Link to="/">
