@@ -11,6 +11,7 @@ import {
   Spacer,
 } from "@chakra-ui/react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Card } from "../SharedComponents/Card";
 import moment from "moment";
 import { daysOfWeek, months } from "../SharedComponents/DateTranslation";
@@ -43,6 +44,10 @@ const Profile = ({ user }) => {
       },
     },
   ]);
+  let navigate = useNavigate()
+  function submit() {
+    navigate('/change-password')
+  }
 
   return (
     <Flex w="100%" flexDir="column" align="center">
@@ -57,7 +62,7 @@ const Profile = ({ user }) => {
         </Heading>
         <Text pb={3}>{user.email}</Text>
         <Text pb={3}>{user.phone}</Text>
-        <Button color="red.500" w="100%" variant="animated">
+        <Button color="red.500" w="100%" variant="animated" onClick={() => submit()}>
           <Text pr={3}>Change Password</Text>
           <ArrowForwardIcon />
         </Button>
