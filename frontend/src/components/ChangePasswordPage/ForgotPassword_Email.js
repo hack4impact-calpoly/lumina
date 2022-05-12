@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react'
 import {
   Button,
   Heading,
@@ -9,35 +9,32 @@ import LogoWithBack from "../SharedComponents/LogoWithBack";
 import FormInput from "../SharedComponents/FormInput";
 import { Card } from "../SharedComponents/Card";
 import { CenterBox } from "../SharedComponents/CenterBox";
-import { useHistory, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const EMAIL_REGEX =
-  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
 const ForgotPassword_Email = () => {
-    const [email, setEmail] = useState("");
-    const [validEmail, setValidEmail] = useState(true);
+    const [email, setEmail] = useState('')
+    const [validEmail, setValidEmail] = useState(true)
 
-    let navigate = useNavigate();
+    let navigate = useNavigate()
 
     function submit() {
-        const goodEmail = EMAIL_REGEX.test(email);
-        if (!goodEmail) setValidEmail(false);
-        else{
-            setValidEmail(true);
+        const goodEmail = EMAIL_REGEX.test(email)
+        if (!goodEmail) setValidEmail(false)
+        else {
+            setValidEmail(true)
             // userEmail in JSON to possibly send to backend later
             const userEmail = {
-                email: email
+                email: email,
             }
-            navigate("/forgot-password/code", {state: userEmail});
-        } 
-        return (
-            email !== "" &&
-            goodEmail
-        );
+            navigate('/forgot-password/code', { state: userEmail })
+        }
+        return email !== '' && goodEmail
     }
 
-    return(
+    return (
         <CenterBox textAlign="center">
             <LogoWithBack back="/"/>
             <Heading>Forgot Password</Heading>
@@ -66,9 +63,7 @@ const ForgotPassword_Email = () => {
             </Flex>
          </Card>
         </CenterBox>
-    );
+    )
+}
 
-};
-
-
-export default ForgotPassword_Email;
+export default ForgotPassword_Email
