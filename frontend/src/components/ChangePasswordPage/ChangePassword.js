@@ -1,25 +1,26 @@
-import { Box, Text, Button } from '@chakra-ui/react'
-import React, { useState } from 'react'
-import LogoWithBack from '../SharedComponents/LogoWithBack'
-import { CenterBox } from '../SharedComponents/CenterBox'
-import { Card } from '../SharedComponents/Card'
-import FormInput from '../SharedComponents/FormInput'
+import { Box, Center, Text, Button, Heading } from "@chakra-ui/react";
+import React, { useState } from "react";
+import { Navigate } from 'react-router-dom';
+import LogoWithBack from "../SharedComponents/LogoWithBack";
+import { CenterBox } from "../SharedComponents/CenterBox";
+import { Card } from "../SharedComponents/Card";
+import FormInput from "../SharedComponents/FormInput";
 
 const ChangePassword = () => {
     const [successPasswordChange, setSuccessPasswordChange] = useState(false)
 
-    return (
-        <CenterBox>
-            {successPasswordChange ? (
-                <ChangePasswordConfirm />
-            ) : (
-                <ChangePasswordForm
-                    setSuccessPasswordChange={setSuccessPasswordChange}
-                />
-            )}
-        </CenterBox>
-    )
-}
+  return (
+    <CenterBox>
+      {successPasswordChange ? (
+         <Navigate to="/change-password/confirm" replace={false} />
+      ) : (
+        <ChangePasswordForm
+          setSuccessPasswordChange={setSuccessPasswordChange}
+        />
+      )}
+    </CenterBox>
+  );
+};
 
 const ChangePasswordForm = ({ setSuccessPasswordChange }) => {
     const [password, setPassword] = useState('')
@@ -51,52 +52,60 @@ const ChangePasswordForm = ({ setSuccessPasswordChange }) => {
         )
     }
     return (
-        <Box>
+      password !== "" &&
+      confirmPassword !== "" &&
+      identicalPassword &&
+      goodPassword
+    );
+  }
+  return (
+     <Center>
+         <Box textAlign="center">
             <LogoWithBack back="/" />
-            <Text textAlign="center" mb={5}>
-                Password reset has been verified. Please set a new password.
+            <Heading as="h1" mb={8}>
+               Password Reset
+            </Heading>
+            <Text mb={5}>
+               Password reset has been verified. Please set a new password.
             </Text>
-            <Card>
-                <FormInput
-                    id="password"
-                    label="Password"
-                    isRequired
-                    type="password"
-                    isInvalid={password === ''}
-                    errorMessage="Password is required"
-                    onChange={(e) => setPassword(e.target.value)}
-                    setShowPassword={setShowPassword}
-                    showPassword={showPassword}
-                />
-                <Text color={validPassword ? 'black' : 'red'} fontSize="14px">
-                    *Password must be at least 6 characters long
-                </Text>
-                <FormInput
-                    id="confirmPassword"
-                    label="Confirm Password"
-                    isRequired
-                    type="password"
-                    isInvalid={confirmPassword === ''}
-                    errorMessage="Confirm Password is required"
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    setShowPassword={setShowPassword}
-                    showPassword={showPassword}
-                />
-                <Text color="red">
-                    {samePasswordConfirmPassword
-                        ? ''
-                        : 'Password and Confirm Password must be the same'}
-                </Text>
-                <Button mt={3} onClick={() => submitPasswordChange()}>
-                    Submit
-                </Button>
+            <Card textAlign="left">
+               <FormInput
+                  id="password"
+                  label="Password"
+                  isRequired
+                  type="password"
+                  isInvalid={password === ""}
+                  errorMessage="Password is required"
+                  onChange={(e) => setPassword(e.target.value)}
+                  setShowPassword={setShowPassword}
+                  showPassword={showPassword}
+               />
+               <Text color={validPassword ? "black" : "red"} fontSize="14px">
+                  *Password must be at least 6 characters long
+               </Text>
+               <FormInput
+                  id="confirmPassword"
+                  label="Confirm Password"
+                  isRequired
+                  type="password"
+                  isInvalid={confirmPassword === ""}
+                  errorMessage="Confirm Password is required"
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  setShowPassword={setShowPassword}
+                  showPassword={showPassword}
+               />
+               <Text color="red">
+                  {samePasswordConfirmPassword
+                     ? ""
+                     : "Password and Confirm Password must be the same"}
+               </Text>
+               <Button mt={3} onClick={() => submitPasswordChange()}>
+                  Submit
+               </Button>
             </Card>
-        </Box>
-    )
-}
+         </Box>
+      </Center>
+  );
+};
 
-const ChangePasswordConfirm = () => {
-    return <Box>GOOD PASSWORD</Box>
-}
-
-export default ChangePassword
+export default ChangePassword;

@@ -1,0 +1,13 @@
+{
+    "AppSyncApiName": "lumina",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "DynamoDBEnableServerSideEncryption": false,
+    "authRoleName": {
+        "Ref": "AuthRoleName"
+    },
+    "unauthRoleName": {
+        "Ref": "UnauthRoleName"
+    },
+    "S3DeploymentBucket": "amplify-lumina-dev-05552-deployment",
+    "S3DeploymentRootKey": "amplify-appsync-files/c93ada71fd23a9aa7717231342e5555ac628eea4"
+}

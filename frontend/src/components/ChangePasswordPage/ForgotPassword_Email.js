@@ -36,43 +36,32 @@ const ForgotPassword_Email = () => {
 
     return (
         <CenterBox textAlign="center">
-            <LogoWithBack back="/" />
-
+            <LogoWithBack back="/"/>
             <Heading>Forgot Password</Heading>
-
-            <Text mb={2}>
-                Please enter the email that your RISE volunteer account is
-                associated with.
-            </Text>
-
-            <Card>
-                <FormInput
-                    width="300px"
-                    ml={260}
-                    id="email"
-                    invalid={email === ''}
-                    label="Email"
-                    placeholder="example@example.com"
-                    onChange={(e) => setEmail(e.target.value)}
-                    isRequired
-                />
-                <Text color="red">{validEmail ? '' : 'Invalid Email'}</Text>
-
-                <Flex>
-                    <Button
-                        mt="30px"
-                        ml="425px"
-                        width="150px"
-                        color={'white'}
-                        bg={'#E53E3E'}
-                        variant="animated"
-                        onClick={() => submit()}
-                    >
-                        {' '}
-                        Submit{' '}
-                    </Button>
-                </Flex>
-            </Card>
+            <Text mb={2}>Please enter the email that your Lumina Alliance volunteer account is associated with.</Text>
+         <Card>         
+            <FormInput 
+               width="300px"
+               ml={260}
+               id="email" 
+               invalid={email === ""} 
+               label="Email" 
+               placeholder="example@example.com" 
+               onChange={(e) => setEmail(e.target.value)}
+               isRequired
+            />
+            <Text color="red">{validEmail ? "" : "Invalid Email"}</Text>
+            <Flex>
+               <Button 
+               mt= "30px" 
+               ml="425px" 
+               width="150px"
+               color={"white"} 
+               bg={"#E53E3E"}
+               variant="animated"  
+               onClick={() => submit()}> Submit </Button>
+            </Flex>
+         </Card>
         </CenterBox>
     )
 }

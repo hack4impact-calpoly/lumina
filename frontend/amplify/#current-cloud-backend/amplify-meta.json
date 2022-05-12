@@ -1,0 +1,89 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-lumina-dev-05552-authRole",
+      "UnauthRoleArn": "arn:aws:iam::633874248049:role/amplify-lumina-dev-05552-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::633874248049:role/amplify-lumina-dev-05552-authRole",
+      "Region": "us-west-1",
+      "DeploymentBucketName": "amplify-lumina-dev-05552-deployment",
+      "UnauthRoleName": "amplify-lumina-dev-05552-unauthRole",
+      "StackName": "amplify-lumina-dev-05552",
+      "StackId": "arn:aws:cloudformation:us-west-1:633874248049:stack/amplify-lumina-dev-05552/bdd7c9e0-9618-11ec-bce4-0638cab17ebf",
+      "AmplifyAppId": "d1mjxt8r1ayphj"
+    }
+  },
+  "auth": {
+    "lumina0bfde4e2": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false,
+      "frontendAuthConfig": {
+        "socialProviders": [],
+        "usernameAttributes": [
+          "EMAIL"
+        ],
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyMinLength": 8,
+          "passwordPolicyCharacters": []
+        },
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "output": {
+        "UserPoolId": "us-west-1_JEnMb5Dnl",
+        "AppClientIDWeb": "432c28u0qp2d1fmh3eksc95kek",
+        "AppClientID": "2nc5n52d3ggp5pm8gpg000jqmn",
+        "IdentityPoolId": "us-west-1:5995aad3-e7e5-4558-9960-61ce9d13b017",
+        "UserPoolArn": "arn:aws:cognito-idp:us-west-1:633874248049:userpool/us-west-1_JEnMb5Dnl",
+        "IdentityPoolName": "lumina0bfde4e2_identitypool_0bfde4e2__dev",
+        "UserPoolName": "lumina0bfde4e2_userpool_0bfde4e2"
+      },
+      "lastPushTimeStamp": "2022-05-07T22:47:30.385Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-lumina-dev-05552-deployment/amplify-cfn-templates/auth/lumina0bfde4e2-cloudformation-template.json",
+        "logicalId": "authlumina0bfde4e2"
+      },
+      "lastPushDirHash": "Udz1dShA5slE5ogqIzfUl0hdWpc="
+    }
+  },
+  "api": {
+    "lumina": {
+      "service": "AppSync",
+      "providerPlugin": "awscloudformation",
+      "output": {
+        "authConfig": {
+          "defaultAuthentication": {
+            "authenticationType": "API_KEY",
+            "apiKeyConfig": {
+              "apiKeyExpirationDays": 30,
+              "description": "api key description"
+            }
+          },
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "AWS_IAM"
+            }
+          ]
+        },
+        "GraphQLAPIIdOutput": "we3s2zy72fbe3mbokd3ku27hmi",
+        "GraphQLAPIEndpointOutput": "https://jffd64u7zzcs5kfmhaiuvezyfi.appsync-api.us-west-1.amazonaws.com/graphql",
+        "GraphQLAPIKeyOutput": "da2-37ytscbmdbfpbhp2sfbanwma54"
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-lumina-dev-05552-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+        "logicalId": "apilumina"
+      },
+      "lastPushTimeStamp": "2022-05-07T22:47:30.385Z",
+      "lastPushDirHash": "0UWO9DXbgrEYec/rXdGX33v+Bjk="
+    }
+  }
+}
