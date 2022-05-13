@@ -3,7 +3,7 @@
   "serviceConfiguration": {
     "apiName": "lumina",
     "serviceName": "AppSync",
-    "gqlSchemaPath": "/tmp/amplify-963d16d0-b3db-4c5c-999e-c32174b7fe0b/amplify/backend/api/lumina/schema.graphql",
+    "gqlSchemaPath": "/tmp/amplify-9068add3-cee7-48dd-80c6-ec3dfbb0549e/amplify/backend/api/lumina/schema.graphql",
     "defaultAuthType": {
       "mode": "API_KEY",
       "keyDescription": "api key description",

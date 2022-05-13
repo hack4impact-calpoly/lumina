@@ -14,7 +14,6 @@ import {
 } from "@chakra-ui/react";
 import { Card } from "../SharedComponents/Card";
 import FormInput from "../SharedComponents/FormInput";
-import listContactList from '../../graphql/queries.graphql';
 
 const Directory = () => {
   const [name, setName] = useState("");
@@ -29,25 +28,36 @@ const Directory = () => {
   }, []);
 
   async function fetchContactList() {
+    const contactListData = await API.graphql(graphqlOperation(`
+        query listContactList {
+          user(phone: "8583449136") {
+            id
+            firstname
+            lastname
+            phone
+            email
+          }
+        }
+      `));
+    console.log(contactListData);
+    /*
     try {
       const contactListData = await API.graphql(graphqlOperation(`
         query listContactList {
           Users {
-            items {
-                id
-                firstname
-                lastname
-                AWSPhone
-                AWSEmail
-            }
+            id
+            firstname
+            lastname
+            phone
+            email
           }
         }
       `));
-      const contactList = contactListData.data.contactList;
+      const contactList = contactListData.data.Users;
       setContactList(contactList);
     } catch (err) {
       console.log("Error fetching contact list: " + err);
-    }
+    } */
   }
 
   return (
