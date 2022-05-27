@@ -17,7 +17,7 @@ const Signup = () => {
     const [email, setEmail] = useState('')
 
     const [accountCreated, setAccountCreated] = useState(false)
-
+ 
 
   return (
     <CenterBox>
@@ -55,6 +55,8 @@ const SignupForm = ({
         useState(true)
     const [showPassword, setShowPassword] = useState(false)
 
+    const [existingAccount, setExistingAccount] = useState(false)
+
     async function register() {
       if (isValidForm()) {
         try {
@@ -63,10 +65,12 @@ const SignupForm = ({
             password: password
           });
         
-        setAccountCreated(true);
-        console.log(user);
+          setAccountCreated(true);
+          console.log(user);
+
         } catch (error) {
           console.log('error signing up: ', error);
+          setExistingAccount(true);
         }
       }
     }
@@ -190,6 +194,12 @@ const SignupForm = ({
                 >
                     Register
                 </Button>
+
+                <Text color="red">
+                  {existingAccount
+                    ? "An account is already associated with this email address. Please try again with a different email."
+                    : "" }
+                </Text>
             </Card>
         </Box>
     )
