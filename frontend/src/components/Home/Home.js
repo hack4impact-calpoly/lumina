@@ -8,14 +8,10 @@ import {
   HStack,
   Center,
 } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import { FiHome, FiCalendar, FiMenu, FiUser } from "react-icons/fi";
-import Directory from "./Directory";
 import LogoWithBack from "../SharedComponents/LogoWithBack";
-import ShiftCalendar from "./Calendar/ShiftCalendar";
-import Dashboard from "./Dashboard/Dashboard";
-import Profile from "./Profile";
 import { Card } from "../SharedComponents/Card";
 import { BrowserView, MobileView } from "react-device-detect";
 
@@ -43,7 +39,6 @@ const sidebarItems = [
 ];
 
 const Home = () => {
-  const [mainContent, setMainContent] = useState("");
   const [contactList, setContactList] = useState([
     {
       name: "Lenna Hane",
@@ -148,50 +143,22 @@ const Home = () => {
     email: "lenna.hane@gmail.com",
     phone: "(805) 555-5555",
   });
-  function switchMainComponent() {
-    switch (mainContent) {
-      case "directory":
-        return (
-          <Directory
-            contactList={contactList}
-            setContactList={setContactList}
-          />
-        );
-      case "calendar":
-        return <ShiftCalendar contactList={contactList} />;
-      case "profile":
-        return <Profile user={user} />;
-      default:
-        return <Dashboard />;
-    }
-  }
 
   return (
     <Box w="100%">
       <BrowserView style={{ width: "100%" }}>
-        <HomeBrowser
-          mainContent={mainContent}
-          setMainContent={setMainContent}
-          switchMainComponent={switchMainComponent}
-        />
+        <HomeBrowser user={user} />
+        <Outlet />
       </BrowserView>
       <MobileView style={{ width: "100%" }}>
-        <HomeMobile
-          mainContent={mainContent}
-          setMainContent={setMainContent}
-          switchMainComponent={switchMainComponent}
-        />
+        <HomeMobile />
+        <Outlet />
       </MobileView>
     </Box>
   );
 };
 
-const HomeBrowser = ({
-  mainContent,
-  setMainContent,
-  switchMainComponent,
-  ...rest
-}) => {
+const HomeBrowser = ({ ...rest }) => {
   return (
     <Box w="100%" {...rest}>
       <LogoWithBack
@@ -204,15 +171,7 @@ const HomeBrowser = ({
         ml="150px"
       />
       <Flex w="100%">
-        <Sidebar
-          mainContent={mainContent}
-          setMainContent={setMainContent}
-          position="fixed"
-          zIndex="sticky"
-        />
-        <Flex pt="90px" pb="90px" ml="300px" w="100%">
-          {switchMainComponent()}
-        </Flex>
+        <Sidebar position="fixed" zIndex="sticky" />
       </Flex>
     </Box>
   );
@@ -244,9 +203,6 @@ const HomeMobile = ({
           zIndex="sticky"
           height="fixed"
         />
-        <Flex mt="80px" ml="10px" w="100%" pb="150px">
-          {switchMainComponent()}
-        </Flex>
       </Flex>
     </Box>
   );
@@ -269,32 +225,29 @@ const MobileSignout = ({ mainContent, setMainContent, ...rest }) => {
   );
 };
 
-const MobileNavBar = ({ mainContent, setMainContent, ...rest }) => {
+const MobileNavBar = ({ ...rest }) => {
+  let navigate = useNavigate();
   return (
     <Card {...rest} w="100%" h="100px" flexDir="row" bottom={0}>
       <HStack w="100%">
         <NavbarItem
           icon={FiHome}
-          onClick={() => setMainContent("")}
-          mainContent={mainContent}
+          onClick={() => navigate("/home/dashboard")}
           currentContent=""
         />
         <NavbarItem
           icon={FiCalendar}
-          onClick={() => setMainContent("calendar")}
-          mainContent={mainContent}
+          onClick={() => navigate("/home/calendar")}
           currentContent="calendar"
         />
         <NavbarItem
           icon={FiMenu}
-          onClick={() => setMainContent("directory")}
-          mainContent={mainContent}
+          onClick={() => navigate("/home/directory")}
           currentContent="directory"
         />
         <NavbarItem
           icon={FiUser}
-          onClick={() => setMainContent("profile")}
-          mainContent={mainContent}
+          onClick={() => navigate("/home/profile")}
           currentContent="profile"
         />
       </HStack>
@@ -302,21 +255,15 @@ const MobileNavBar = ({ mainContent, setMainContent, ...rest }) => {
   );
 };
 
-const NavbarItem = ({ icon, name, mainContent, currentContent, ...rest }) => {
+const NavbarItem = ({ icon, ...rest }) => {
   return (
     <Center
       w="100%"
-      bg={mainContent === currentContent ? "teal.400" : "white"}
-      color={mainContent === currentContent ? "white" : "black"}
       alignItems="baseline"
       {...rest}
       p="0.5"
       borderRadius="lg"
       cursor="pointer"
-      _hover={{
-        bg: "teal.400",
-        color: "white",
-      }}
     >
       <Box w="65px" h="50px" align="center">
         <Icon mt={2} fontSize="30" as={icon} />
@@ -325,7 +272,8 @@ const NavbarItem = ({ icon, name, mainContent, currentContent, ...rest }) => {
   );
 };
 
-const Sidebar = ({ mainContent, setMainContent, ...rest }) => {
+const Sidebar = ({ ...rest }) => {
+  let navigate = useNavigate();
   return (
     <Card {...rest} h="100%" flexDir="column">
       <Link to="/">
@@ -343,12 +291,11 @@ const Sidebar = ({ mainContent, setMainContent, ...rest }) => {
         {sidebarItems.map((item) => {
           return (
             <SidebarItem
+              key={item.name}
               name={item.name}
               icon={item.icon}
               w="100%"
-              onClick={() => setMainContent(item.mainContent)}
-              bg={mainContent === item.mainContent ? "teal.400" : "white"}
-              color={mainContent === item.mainContent ? "white" : "black"}
+              onClick={() => navigate(`/home/${item.mainContent}`)}
             />
           );
         })}

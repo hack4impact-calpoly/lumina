@@ -8,12 +8,14 @@ import {
   VStack,
   HStack,
   Button,
+  Link,
   Spacer,
 } from "@chakra-ui/react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { Card } from "../SharedComponents/Card";
 import moment from "moment";
 import { daysOfWeek, months } from "../SharedComponents/DateTranslation";
+import HomeMainContentContainer from "../SharedComponents/HomeMainContentContainer";
 
 const Profile = ({ user }) => {
   const [shifts, setShifts] = useState([
@@ -45,7 +47,7 @@ const Profile = ({ user }) => {
   ]);
 
   return (
-    <Flex w="100%" flexDir="column" align="center">
+    <HomeMainContentContainer flexDir="column" align="center">
       <Box mb={3} align="center">
         <Heading
           size="4xl"
@@ -70,15 +72,15 @@ const Profile = ({ user }) => {
           return <ShiftCard shift={shift} mb={3} />;
         })}
       </Box>
-      <Button color="blue.500" cursor="pointer" variant="animated">
-        <Flex align="baseline">
+      <Link>
+        <Flex align="center">
           <Text fontSize="20px" mr={3}>
             See all past shifts
           </Text>
           <ArrowForwardIcon h="100%" />
         </Flex>
-      </Button>
-    </Flex>
+      </Link>
+    </HomeMainContentContainer>
   );
 };
 

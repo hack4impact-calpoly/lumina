@@ -6,6 +6,7 @@ import { CreateShiftModal, PrepoulateConfirmModal } from "./CalendarModals";
 import LuminaCalendar from "./LuminaCalendar";
 import Shifts from "./Shifts";
 import { getDaysInMonth } from "./DateFunctions";
+import HomeMainContentContainer from "../../SharedComponents/HomeMainContentContainer";
 
 const ShiftCalendarBrowser = ({
   contactList,
@@ -35,8 +36,8 @@ const ShiftCalendarBrowser = ({
   }
 
   return (
-    <Flex flexDir="row" w="100%" minH="75vh">
-      <Box minW="40%" mr={10}>
+    <HomeMainContentContainer flexDir="row" minH="75vh">
+      <Box minW='40%' mr={10}>
         <Box mb={3}>
           <Text fontSize="30px">{daysOfWeek[date.getDay()]}</Text>
           <Text fontWeight="bold" fontSize="40px">
@@ -55,7 +56,7 @@ const ShiftCalendarBrowser = ({
           cancelShift={cancelShift}
         />
       </Box>
-      <Box w="100%">
+      <Box w='50%'>
         <Button
           variant="animated"
           bg="orange.100"
@@ -76,7 +77,6 @@ const ShiftCalendarBrowser = ({
         <LuminaCalendar
           events={events}
           setCurrentEvent={setCurrentEvent}
-          w="90%"
         />
       </Box>
       <CreateShiftModal
@@ -92,7 +92,7 @@ const ShiftCalendarBrowser = ({
         isOpen={isPrepopulateOpen}
         onClose={onPrepopulateClose}
       />
-    </Flex>
+    </HomeMainContentContainer>
   );
 };
 

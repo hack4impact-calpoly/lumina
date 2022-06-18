@@ -3,25 +3,18 @@ import {
   Box,
   Button,
   Flex,
-  Heading,
   Spacer,
   Text,
   useDisclosure,
   Icon,
-  Drawer,
-  DrawerBody,
-  DrawerHeader,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
 } from "@chakra-ui/react";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { AiOutlineFileSearch } from "react-icons/ai";
-import { daysOfWeek, months } from "../../SharedComponents/DateTranslation";
+import { months } from "../../SharedComponents/DateTranslation";
 import LuminaCalendar from "./LuminaCalendar";
-import Shifts from "./Shifts";
 import { ShiftDetailsDrawer } from "./CalendarDrawers";
 import { PrepoulateConfirmModal } from "./CalendarModals";
+import HomeMainContentContainer from "../../SharedComponents/HomeMainContentContainer";
 
 const ShiftCalendarMobile = ({
   contactList,
@@ -44,7 +37,7 @@ const ShiftCalendarMobile = ({
   } = useDisclosure();
 
   return (
-    <Flex w="98%" flexDir="column" h="65vh">
+    <HomeMainContentContainer flexDir="column" h="80vh">
       <Button variant="animated" bg="orange.100" mb={3} onClick={() => onPrepopulateOpen()}>
         Prepopulate
       </Button>
@@ -88,7 +81,7 @@ const ShiftCalendarMobile = ({
         isOpen={isPrepopulateOpen}
         onClose={onPrepopulateClose}
       />
-    </Flex>
+    </HomeMainContentContainer>
   );
 };
 

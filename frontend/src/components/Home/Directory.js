@@ -4,7 +4,6 @@ import {
   Heading,
   HStack,
   Spacer,
-  Flex,
   Text,
   VStack,
   IconButton,
@@ -15,8 +14,9 @@ import { Card } from "../SharedComponents/Card";
 import FormInput from "../SharedComponents/FormInput";
 import { BrowserView, MobileView } from "react-device-detect";
 import { AiFillCloseCircle } from "react-icons/ai";
+import HomeMainContentContainer from "../SharedComponents/HomeMainContentContainer";
 
-const Directory = ({ contactList, setContactList }) => {
+const Directory = ({ contactList }) => {
   const [name, setName] = useState("");
 
   return (
@@ -41,33 +41,44 @@ const Directory = ({ contactList, setContactList }) => {
 
 const DirectoryBrowser = ({ contactList, name, setName }) => {
   return (
-    <Flex flexDir="row">
+    <HomeMainContentContainer flexDir="row">
       <HeaderAndSearch setName={setName} name={name} minW="400px" mr="90px" />
       <VStack spacing={4}>
         {contactList.map((contact) => {
           if (contact.name.toLowerCase().includes(name.toLowerCase())) {
             return (
               <Contact
+                key={contact.name}
                 name={contact.name}
                 number={contact.phone}
                 width="500px"
               />
             );
+          } else {
+            return <></>;
           }
         })}
       </VStack>
-    </Flex>
+    </HomeMainContentContainer>
   );
 };
 
 const DirectoryMobile = ({ contactList, name, setName }) => {
   return (
-    <VStack align="left" w="95%" ml="2.5%" mr="2.5%" spacing={4}>
-      <HeaderAndSearch setName={setName} name={name} mb="30px" />
-      {contactList.map((contact) => {
-        return <Contact name={contact.name} number={contact.phone} w="100%" />;
-      })}
-    </VStack>
+    <HomeMainContentContainer>
+      <VStack align="left" w="95%" ml="2.5%" mr="2.5%" spacing={4}>
+        <HeaderAndSearch setName={setName} name={name} mb="30px" />
+        {contactList.map((contact) => {
+          if (contact.name.toLowerCase().includes(name.toLowerCase())) {
+            return (
+              <Contact name={contact.name} number={contact.phone} w="100%" />
+            );
+          } else {
+            return <></>;
+          }
+        })}
+      </VStack>
+    </HomeMainContentContainer>
   );
 };
 
@@ -93,7 +104,6 @@ const Contact = ({ name, number, ...rest }) => {
 
 const HeaderAndSearch = ({ setName, name, ...rest }) => {
   function clearInput() {
-    console.log(name);
     setName("");
   }
   return (

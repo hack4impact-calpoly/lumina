@@ -7,12 +7,15 @@ import Signup from "./components/SignupPage/Signup";
 import Home from "./components/Home/Home";
 import ChangePassword from "./components/ChangePasswordPage/ChangePassword";
 import theme from "./theme";
-import ForgotPassword_Email from './components/ChangePasswordPage/ForgotPassword_Email';
-import ForgotPassword_Code from './components/ChangePasswordPage/ForgotPassword_Code';
+import ForgotPassword_Email from "./components/ChangePasswordPage/ForgotPassword_Email";
+import ForgotPassword_Code from "./components/ChangePasswordPage/ForgotPassword_Code";
 import Directory from "./components/Home/Directory";
 import NotFound from "./components/NotFound/NotFound";
 import Amplify, { Auth } from "aws-amplify";
-import awsconfig from './aws-exports';
+import awsconfig from "./aws-exports";
+import Dashboard from "./components/Home/Dashboard/Dashboard";
+import ShiftCalendar from "./components/Home/Calendar/ShiftCalendar";
+import Profile from "./components/Home/Profile";
 Amplify.configure(awsconfig);
 
 function App() {
@@ -114,23 +117,44 @@ function App() {
       phone: "(805) 555-5555",
     },
   ]);
+  const [user, setUser] = useState({
+    firstName: "Lenna",
+    lastName: "Hane",
+    email: "lenna.hane@gmail.com",
+    phone: "(805) 555-5555",
+  });
   return (
     <ChakraProvider theme={theme}>
-      <Box bg='#F6F6F6' minH="100vh">
+      <Box bg="#F6F6F6" minH="100vh">
         <Router>
           <Routes>
             <Route exact path="/" element={<Login />} />
             <Route path="/sign-up" element={<Signup />} />
-            <Route path="/forgot-password" element={<ForgotPassword_Email/>} />
-            <Route path="/forgot-password/code" element={<ForgotPassword_Code/>} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/home/dashboard" element={<Home />} />
-            <Route path="/home/calendar" element={<Home />} />
-            <Route path="/home/directory" element={<Home />} />
-            <Route path="/home/profile" element={<Home />} />
-            <Route path="/mobile-directory" element={<Directory />} />
+            <Route path="/forgot-password" element={<ForgotPassword_Email />} />
+            <Route
+              path="/forgot-password/code"
+              element={<ForgotPassword_Code />}
+            />
+            <Route path="/home" element={<Home />}>
+              <Route index element={<Dashboard />} />
+              <Route path="dashboard" element={<Dashboard />} />
+              <Route
+                path="calendar"
+                element={<ShiftCalendar contactList={contactList} />}
+              />
+              <Route
+                path="directory"
+                element={
+                  <Directory
+                    contactList={contactList}
+                  />
+                }
+              />
+              <Route path="profile" element={<Profile user={user} />} />
+            </Route>
+
             <Route path="/change-password" element={<ChangePassword />} />
-            <Route path="*" element={ <NotFound /> } />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </Router>
       </Box>

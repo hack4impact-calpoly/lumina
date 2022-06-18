@@ -4,34 +4,42 @@ import { isMobile } from "react-device-detect";
 const Card = {
   // The styles all Cards have in common
   baseStyle: {
-    display: 'flex',
-    flexDirection: 'column',
-    background: 'white',
+    display: "flex",
+    flexDirection: "column",
+    background: "white",
   },
   // Two variants: rounded and smooth
   variants: {
     rounded: {
       padding: 8,
-      borderRadius: 'xl',
-      boxShadow: 'xl',
+      borderRadius: "xl",
+      boxShadow: "xl",
     },
     smooth: {
       padding: 6,
-      borderRadius: 'base',
-      boxShadow: 'md',
+      borderRadius: "base",
+      boxShadow: "md",
     },
   },
   // The default variant value
   defaultProps: {
-    variant: 'smooth',
+    variant: "smooth",
   },
 };
 
-const CenterBox ={
-  baseStyle : {
+const HomeMainContentContainer = {
+  baseStyle: {
+    display: "flex",
+    pl: isMobile ? '0rem' : "20rem",
+    pt: "5rem",
+  },
+};
+
+const CenterBox = {
+  baseStyle: {
     w: isMobile ? "95%" : "900px",
-  }
-}
+  },
+};
 
 const Button = {
   variants: {
@@ -47,6 +55,7 @@ const Button = {
 const theme = extendTheme({
   components: {
     Card,
+    HomeMainContentContainer,
     CenterBox,
     Button,
   },

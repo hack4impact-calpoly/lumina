@@ -9,7 +9,7 @@ import {
   InputLeftElement,
   Box,
   Button,
-  Text
+  Text,
 } from "@chakra-ui/react";
 import { ViewOffIcon, ViewIcon } from "@chakra-ui/icons";
 
@@ -28,36 +28,47 @@ import { ViewOffIcon, ViewIcon } from "@chakra-ui/icons";
 // Also accepts all <PasswordInput> properties (required if type === 'password')
 // See signup page for examples
 
-
-const FormInput = (props) => {
+const FormInput = ({
+  isInvalid,
+  id,
+  label,
+  leftElement,
+  rightElement,
+  type,
+  value,
+  onChange,
+  placeholder,
+  errorMessage,
+  ...rest
+}) => {
   return (
-    <FormControl {...props} isInvalid={props.isInvalid}>
-      <FormLabel htmlFor={props.id} fontWeight="bold">
-        {props.label}
+    <FormControl {...rest} isInvalid={isInvalid}>
+      <FormLabel htmlFor={id} fontWeight="bold">
+        {label}
       </FormLabel>
       <InputGroup>
-        {props.leftElement ? (
-          <InputLeftElement>{props.leftElement}</InputLeftElement>
+        {leftElement ? (
+          <InputLeftElement>{leftElement}</InputLeftElement>
         ) : (
           <Box></Box>
         )}
-        {props.type === "password" ? (
-          <PasswordInput {...props} />
+        {type === "password" ? (
+          <PasswordInput {...rest} />
         ) : (
           <Input
-            value={props.value}
-            id={props.id}
-            onChange={props.onChange}
-            placeholder={props.placeholder}
+            value={value}
+            id={id}
+            onChange={onChange}
+            placeholder={placeholder}
           />
         )}
-        {props.rightElement ? (
-          <InputRightElement>{props.rightElement}</InputRightElement>
+        {rightElement ? (
+          <InputRightElement>{rightElement}</InputRightElement>
         ) : (
           <Box></Box>
         )}
       </InputGroup>
-      <FormErrorMessage>{props.errorMessage}</FormErrorMessage>
+      <FormErrorMessage>{errorMessage}</FormErrorMessage>
     </FormControl>
   );
 };
@@ -90,6 +101,5 @@ const PasswordInput = ({
     </InputGroup>
   );
 };
-
 
 export default FormInput;

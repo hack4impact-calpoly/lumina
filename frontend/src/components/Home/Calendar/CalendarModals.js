@@ -315,7 +315,6 @@ export const PrepoulateConfirmModal = ({ prepopulate, isOpen, onClose }) => {
               This will remove any existing shifts and events from the current
               months.
             </b>{" "}<br />
-            Are you sure?
           </Text>
           <Button bg="red.300" onClick={() => prepopulateClose()}>
             Yes

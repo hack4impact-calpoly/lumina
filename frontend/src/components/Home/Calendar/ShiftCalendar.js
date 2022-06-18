@@ -15,7 +15,7 @@ const emptyEvent = {
   allDay: true,
 };
 
-const ShiftCalendar = ({ contactList }) => {
+const ShiftCalendar = ({ contactList, ...rest }) => {
   const [events, setEvents] = useState([]);
   const [currentEvent, setCurrentEvent] = useState();
 
@@ -339,7 +339,7 @@ const ShiftCalendar = ({ contactList }) => {
   }
 
   return (
-    <Box w="100%">
+    <Box w="100%" {...rest}>
       <BrowserView style={{ width: "100%" }}>
         {currentEvent ? (
           <ShiftCalendarBrowser

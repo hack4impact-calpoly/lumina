@@ -22,6 +22,7 @@ import moment from "moment";
 import UserShifts from "./UserShifts";
 import Annoucements from "./Annoucements";
 import CreateAnnoucement from "./CreateAnnoucement";
+import HomeMainContentContainer from "../../SharedComponents/HomeMainContentContainer";
 
 const Dashboard = ({ contactList, setContactList }) => {
   return (
@@ -39,7 +40,7 @@ const Dashboard = ({ contactList, setContactList }) => {
 const DashboardBrowser = ({}) => {
   const [createAnnoucement, setCreateAnnoucement] = useState(false);
   return (
-    <Box mr="10%">
+    <HomeMainContentContainer>
       {createAnnoucement ? (
         <CreateAnnoucement setCreateAnnoucement={setCreateAnnoucement} />
       ) : (
@@ -53,7 +54,7 @@ const DashboardBrowser = ({}) => {
           </Flex>
         </Box>
       )}
-    </Box>
+    </HomeMainContentContainer>
   );
 };
 

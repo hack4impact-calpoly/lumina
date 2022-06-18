@@ -89,13 +89,12 @@ const SignupForm = ({
       try {
         const { user } = await Auth.signUp({
           username: email,
-          password: password
-        });
-      
-      setAccountCreated(true);
-      console.log(user);
+          password: password,
+        }).then(setAccountCreated(true));
+
+        console.log(user);
       } catch (error) {
-        console.log('error signing up: ', error);
+        console.log("error signing up: ", error);
       }
     }
   }
