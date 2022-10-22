@@ -6,7 +6,6 @@ const Card = {
     baseStyle: {
         display: 'flex',
         flexDirection: 'column',
-        background: 'white',
     },
     // Two variants: rounded and smooth
     variants: {

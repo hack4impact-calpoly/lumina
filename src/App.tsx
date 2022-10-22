@@ -13,7 +13,7 @@ import SignUp from './pages/SignUp';
 
 export const App = () => (
   <ChakraProvider theme={theme}>
-    <Box textAlign="center" fontSize="xl" h="100vh" bg="gray.100">
+    <Box h="100vh" maxH="100%" textAlign="center" fontSize="xl">
       <Router>
         <Routes>
           <Route
