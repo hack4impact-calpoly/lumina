@@ -1,5 +1,4 @@
 import {
-  Button,
   FormControl,
   FormLabel,
   Icon,
@@ -26,12 +25,12 @@ const FormInput = ({ isRequired, label, type, onChange }: FormInputProps) => {
         <InputGroup>
           <Input type={show ? "text" : "password"} onChange={(e) => onChange(e.target.value)} />
           <InputRightElement>
-            <Button bg="clear" onClick={() => setShow(!show)}>
+            <button style={{background: 'clear', width: "100%", height: "100%"}} onClick={() => setShow(!show)}>
               <Icon
                 cursor="pointer"
                 as={show ? AiOutlineEye : AiOutlineEyeInvisible}
               />
-            </Button>
+            </button>
           </InputRightElement>
         </InputGroup>
       );
