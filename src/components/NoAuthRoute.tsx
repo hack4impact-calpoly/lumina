@@ -1,14 +1,14 @@
-import React from 'react'
-import { Navigate } from 'react-router-dom'
+import React from 'react';
+import { Navigate } from 'react-router-dom';
 
 type Props = {
-  element: JSX.Element
-  fallback: string
-}
+  element: JSX.Element;
+  fallback: string;
+};
 
 const NoAuthRoute = ({ element, fallback }: Props) => {
-  const loggedIn = localStorage.getItem('user')
-  return loggedIn ? <Navigate to={fallback} /> : element
-}
+  const loggedIn = localStorage.getItem('user');
+  return loggedIn ? <Navigate to={fallback} /> : element;
+};
 
-export default NoAuthRoute
+export default NoAuthRoute;

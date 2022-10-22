@@ -1,47 +1,47 @@
-import { Flex, Icon, Text, VStack } from '@chakra-ui/react'
-import React from 'react'
-import { IconType } from 'react-icons'
+import { Flex, Icon, Text, VStack } from '@chakra-ui/react';
+import React from 'react';
+import { IconType } from 'react-icons';
 import {
   AiOutlineCalendar,
   AiOutlineHome,
   AiOutlineMenu,
   AiOutlineUser,
-} from 'react-icons/ai'
-import { useNavigate } from 'react-router-dom'
+} from 'react-icons/ai';
+import { useNavigate } from 'react-router-dom';
 
 type SidebarElement = {
-  name: string
-  url: string
-  icon: IconType
-}
+  name: string;
+  url: string;
+  icon: IconType;
+};
 
 const sidebarElements: SidebarElement[] = [
   {
     name: 'Dashboard',
-    url: "/dashboard",
+    url: '/dashboard',
     icon: AiOutlineHome,
   },
   {
     name: 'Calendar',
-    url: "/calendar",
+    url: '/calendar',
     icon: AiOutlineCalendar,
   },
   {
     name: 'Directory',
-    url: "/directory",
+    url: '/directory',
     icon: AiOutlineMenu,
   },
   {
     name: 'Profile',
-    url: "/profile",
+    url: '/profile',
     icon: AiOutlineUser,
   },
-]
+];
 
-type Props = {}
+type Props = {};
 
 const Sidebar = (props: Props) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <Flex h="100%" shadow="lg" alignItems="center">
       <VStack w="100%" m={3}>
@@ -65,11 +65,11 @@ const Sidebar = (props: Props) => {
                 {element.name}
               </Text>
             </Flex>
-          )
+          );
         })}
       </VStack>
     </Flex>
-  )
-}
+  );
+};
 
-export default Sidebar
+export default Sidebar;

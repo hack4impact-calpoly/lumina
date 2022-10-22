@@ -5,27 +5,33 @@ import {
   Input,
   InputGroup,
   InputRightElement,
-} from "@chakra-ui/react";
-import React, { useState } from "react";
-import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
+} from '@chakra-ui/react';
+import React, { useState } from 'react';
+import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai';
 
 type FormInputProps = {
-  isRequired?: boolean
+  isRequired?: boolean;
   label: string;
   type: string;
-  onChange: React.Dispatch<React.SetStateAction<string>>
+  onChange: React.Dispatch<React.SetStateAction<string>>;
 };
 
 const FormInput = ({ isRequired, label, type, onChange }: FormInputProps) => {
   const [show, setShow] = useState<boolean>(false);
 
   const input = () => {
-    if (type === "password") {
+    if (type === 'password') {
       return (
         <InputGroup>
-          <Input type={show ? "text" : "password"} onChange={(e) => onChange(e.target.value)} />
+          <Input
+            type={show ? 'text' : 'password'}
+            onChange={(e) => onChange(e.target.value)}
+          />
           <InputRightElement>
-            <button style={{background: 'clear', width: "100%", height: "100%"}} onClick={() => setShow(!show)}>
+            <button
+              style={{ background: 'clear', width: '100%', height: '100%' }}
+              onClick={() => setShow(!show)}
+            >
               <Icon
                 cursor="pointer"
                 as={show ? AiOutlineEye : AiOutlineEyeInvisible}
@@ -35,7 +41,8 @@ const FormInput = ({ isRequired, label, type, onChange }: FormInputProps) => {
         </InputGroup>
       );
     }
-    if (onChange !== undefined) return <Input type={type} onChange={(e) => onChange(e.target.value)} />;
+    if (onChange !== undefined)
+      return <Input type={type} onChange={(e) => onChange(e.target.value)} />;
     return <Input type={type} />;
   };
   return (

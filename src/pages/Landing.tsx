@@ -1,23 +1,29 @@
-import { Button, Center, VStack } from '@chakra-ui/react'
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
-import { Card } from '../components/Card'
-import SignIn from '../components/SignIn'
+import { Button, Center, VStack } from '@chakra-ui/react';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Card } from '../components/Card';
+import SignIn from '../components/SignIn';
 
-type Props = {}
+type Props = {};
 
 const Landing = (props: Props) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <Center h="100%">
       <Card>
         <VStack>
           <SignIn />
-          <Button w='100%' colorScheme='blue' onClick={() => navigate('/sign-up')} >Sign Up</Button>
+          <Button
+            w="100%"
+            colorScheme="blue"
+            onClick={() => navigate('/sign-up')}
+          >
+            Sign Up
+          </Button>
         </VStack>
       </Card>
     </Center>
-  )
-}
+  );
+};
 
-export default Landing
+export default Landing;

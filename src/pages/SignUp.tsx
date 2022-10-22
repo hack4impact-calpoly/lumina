@@ -1,33 +1,30 @@
-import { Button, Center, Text, VStack, Stack } from '@chakra-ui/react'
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { Card } from '../components/Card'
-import FormInput from '../components/FormInput'
-import { getAuth } from 'firebase/auth'
-import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth'
-import { db, firebaseApp } from '../firebaseApp'
-import { doc, setDoc } from 'firebase/firestore'
+import { Button, Center, Text, VStack, Stack } from '@chakra-ui/react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Card } from '../components/Card';
+import FormInput from '../components/FormInput';
+import { getAuth } from 'firebase/auth';
+import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { db, firebaseApp } from '../firebaseApp';
+import { doc, setDoc } from 'firebase/firestore';
 
-const auth = getAuth(firebaseApp)
-const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-const phoneRegex = /^[0-9]{3}[0-9]{3}[0-9]{4}$/
-type Props = {}
+const auth = getAuth(firebaseApp);
+const emailRegex =
+  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const phoneRegex = /^[0-9]{3}[0-9]{3}[0-9]{4}$/;
+type Props = {};
 
 const SignUp = (props: Props) => {
-  const [firstName, setFirstName] = useState('')
-  const [lastName, setLastName] = useState('')
-  const [email, setEmail] = useState('')
-  const [phoneNumber, setPhoneNumber] = useState('')
-  const [password, setPassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
-  const [
-    createUserWithEmailAndPassword,
-    user,
-    loading,
-    error,
-  ] = useCreateUserWithEmailAndPassword(auth)
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [createUserWithEmailAndPassword, user, loading, error] =
+    useCreateUserWithEmailAndPassword(auth);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const nonEmptyStates = () => {
     return (
@@ -37,32 +34,30 @@ const SignUp = (props: Props) => {
       phoneNumber.length > 0 &&
       password.length > 0 &&
       confirmPassword.length > 0
-    )
-  }
+    );
+  };
   const validateEmail = () => {
-    return String(email).toLowerCase().match(emailRegex)
-  }
+    return String(email).toLowerCase().match(emailRegex);
+  };
 
   const validatePhone = () => {
-    return String(phoneNumber).toLowerCase().match(phoneRegex)
-  }
+    return String(phoneNumber).toLowerCase().match(phoneRegex);
+  };
   const signUp = () => {
-    console.log('hey')
     if (nonEmptyStates()) {
-      console.log('hey')
       if (password === confirmPassword && validateEmail() && validatePhone()) {
-        createUserWithEmailAndPassword(email, password)
+        createUserWithEmailAndPassword(email, password);
       }
     }
-  }
+  };
 
   const saveUserInfo = async (uid: string) => {
     await setDoc(doc(db, 'userInfo', uid), {
       firstName: firstName,
       lastName: lastName,
       phoneNumber: phoneNumber,
-    })
-  }
+    });
+  };
 
   if (error) {
     return (
@@ -71,7 +66,7 @@ const SignUp = (props: Props) => {
           <Text>An error has occured, please try again.</Text>
         </Stack>
       </Center>
-    )
+    );
   }
   if (loading) {
     return (
@@ -80,11 +75,12 @@ const SignUp = (props: Props) => {
           <Text>Loading...</Text>
         </Stack>
       </Center>
-    )
+    );
   }
   if (user) {
-    saveUserInfo(user['user']['uid'])
-    navigate('/dashboard')
+    saveUserInfo(user['user']['uid']);
+    localStorage.setItem('user', JSON.stringify(user));
+    navigate('/dashboard');
   }
   return (
     <Center h="100%">
@@ -132,7 +128,7 @@ const SignUp = (props: Props) => {
         </VStack>
       </Card>
     </Center>
-  )
-}
+  );
+};
 
-export default SignUp
+export default SignUp;
