@@ -7,11 +7,9 @@ import { getAuth } from 'firebase/auth';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { db, firebaseApp } from '../firebaseApp';
 import { doc, setDoc } from 'firebase/firestore';
+import { emailRegex, phoneRegex } from '../misc/regex';
 
 const auth = getAuth(firebaseApp);
-const emailRegex =
-  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-const phoneRegex = /^[0-9]{3}[0-9]{3}[0-9]{4}$/;
 type Props = {};
 
 const SignUp = (props: Props) => {
@@ -60,6 +58,7 @@ const SignUp = (props: Props) => {
   };
 
   if (error) {
+    console.log(error)
     return (
       <Center>
         <Stack>
@@ -80,7 +79,7 @@ const SignUp = (props: Props) => {
   if (user) {
     saveUserInfo(user['user']['uid']);
     localStorage.setItem('user', JSON.stringify(user));
-    navigate('/dashboard');
+    navigate('/home/dashboard');
   }
   return (
     <Center h="100%">

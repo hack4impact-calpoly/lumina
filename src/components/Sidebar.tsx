@@ -19,22 +19,22 @@ type SidebarElement = {
 const sidebarElements: SidebarElement[] = [
   {
     name: 'Dashboard',
-    url: '/dashboard',
+    url: '/home/dashboard',
     icon: AiOutlineHome,
   },
   {
     name: 'Calendar',
-    url: '/calendar',
+    url: '/home/calendar',
     icon: AiOutlineCalendar,
   },
   {
     name: 'Directory',
-    url: '/directory',
+    url: '/home/directory',
     icon: AiOutlineMenu,
   },
   {
     name: 'Profile',
-    url: '/profile',
+    url: '/home/profile',
     icon: AiOutlineUser,
   },
 ];

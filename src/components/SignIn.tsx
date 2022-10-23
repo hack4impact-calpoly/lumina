@@ -45,7 +45,7 @@ const SignIn = (props: Props) => {
   }
   if (user) {
     localStorage.setItem('user', JSON.stringify(user));
-    navigate('/dashboard');
+    navigate('/home/dashboard');
   }
   return (
     <Stack>

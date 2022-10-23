@@ -13,16 +13,16 @@ import React, { useState } from 'react';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { Card } from '../components/Card';
 import HomePage from '../components/HomePage';
-import { fakeUsers } from '../hooks/createFakeUser';
 import { User } from '../types/User';
 
-type Props = {};
+type Props = {
+  users: User[];
+};
 
-const Directory = (props: Props) => {
+const Directory = ({ users }: Props) => {
   const [searchName, setSearchName] = useState('');
   const [searchEmail, setSearchEmail] = useState('');
   const [searchNumber, setSearchNumber] = useState('');
-  const users = fakeUsers(10);
   return (
     <HomePage>
       <Heading textAlign="center" mb={3}>
@@ -91,7 +91,7 @@ const UserList = ({
   searchNumber,
 }: UserListProps) => {
   return (
-    <VStack w="100%" p={6}>
+    <VStack w="100%">
       {users.map((user: User) => {
         const name = user.firstName + ' ' + user.lastName;
         if (

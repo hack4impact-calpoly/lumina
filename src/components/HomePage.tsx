@@ -19,7 +19,7 @@ const HomePage = ({ children }: Props) => {
       <GridItem rowSpan={1} colSpan={1}>
         <Sidebar />
       </GridItem>
-      <GridItem rowSpan={1} colSpan={9} textAlign="start" overflowY="scroll">
+      <GridItem rowSpan={1} colSpan={9} textAlign="start" overflowY="scroll" p={6}>
         {children}
       </GridItem>
     </Grid>
