@@ -1,13 +1,10 @@
 import { Heading } from '@chakra-ui/react';
 import React from 'react';
 import HomePage from '../components/HomePage';
-import { User } from '../types/User';
+import { useUser } from '../components/HomeWrapper';
 
-type Props = {
-  user: User;
-};
-
-const Admin = ({ user }: Props) => {
+const Admin = () => {
+  const user = useUser();
   return (
     <HomePage>
       <Heading>Admin Center</Heading>

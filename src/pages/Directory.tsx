@@ -2,14 +2,11 @@ import { Grid, GridItem, Heading } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import DirectorySearch from '../components/DirectorySearch';
 import HomePage from '../components/HomePage';
+import { useUsers } from '../components/HomeWrapper';
 import UserList from '../components/UserList';
-import { User } from '../types/User';
 
-type Props = {
-  users: User[];
-};
-
-const Directory = ({ users }: Props) => {
+const Directory = () => {
+  const users = useUsers();
   const [searchName, setSearchName] = useState('');
   const [searchEmail, setSearchEmail] = useState('');
   const [searchNumber, setSearchNumber] = useState('');

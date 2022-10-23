@@ -1,14 +1,11 @@
 import { Grid, GridItem, Heading, Text } from '@chakra-ui/react';
 import React from 'react';
 import HomePage from '../components/HomePage';
-import { User } from '../types/User';
 import Announcements from '../components/Announcements';
+import { useUser } from '../components/HomeWrapper';
 
-type Props = {
-  user: User;
-};
-
-const Dashboard = ({ user }: Props) => {
+const Dashboard = () => {
+  const user = useUser()
   return (
     <HomePage>
       <Grid

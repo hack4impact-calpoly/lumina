@@ -1,7 +1,12 @@
 import * as React from 'react';
 import { ChakraProvider, Box } from '@chakra-ui/react';
 import theme from './theme';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from 'react-router-dom';
 import Landing from './pages/Landing';
 import Dashboard from './pages/Dashboard';
 import Calendar from './pages/Calendar';
@@ -10,14 +15,10 @@ import Profile from './pages/Profile';
 import PrivateRoute from './components/PrivateRoute';
 import NoAuthRoute from './components/NoAuthRoute';
 import SignUp from './pages/SignUp';
-import { fakeUsers } from './hooks/createFakeUser';
-import { User } from './types/User';
 import CreateAnnouncement from './pages/CreateAnnouncement';
 import AnnouncementView from './pages/AnnouncementView';
 import Admin from './pages/Admin';
-
-const users: User[] = fakeUsers(100);
-const user: User = users[Math.floor(Math.random() * users.length)];
+import HomeWrapper from './components/HomeWrapper';
 
 export const App = () => (
   <ChakraProvider theme={theme}>
@@ -36,16 +37,11 @@ export const App = () => (
               <NoAuthRoute element={<SignUp />} fallback="/home/dashboard" />
             }
           />
-          <Route path="/home">
+          <Route path="/home" element={<HomeWrapper />}>
             <Route path="dashboard">
               <Route
                 index
-                element={
-                  <PrivateRoute
-                    element={<Dashboard user={user} />}
-                    fallback="/"
-                  />
-                }
+                element={<PrivateRoute element={<Dashboard />} fallback="/" />}
               />
               <Route
                 path="create-announcement"
@@ -68,22 +64,18 @@ export const App = () => (
               path="directory"
               element={
                 <PrivateRoute
-                  element={<Directory users={users} />}
+                  element={<Directory />}
                   fallback="/"
                 />
               }
             />
             <Route
               path="profile"
-              element={
-                <PrivateRoute element={<Profile user={user} />} fallback="/" />
-              }
+              element={<PrivateRoute element={<Profile />} fallback="/" />}
             />
             <Route
               path="admin"
-              element={
-                <PrivateRoute element={<Admin user={user} />} fallback="/" />
-              }
+              element={<PrivateRoute element={<Admin />} fallback="/" />}
             />
           </Route>
           <Route path="*" element={<Navigate to="/" />} />

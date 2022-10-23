@@ -1,13 +1,9 @@
 import { Avatar, Heading, Text, VStack } from '@chakra-ui/react';
-import React from 'react';
 import HomePage from '../components/HomePage';
-import { User } from '../types/User';
+import { useUser } from '../components/HomeWrapper';
 
-type Props = {
-  user: User;
-};
-
-const Profile = ({ user }: Props) => {
+const Profile = () => {
+  const user = useUser()
   const name: string = user.firstName + ' ' + user.lastName;
   return (
     <HomePage>
