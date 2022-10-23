@@ -1,18 +1,8 @@
-import {
-  Grid,
-  GridItem,
-  Heading,
-  Icon,
-  Input,
-  InputGroup,
-  InputRightElement,
-  Text,
-  VStack,
-} from '@chakra-ui/react';
+import { Grid, GridItem, Heading } from '@chakra-ui/react';
 import React, { useState } from 'react';
-import { AiOutlineSearch } from 'react-icons/ai';
-import { Card } from '../components/Card';
+import DirectorySearch from '../components/DirectorySearch';
 import HomePage from '../components/HomePage';
+import UserList from '../components/UserList';
 import { User } from '../types/User';
 
 type Props = {
@@ -23,6 +13,7 @@ const Directory = ({ users }: Props) => {
   const [searchName, setSearchName] = useState('');
   const [searchEmail, setSearchEmail] = useState('');
   const [searchNumber, setSearchNumber] = useState('');
+  const [searchType, setSearchType] = useState('all');
   return (
     <HomePage>
       <Heading textAlign="center" mb={3}>
@@ -34,10 +25,12 @@ const Directory = ({ users }: Props) => {
         gap={2}
       >
         <GridItem rowSpan={1} colSpan={2}>
-          <Search
+          <DirectorySearch
             name={setSearchName}
             email={setSearchEmail}
             number={setSearchNumber}
+            typeChange={setSearchType}
+            type={searchType}
           />
         </GridItem>
         <GridItem rowSpan={1} colSpan={3}>
@@ -46,82 +39,11 @@ const Directory = ({ users }: Props) => {
             searchName={searchName}
             searchEmail={searchEmail}
             searchNumber={searchNumber}
+            searchType={searchType}
           />
         </GridItem>
       </Grid>
     </HomePage>
-  );
-};
-
-type SearchProps = {
-  name: React.Dispatch<React.SetStateAction<string>>;
-  email: React.Dispatch<React.SetStateAction<string>>;
-  number: React.Dispatch<React.SetStateAction<string>>;
-};
-
-const Search = ({ name, email, number }: SearchProps) => {
-  return (
-    <VStack>
-      <SearchInput onChange={name} placeholder="Search by name" />
-      <SearchInput onChange={email} placeholder="Search by email" />
-      <SearchInput onChange={number} placeholder="Search by number" />
-    </VStack>
-  );
-};
-
-type UserListProps = {
-  users: User[];
-  searchName: string;
-  searchEmail: string;
-  searchNumber: string;
-};
-
-const UserList = ({
-  users,
-  searchName,
-  searchEmail,
-  searchNumber,
-}: UserListProps) => {
-  return (
-    <VStack w="100%">
-      {users.map((user: User) => {
-        const name = user.firstName + ' ' + user.lastName;
-        if (
-          name.toLowerCase().includes(searchName.toLowerCase()) &&
-          user.email.toLowerCase().includes(searchEmail.toLowerCase()) &&
-          user.phoneNumber.toLowerCase().includes(searchNumber.toLowerCase())
-        ) {
-          return (
-            <Card w="100%">
-              <Text fontWeight="bold" fontSize="2xl">
-                {name}
-              </Text>
-              <Text>{user.email}</Text>
-              <Text>{user.phoneNumber}</Text>
-            </Card>
-          );
-        }
-        return <></>;
-      })}
-    </VStack>
-  );
-};
-
-type SearchInputProps = {
-  onChange: React.Dispatch<React.SetStateAction<string>>;
-  placeholder: string;
-};
-const SearchInput = ({ onChange, placeholder }: SearchInputProps) => {
-  return (
-    <InputGroup>
-      <Input
-        onChange={(e) => onChange(e.target.value)}
-        placeholder={placeholder}
-      />
-      <InputRightElement>
-        <Icon as={AiOutlineSearch} />
-      </InputRightElement>
-    </InputGroup>
   );
 };
 

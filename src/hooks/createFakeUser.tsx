@@ -7,6 +7,7 @@ export function createRandomUser(): User {
     firstName: faker.name.firstName(),
     lastName: faker.name.firstName(),
     phoneNumber: faker.phone.number('(###) ###-###'),
+    admin: Math.floor(Math.random() * 10) === 0,
   };
 }
 

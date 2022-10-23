@@ -54,7 +54,8 @@ const SignUp = (props: Props) => {
       firstName: firstName,
       lastName: lastName,
       phoneNumber: phoneNumber,
-      email: email
+      email: email,
+      type: "basic"
     });
   };
 

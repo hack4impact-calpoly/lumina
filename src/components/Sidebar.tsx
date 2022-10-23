@@ -5,6 +5,7 @@ import {
   AiOutlineCalendar,
   AiOutlineHome,
   AiOutlineMenu,
+  AiOutlineTeam,
   AiOutlineUser,
 } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
@@ -37,6 +38,11 @@ const sidebarElements: SidebarElement[] = [
     name: 'Profile',
     url: '/home/profile',
     icon: AiOutlineUser,
+  },
+  {
+    name: 'Admin',
+    url: '/home/admin',
+    icon: AiOutlineTeam,
   },
 ];
 
