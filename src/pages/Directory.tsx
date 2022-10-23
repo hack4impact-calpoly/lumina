@@ -31,38 +31,14 @@ const Directory = ({ users }: Props) => {
       <Grid
         templateRows="repeat(1, 1fr)"
         templateColumns="repeat(5, 1fr)"
-        gap={1}
+        gap={2}
       >
         <GridItem rowSpan={1} colSpan={2}>
-          <VStack p={6}>
-            <InputGroup>
-              <Input
-                onChange={(e) => setSearchName(e.target.value)}
-                placeholder="Search by name"
-              />
-              <InputRightElement>
-                <Icon as={AiOutlineSearch} />
-              </InputRightElement>
-            </InputGroup>
-            <InputGroup>
-              <Input
-                onChange={(e) => setSearchEmail(e.target.value)}
-                placeholder="Search by email"
-              />
-              <InputRightElement>
-                <Icon as={AiOutlineSearch} />
-              </InputRightElement>
-            </InputGroup>
-            <InputGroup>
-              <Input
-                onChange={(e) => setSearchNumber(e.target.value)}
-                placeholder="Search by number"
-              />
-              <InputRightElement>
-                <Icon as={AiOutlineSearch} />
-              </InputRightElement>
-            </InputGroup>
-          </VStack>
+          <Search
+            name={setSearchName}
+            email={setSearchEmail}
+            number={setSearchNumber}
+          />
         </GridItem>
         <GridItem rowSpan={1} colSpan={3}>
           <UserList
@@ -74,6 +50,22 @@ const Directory = ({ users }: Props) => {
         </GridItem>
       </Grid>
     </HomePage>
+  );
+};
+
+type SearchProps = {
+  name: React.Dispatch<React.SetStateAction<string>>;
+  email: React.Dispatch<React.SetStateAction<string>>;
+  number: React.Dispatch<React.SetStateAction<string>>;
+};
+
+const Search = ({ name, email, number }: SearchProps) => {
+  return (
+    <VStack>
+      <SearchInput onChange={name} placeholder="Search by name" />
+      <SearchInput onChange={email} placeholder="Search by email" />
+      <SearchInput onChange={number} placeholder="Search by number" />
+    </VStack>
   );
 };
 
@@ -112,6 +104,24 @@ const UserList = ({
         return <></>;
       })}
     </VStack>
+  );
+};
+
+type SearchInputProps = {
+  onChange: React.Dispatch<React.SetStateAction<string>>;
+  placeholder: string;
+};
+const SearchInput = ({ onChange, placeholder }: SearchInputProps) => {
+  return (
+    <InputGroup>
+      <Input
+        onChange={(e) => onChange(e.target.value)}
+        placeholder={placeholder}
+      />
+      <InputRightElement>
+        <Icon as={AiOutlineSearch} />
+      </InputRightElement>
+    </InputGroup>
   );
 };
 

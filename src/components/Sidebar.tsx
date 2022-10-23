@@ -1,4 +1,4 @@
-import { Button, Flex, Icon, Spacer, Text, VStack } from '@chakra-ui/react';
+import { Button, Flex, Spacer, VStack } from '@chakra-ui/react';
 import React from 'react';
 import { IconType } from 'react-icons';
 import {
@@ -9,6 +9,7 @@ import {
 } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 import { ColorModeSwitcher } from '../ColorModeSwitcher';
+import TextIcon from './TextIcon';
 
 type SidebarElement = {
   name: string;
@@ -51,34 +52,29 @@ const Sidebar = (props: Props) => {
 
   return (
     <Flex h="100vh" shadow="lg" alignItems="center" flexDir="column">
-      <ColorModeSwitcher w="100%" />
+      <ColorModeSwitcher w="100%" borderRadius={0} />
       <Spacer />
       <VStack w="100%" m={3}>
         {sidebarElements.map((element) => {
           return (
-            <Flex
-              alignItems="center"
+            <TextIcon
+              left
+              icon={element.icon}
+              fontSize="xl"
+              text={element.name}
               p="4"
-              mx="4"
-              borderRadius="lg"
               cursor="pointer"
               _hover={{
                 bg: 'teal.400',
-                color: 'white',
               }}
               w="100%"
               onClick={() => navigate(element.url)}
-            >
-              <Icon ml={0} fontSize="16" as={element.icon} />
-              <Text fontSize="20px" ml={3}>
-                {element.name}
-              </Text>
-            </Flex>
+            />
           );
         })}
       </VStack>
       <Spacer />
-      <Button w="100%" colorScheme="red" onClick={signOut}>
+      <Button w="100%" colorScheme="red" borderRadius={0} onClick={signOut}>
         Sign Out
       </Button>
     </Flex>

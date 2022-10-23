@@ -1,24 +1,32 @@
-import { Button, Heading, Input, Textarea, VStack } from '@chakra-ui/react';
+import {
+  Button,
+  Heading,
+  Icon,
+  Input,
+  Textarea,
+  VStack,
+} from '@chakra-ui/react';
 import { addDoc, collection } from 'firebase/firestore';
 import React, { useState } from 'react';
 import HomePage from '../components/HomePage';
 import { db } from '../firebaseApp';
 import { useNavigate } from 'react-router-dom';
+import { AiOutlineArrowLeft } from 'react-icons/ai';
 
-type Props = {};
-
-const CreateAnnouncement = (props: Props) => {
+const CreateAnnouncement = () => {
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
   const createAnnouncement = async () => {
     if (title.length > 0 && body.length > 0) {
-      await addDoc(collection(db, "announcements"), {
+      setLoading(true);
+      await addDoc(collection(db, 'announcements'), {
         title: title,
         body: body,
-        timestamp: new Date()
+        timestamp: new Date(),
       });
       navigate('/home/dashboard');
     }
@@ -26,7 +34,10 @@ const CreateAnnouncement = (props: Props) => {
 
   return (
     <HomePage>
-      <VStack h="100%" spacing={5} textAlign='start'>
+      <VStack h="100%" spacing={5} textAlign="start">
+        <Button alignSelf="start" onClick={() => navigate('/home/dashboard')}>
+          <Icon as={AiOutlineArrowLeft} />
+        </Button>
         <Heading size="4xl">Create Announcement</Heading>
         <Input
           fontWeight="bold"
@@ -41,7 +52,12 @@ const CreateAnnouncement = (props: Props) => {
           placeholder="Body"
           onChange={(e) => setBody(e.target.value)}
         />
-        <Button w="100%" colorScheme="teal" onClick={createAnnouncement}>
+        <Button
+          w="100%"
+          colorScheme="teal"
+          onClick={createAnnouncement}
+          isLoading={loading}
+        >
           Create
         </Button>
       </VStack>

@@ -3,21 +3,29 @@ import {
   Grid,
   GridItem,
   Heading,
+  HStack,
   Icon,
+  Skeleton,
   Text,
   Tooltip,
   VStack,
 } from '@chakra-ui/react';
 import React, { useState, useEffect } from 'react';
-import { AiOutlineEdit, AiOutlineRight } from 'react-icons/ai';
+import {
+  AiOutlineArrowDown,
+  AiOutlineArrowUp,
+  AiOutlineEdit,
+  AiOutlineReload,
+  AiOutlineRight,
+} from 'react-icons/ai';
 import HomePage from '../components/HomePage';
 import { User } from '../types/User';
 import { useNavigate } from 'react-router-dom';
-import { collection, getDocs } from 'firebase/firestore';
-import { db } from '../firebaseApp';
 import { Announcement } from '../types/Announcement';
 import { Card } from '../components/Card';
 import moment from 'moment';
+import { getAnnouncements } from '../hooks/getAnnouncements';
+import TextIcon from '../components/TextIcon';
 
 type Props = {
   user: User;
@@ -59,52 +67,39 @@ const Announcements = () => {
       ? JSON.parse(localAnnouncements)
       : []
   );
+  const [maxAnnouncements, setMaxAnnouncements] = useState(3);
+  const [loaded, setLoaded] = useState(false);
 
   const navigate = useNavigate();
+  const getAnnouncementsWrapper = () => {
+    setLoaded(false)
+    getAnnouncements(setAnnouncements).then((res) => setLoaded(true));
+  };
 
   useEffect(() => {
-    const getAnnouncements = async () => {
-      if (announcements.length <= 0) {
-        const query = await getDocs(collection(db, 'announcements'));
-        let allAnnouncements: Announcement[] = [];
-        query.forEach((doc) => {
-          const announcement = {
-            id: doc.id,
-            title: doc.data()['title'],
-            body: doc.data()['body'],
-            timestamp: doc.data()['timestamp'],
-          };
-          allAnnouncements.push(announcement);
-        });
-        localStorage.setItem(
-          'announcements',
-          JSON.stringify(
-            allAnnouncements.sort(
-              (objA, objB) => Number(objB.timestamp) - Number(objA.timestamp)
-            )
-          )
-        );
-        localStorage.setItem(
-          'announcementsTTL',
-          JSON.stringify(new Date(new Date().getTime() + 5 * 60000))
-        );
-        setAnnouncements(
-          allAnnouncements.sort(
-            (objA, objB) => Number(objB.timestamp) - Number(objA.timestamp)
-          )
-        );
-      }
-    };
-    getAnnouncements();
-    return () => {};
+    if (announcements.length <= 0) {
+      getAnnouncements(setAnnouncements);
+    }
+    setLoaded(true)
   }, []);
 
   return (
     <Flex flexDir="column">
-      <Flex alignItems="center">
+      <HStack>
         <Text fontWeight="bold" fontSize="4xl" mr={3}>
           Announcements
         </Text>
+        <Tooltip hasArrow label="Reload announcements">
+          <span>
+            <Icon
+              fontSize="4xl"
+              as={AiOutlineReload}
+              cursor="pointer"
+              onClick={getAnnouncementsWrapper}
+              tabIndex={0}
+            />
+          </span>
+        </Tooltip>
         <Tooltip hasArrow label="Create announcement">
           <span>
             <Icon
@@ -112,14 +107,39 @@ const Announcements = () => {
               as={AiOutlineEdit}
               cursor="pointer"
               onClick={() => navigate('create-announcement')}
+              tabIndex={0}
             />
           </span>
         </Tooltip>
-      </Flex>
+      </HStack>
       <VStack w="100%">
-        {announcements.map((announcement: Announcement) => {
-          return <AnnouncementCard announcement={announcement} />;
+        {announcements.map((announcement, index) => {
+          if (index < maxAnnouncements) {
+            return (
+              <Skeleton w='100%' isLoaded={loaded}>
+                <AnnouncementCard announcement={announcement} />
+              </Skeleton>
+            );
+          }
+          return <></>;
         })}
+        {announcements.length <= maxAnnouncements ? (
+          <TextIcon
+            icon={AiOutlineArrowUp}
+            fontSize="2xl"
+            text="Show less"
+            onClick={() => setMaxAnnouncements(3)}
+            isLink
+          />
+        ) : (
+          <TextIcon
+            icon={AiOutlineArrowDown}
+            fontSize="2xl"
+            text="View all announcements"
+            onClick={() => setMaxAnnouncements(announcements.length)}
+            isLink
+          />
+        )}
       </VStack>
     </Flex>
   );
@@ -130,7 +150,7 @@ type AnnouncementCardProps = {
 };
 
 const AnnouncementCard = ({ announcement }: AnnouncementCardProps) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [announcementHover, setAnnouncementHover] = useState(false);
   const annoucementDate = new Date(announcement.timestamp.seconds * 1000);
@@ -142,6 +162,7 @@ const AnnouncementCard = ({ announcement }: AnnouncementCardProps) => {
       onMouseLeave={() => setAnnouncementHover(false)}
       cursor="pointer"
       onClick={() => navigate(`/home/dashboard/annoucement/${announcement.id}`)}
+      tabIndex={0}
     >
       <Grid
         templateRows="repeat(4, 1fr)"
