@@ -55,12 +55,12 @@ const SignUp = (props: Props) => {
       lastName: lastName,
       phoneNumber: phoneNumber,
       email: email,
-      type: "basic"
+      type: 'basic',
     });
   };
 
   if (error) {
-    console.log(error)
+    console.log(error);
     return (
       <Center>
         <Stack>

@@ -1,6 +1,6 @@
 import { Text, VStack } from '@chakra-ui/react';
 import React from 'react';
-import { User } from '../types/User';
+import { User } from '../types';
 import { Card } from './Card';
 
 type UserListProps = {

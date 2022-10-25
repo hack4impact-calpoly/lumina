@@ -7,11 +7,11 @@ import {
   AiOutlineReload,
 } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
-import { Announcement } from '../types/Announcement';
+import { Announcement } from '../types';
 import { getAnnouncements } from '../hooks/getAnnouncements';
 import TextIcon from './TextIcon';
 import TooltipIcon from './TooltipIcon';
-import AnnouncementCard from './AnnouncementCard';
+import InfoCard from './InfoCard';
 
 const Announcements = () => {
   const localAnnouncements = localStorage.getItem('announcements');
@@ -60,11 +60,32 @@ const Announcements = () => {
         />
       </HStack>
       <VStack w="100%">
+        {announcements.length <= 0 ? (
+          <>
+            <Skeleton w="100%" h="15rem"></Skeleton>
+            <Skeleton w="100%" h="15rem"></Skeleton>
+            <Skeleton w="100%" h="15rem"></Skeleton>
+          </>
+        ) : (
+          <></>
+        )}
         {announcements.map((announcement, index) => {
           if (index < maxAnnouncements) {
+            const annoucementDate = new Date(
+              announcement.timestamp.seconds * 1000
+            );
             return (
               <Skeleton w="100%" isLoaded={loaded}>
-                <AnnouncementCard announcement={announcement} />
+                <InfoCard
+                  title={announcement.title}
+                  body={announcement.body}
+                  date={annoucementDate}
+                  gridRowUnits={4}
+                  onClick={() =>
+                    navigate(`/home/dashboard/annoucement/${announcement.id}`)
+                  }
+                  cursor="pointer"
+                />
               </Skeleton>
             );
           }

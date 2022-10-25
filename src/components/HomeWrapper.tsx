@@ -1,10 +1,10 @@
 import React from 'react';
 import { Outlet, useOutletContext } from 'react-router-dom';
-import { fakeUsers } from '../hooks/createFakeUser';
-import { User } from '../types/User';
+import { fakeUsers } from '../hooks/fake';
+import { User } from '../types';
 
 type Props = {};
-const users: User[] = fakeUsers(100);
+const users: User[] = fakeUsers(50);
 const user: User = users[Math.floor(Math.random() * users.length)];
 const HomeWrapper = (props: Props) => {
   return <Outlet context={{ user: user, users: users }} />;

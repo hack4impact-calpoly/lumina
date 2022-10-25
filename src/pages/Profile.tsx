@@ -3,7 +3,7 @@ import HomePage from '../components/HomePage';
 import { useUser } from '../components/HomeWrapper';
 
 const Profile = () => {
-  const user = useUser()
+  const user = useUser();
   const name: string = user.firstName + ' ' + user.lastName;
   return (
     <HomePage>

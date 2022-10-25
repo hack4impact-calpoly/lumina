@@ -1,6 +1,7 @@
-import { Grid, GridItem, Heading } from '@chakra-ui/react';
+import { GridItem, Heading } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import DirectorySearch from '../components/DirectorySearch';
+import EZGrid from '../components/EZGrid';
 import HomePage from '../components/HomePage';
 import { useUsers } from '../components/HomeWrapper';
 import UserList from '../components/UserList';
@@ -16,11 +17,7 @@ const Directory = () => {
       <Heading textAlign="center" mb={3}>
         Directory
       </Heading>
-      <Grid
-        templateRows="repeat(1, 1fr)"
-        templateColumns="repeat(5, 1fr)"
-        gap={2}
-      >
+      <EZGrid rowUnits={1} colUnits={5}>
         <GridItem rowSpan={1} colSpan={2}>
           <DirectorySearch
             name={setSearchName}
@@ -39,7 +36,7 @@ const Directory = () => {
             searchType={searchType}
           />
         </GridItem>
-      </Grid>
+      </EZGrid>
     </HomePage>
   );
 };

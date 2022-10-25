@@ -2,7 +2,7 @@ import { Button, Heading, Icon, Text, VStack } from '@chakra-ui/react';
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import HomePage from '../components/HomePage';
-import { Announcement } from '../types/Announcement';
+import { Announcement } from '../types';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 
 const AnnouncementView = () => {

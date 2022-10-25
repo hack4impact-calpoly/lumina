@@ -1,11 +1,11 @@
 import { getDocs, collection } from 'firebase/firestore';
 import { db } from '../firebaseApp';
-import { Announcement } from '../types/Announcement';
+import { Announcement } from '../types';
 import { getTTL } from './getTTL';
 
 const sortAnnouncements = (announcements: Announcement[]) => {
   return announcements.sort(
-    (objA, objB) => Number(objB.timestamp) - Number(objA.timestamp)
+    (objA, objB) => objB.timestamp.seconds - objA.timestamp.seconds
   );
 };
 

@@ -62,12 +62,7 @@ export const App = () => (
             />
             <Route
               path="directory"
-              element={
-                <PrivateRoute
-                  element={<Directory />}
-                  fallback="/"
-                />
-              }
+              element={<PrivateRoute element={<Directory />} fallback="/" />}
             />
             <Route
               path="profile"
