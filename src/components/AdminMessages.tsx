@@ -5,10 +5,16 @@ import {
   Icon,
   Tag,
   Text,
+  Tooltip,
   VStack,
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
-import { AiOutlineCheck, AiOutlineClose, AiOutlineDelete } from 'react-icons/ai';
+import {
+  AiOutlineArrowRight,
+  AiOutlineCheck,
+  AiOutlineClose,
+  AiOutlineDelete,
+} from 'react-icons/ai';
 import { fakeMessages } from '../hooks/fake';
 import { MessageFilter, MessageType } from '../types';
 import InfoCard from './InfoCard';
@@ -131,12 +137,16 @@ const AdminMessages = (props: Props) => {
 const QuickActionApproveDeny = () => {
   return (
     <VStack w="100%" h="100%">
-      <Button h="50%" colorScheme="green" w="100%">
-        <Icon as={AiOutlineCheck} h="50%" w="50%" />
-      </Button>
-      <Button h="50%" colorScheme="red" w="100%">
-      <Icon as={AiOutlineClose} h="50%" w="50%" />
-      </Button>
+      <Tooltip hasArrow label="Approve">
+        <Button h="50%" colorScheme="green" w="100%">
+          <Icon as={AiOutlineCheck} h="50%" w="50%" />
+        </Button>
+      </Tooltip>
+      <Tooltip hasArrow label="Deny">
+        <Button h="50%" colorScheme="red" w="100%">
+          <Icon as={AiOutlineClose} h="50%" w="50%" />
+        </Button>
+      </Tooltip>
     </VStack>
   );
 };
@@ -144,12 +154,16 @@ const QuickActionApproveDeny = () => {
 const QuickActionShiftView = () => {
   return (
     <VStack w="100%" h="100%">
-      <Button h="50%" colorScheme="green" w="100%">
-        Go to shift
-      </Button>
-      <Button h="50%" colorScheme="gray" w="100%">
-        <Icon as={AiOutlineDelete} h="50%" w="50%" />
-      </Button>
+      <Tooltip hasArrow label="View shift">
+        <Button h="50%" colorScheme="green" w="100%">
+          <Icon as={AiOutlineArrowRight} h="50%" w="50%" />
+        </Button>
+      </Tooltip>
+      <Tooltip hasArrow label="Delete">
+        <Button h="50%" colorScheme="gray" w="100%">
+          <Icon as={AiOutlineDelete} h="50%" w="50%" />
+        </Button>
+      </Tooltip>
     </VStack>
   );
 };

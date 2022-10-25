@@ -68,7 +68,7 @@ const InfoCard = ({
           )}
         </GridItem>
         <GridItem rowSpan={calcBodyRowUnits()} colSpan={9}>
-          <Text noOfLines={3}>{body}</Text>
+          <Text noOfLines={3} lineHeight={6}>{body}</Text>
         </GridItem>
         <GridItem rowSpan={1} colSpan={9}>
           <Text noOfLines={1} fontWeight="light">
