@@ -35,8 +35,7 @@
     "eject": "react-scripts eject",
     "prettier": "npx prettier --check .",
     "lint-check": "eslint --ext .js,.jsx,.ts,.tsx --ignore-path .gitignore . && prettier --check .",
-    "lint-write": "eslint --ext .js,.jsx,.ts,.tsx --ignore-path .gitignore . --fix && prettier --write .",
-    "prepare": "cd .. && husky install frontend/.husky"
+    "lint-write": "eslint --ext .js,.jsx,.ts,.tsx --ignore-path .gitignore . --fix && prettier --write ."
   },
   "eslintConfig": {
     "extends": [
