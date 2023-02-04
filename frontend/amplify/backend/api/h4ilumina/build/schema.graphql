@@ -1,0 +1,230 @@
+
+type Example @aws_iam @aws_api_key {
+  id: ID!
+  name: String
+  description: String
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  _version: Int!
+  _deleted: Boolean
+  _lastChangedAt: AWSTimestamp!
+}
+
+input ModelStringInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelIntInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelFloatInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  between: [Float]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelBooleanInput {
+  ne: Boolean
+  eq: Boolean
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelIDInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelSubscriptionStringInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+  in: [String]
+  notIn: [String]
+}
+
+input ModelSubscriptionIntInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+  in: [Int]
+  notIn: [Int]
+}
+
+input ModelSubscriptionFloatInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  between: [Float]
+  in: [Float]
+  notIn: [Float]
+}
+
+input ModelSubscriptionBooleanInput {
+  ne: Boolean
+  eq: Boolean
+}
+
+input ModelSubscriptionIDInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+  in: [ID]
+  notIn: [ID]
+}
+
+enum ModelAttributeTypes {
+  binary
+  binarySet
+  bool
+  list
+  map
+  number
+  numberSet
+  string
+  stringSet
+  _null
+}
+
+input ModelSizeInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+}
+
+enum ModelSortDirection {
+  ASC
+  DESC
+}
+
+type ModelExampleConnection @aws_api_key @aws_iam {
+  items: [Example]!
+  nextToken: String
+  startedAt: AWSTimestamp
+}
+
+input ModelExampleFilterInput {
+  id: ModelIDInput
+  name: ModelStringInput
+  description: ModelStringInput
+  and: [ModelExampleFilterInput]
+  or: [ModelExampleFilterInput]
+  not: ModelExampleFilterInput
+}
+
+type Query {
+  getExample(id: ID!): Example @aws_api_key @aws_iam
+  listExamples(filter: ModelExampleFilterInput, limit: Int, nextToken: String): ModelExampleConnection @aws_api_key @aws_iam
+  syncExamples(filter: ModelExampleFilterInput, limit: Int, nextToken: String, lastSync: AWSTimestamp): ModelExampleConnection @aws_api_key @aws_iam
+}
+
+input ModelExampleConditionInput {
+  name: ModelStringInput
+  description: ModelStringInput
+  and: [ModelExampleConditionInput]
+  or: [ModelExampleConditionInput]
+  not: ModelExampleConditionInput
+}
+
+input CreateExampleInput {
+  id: ID
+  name: String
+  description: String
+  _version: Int
+}
+
+input UpdateExampleInput {
+  id: ID!
+  name: String
+  description: String
+  _version: Int
+}
+
+input DeleteExampleInput {
+  id: ID!
+  _version: Int
+}
+
+type Mutation {
+  createExample(input: CreateExampleInput!, condition: ModelExampleConditionInput): Example @aws_api_key @aws_iam
+  updateExample(input: UpdateExampleInput!, condition: ModelExampleConditionInput): Example @aws_api_key @aws_iam
+  deleteExample(input: DeleteExampleInput!, condition: ModelExampleConditionInput): Example @aws_api_key @aws_iam
+}
+
+input ModelSubscriptionExampleFilterInput {
+  id: ModelSubscriptionIDInput
+  name: ModelSubscriptionStringInput
+  description: ModelSubscriptionStringInput
+  and: [ModelSubscriptionExampleFilterInput]
+  or: [ModelSubscriptionExampleFilterInput]
+}
+
+type Subscription {
+  onCreateExample(filter: ModelSubscriptionExampleFilterInput): Example @aws_subscribe(mutations: ["createExample"]) @aws_api_key @aws_iam
+  onUpdateExample(filter: ModelSubscriptionExampleFilterInput): Example @aws_subscribe(mutations: ["updateExample"]) @aws_api_key @aws_iam
+  onDeleteExample(filter: ModelSubscriptionExampleFilterInput): Example @aws_subscribe(mutations: ["deleteExample"]) @aws_api_key @aws_iam
+}
+

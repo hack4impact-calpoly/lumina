@@ -1,3 +1,5 @@
+import { IconType } from 'react-icons';
+
 export type Timestamp = {
   seconds: number;
   nanoseconds: number;
@@ -41,4 +43,10 @@ export type MessageFilter = {
   name: string;
   color: string;
   targetVal: MessageType;
+};
+
+export type SidebarElement = {
+  name: string;
+  url: string;
+  icon: IconType;
 };

@@ -1,0 +1,13 @@
+{
+    "AppSyncApiName": "h4ilumina",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "DynamoDBEnableServerSideEncryption": false,
+    "authRoleName": {
+        "Ref": "AuthRoleName"
+    },
+    "unauthRoleName": {
+        "Ref": "UnauthRoleName"
+    },
+    "S3DeploymentBucket": "amplify-h4ilumina-staging-21353-deployment",
+    "S3DeploymentRootKey": "amplify-appsync-files/348cb10bdc322da2438735ce0539363d7db4eb02"
+}

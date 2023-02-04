@@ -1,14 +1,8 @@
-import { Button, Center, Text, VStack, Stack, Card } from '@chakra-ui/react';
-import { getAuth } from 'firebase/auth';
-import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
-import { doc, setDoc } from 'firebase/firestore';
+import { Button, Center, VStack, Card } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import FormInput from '../components/FormInput';
-import { db, firebaseApp } from '../firebaseApp';
 import { emailRegex, phoneRegex } from '../misc/regex';
-
-const auth = getAuth(firebaseApp);
 
 function SignUp() {
   const [firstName, setFirstName] = useState('');
@@ -17,10 +11,9 @@ function SignUp() {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [createUserWithEmailAndPassword, user, loading, error] =
-    useCreateUserWithEmailAndPassword(auth);
 
   const navigate = useNavigate();
+  console.log(navigate);
 
   const nonEmptyStates = () =>
     firstName.length > 0 &&
@@ -36,44 +29,11 @@ function SignUp() {
   const signUp = () => {
     if (nonEmptyStates()) {
       if (password === confirmPassword && validateEmail() && validatePhone()) {
-        createUserWithEmailAndPassword(email, password);
+        console.log('signUp');
       }
     }
   };
 
-  const saveUserInfo = async (uid: string) => {
-    await setDoc(doc(db, 'userInfo', uid), {
-      firstName,
-      lastName,
-      phoneNumber,
-      email,
-      type: 'basic',
-    });
-  };
-
-  if (error) {
-    return (
-      <Center>
-        <Stack>
-          <Text>An error has occured, please try again.</Text>
-        </Stack>
-      </Center>
-    );
-  }
-  if (loading) {
-    return (
-      <Center>
-        <Stack>
-          <Text>Loading...</Text>
-        </Stack>
-      </Center>
-    );
-  }
-  if (user) {
-    saveUserInfo(user.user.uid);
-    localStorage.setItem('user', JSON.stringify(user));
-    navigate('/home/dashboard');
-  }
   return (
     <Center h="100%">
       <Card>
