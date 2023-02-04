@@ -6,12 +6,10 @@ import {
   Textarea,
   VStack,
 } from '@chakra-ui/react';
-import { addDoc, collection } from 'firebase/firestore';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import HomePage from '../components/HomePage';
-import { db } from '../firebaseApp';
 
 function CreateAnnouncement() {
   const [title, setTitle] = useState('');
@@ -22,13 +20,8 @@ function CreateAnnouncement() {
 
   const createAnnouncement = async () => {
     if (title.length > 0 && body.length > 0) {
-      setLoading(true);
-      await addDoc(collection(db, 'announcements'), {
-        title,
-        body,
-        timestamp: new Date(),
-      });
-      navigate('/home/dashboard');
+      console.log(setLoading);
+      console.log('createAnnouncement');
     }
   };
 

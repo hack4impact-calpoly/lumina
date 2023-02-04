@@ -1,1 +1,4 @@
 .eslintrc.js
+amplify
+src/models
+src/ui-components
