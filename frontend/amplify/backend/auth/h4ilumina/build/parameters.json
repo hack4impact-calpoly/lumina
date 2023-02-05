@@ -1,7 +1,7 @@
 {
   "identityPoolName": "testAuthIdentityPool",
   "allowUnauthenticatedIdentities": false,
-  "resourceNameTruncated": "h4iluma799736a",
+  "resourceNameTruncated": "h4ilum59a16cec",
   "userPoolName": "h4ilumina",
   "autoVerifiedAttributes": [
     "email"
@@ -23,6 +23,8 @@
     "Requires Uppercase"
   ],
   "requiredAttributes": [
+    "phone_number",
+    "given_name",
     "email"
   ],
   "aliasAttributes": [],
@@ -30,9 +32,9 @@
   "userpoolClientRefreshTokenValidity": 30,
   "userpoolClientWriteAttributes": [],
   "userpoolClientReadAttributes": [],
-  "userpoolClientLambdaRole": "h4iluma799736a_userpoolclient_lambda_role",
+  "userpoolClientLambdaRole": "h4ilum59a16cec_userpoolclient_lambda_role",
   "userpoolClientSetAttributes": false,
-  "sharedId": "a799736a",
+  "sharedId": "59a16cec",
   "resourceName": "h4ilumina",
   "authSelections": "identityPoolAndUserPool",
   "serviceName": "Cognito",
@@ -60,6 +62,5 @@
     ]
   },
   "breakCircularDependency": true,
-  "dependsOn": [],
-  "hostedUI": false
+  "dependsOn": []
 }

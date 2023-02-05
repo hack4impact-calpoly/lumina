@@ -5,6 +5,11 @@ export type AmplifyDependentResourcesAttributes = {
       GraphQLAPIIdOutput: 'string';
       GraphQLAPIEndpointOutput: 'string';
     };
+    luminaAPI: {
+      RootUrl: 'string';
+      ApiName: 'string';
+      ApiId: 'string';
+    };
   };
   auth: {
     h4ilumina: {
@@ -15,6 +20,23 @@ export type AmplifyDependentResourcesAttributes = {
       UserPoolName: 'string';
       AppClientIDWeb: 'string';
       AppClientID: 'string';
+      CreatedSNSRole: 'string';
+    };
+  };
+  function: {
+    authLambda: {
+      Name: 'string';
+      Arn: 'string';
+      Region: 'string';
+      LambdaExecutionRole: 'string';
+      LambdaExecutionRoleArn: 'string';
+    };
+    luminaLambda: {
+      Name: 'string';
+      Arn: 'string';
+      Region: 'string';
+      LambdaExecutionRole: 'string';
+      LambdaExecutionRoleArn: 'string';
     };
   };
 };

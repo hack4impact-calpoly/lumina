@@ -20,6 +20,20 @@
       },
       "providerPlugin": "awscloudformation",
       "service": "AppSync"
+    },
+    "luminaAPI": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "luminaLambda"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
     }
   },
   "auth": {
@@ -41,6 +55,8 @@
           "passwordPolicyMinLength": 8
         },
         "signupAttributes": [
+          "PHONE_NUMBER",
+          "GIVEN_NAME",
           "EMAIL"
         ],
         "socialProviders": [],
@@ -53,6 +69,52 @@
       },
       "providerPlugin": "awscloudformation",
       "service": "Cognito"
+    }
+  },
+  "function": {
+    "authLambda": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "luminaLambda": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_authLambda_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "authLambda"
+        }
+      ]
+    },
+    "AMPLIFY_function_authLambda_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "authLambda"
+        }
+      ]
+    },
+    "AMPLIFY_function_luminaLambda_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "luminaLambda"
+        }
+      ]
+    },
+    "AMPLIFY_function_luminaLambda_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "luminaLambda"
+        }
+      ]
     }
   }
 }

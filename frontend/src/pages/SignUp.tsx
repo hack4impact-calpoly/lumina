@@ -2,6 +2,8 @@ import { Button, Center, VStack, Card } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import FormInput from '../components/FormInput';
+import nonEmptyFields from '../hooks/nonEmptyFields';
+import signUp from '../hooks/signUp';
 import { emailRegex, phoneRegex } from '../misc/regex';
 
 function SignUp() {
@@ -15,21 +17,22 @@ function SignUp() {
   const navigate = useNavigate();
   console.log(navigate);
 
-  const nonEmptyStates = () =>
-    firstName.length > 0 &&
-    lastName.length > 0 &&
-    email.length > 0 &&
-    phoneNumber.length > 0 &&
-    password.length > 0 &&
-    confirmPassword.length > 0;
-
   const validateEmail = () => email.toLowerCase().match(emailRegex);
 
   const validatePhone = () => phoneNumber.toLowerCase().match(phoneRegex);
-  const signUp = () => {
-    if (nonEmptyStates()) {
+  const validateSignUp = () => {
+    if (
+      nonEmptyFields(
+        firstName,
+        lastName,
+        email,
+        phoneNumber,
+        password,
+        confirmPassword
+      )
+    ) {
       if (password === confirmPassword && validateEmail() && validatePhone()) {
-        console.log('signUp');
+        signUp(email, password, `+1${phoneNumber}`, firstName + lastName);
       }
     }
   };
@@ -74,7 +77,7 @@ function SignUp() {
             isRequired
             onChange={setConfirmPassword}
           />
-          <Button w="100%" onClick={signUp}>
+          <Button w="100%" onClick={validateSignUp}>
             Submit
           </Button>
         </VStack>

@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "paths": {
+    "/luminaAPI": {
+      "name": "/luminaAPI",
+      "lambdaFunction": "luminaLambda",
+      "permissions": {
+        "setting": "protected",
+        "auth": [
+          "create",
+          "read",
+          "update",
+          "delete"
+        ],
+        "guest": [
+          "read",
+          "update"
+        ]
+      }
+    }
+  }
+}
