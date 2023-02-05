@@ -378,7 +378,7 @@
         "Name": "luminaAPI"
       }
     },
-    "luminaAPIDefault4XXResponse7618b280": {
+    "luminaAPIDefault4XXResponse1f6922e7": {
       "Type": "AWS::ApiGateway::GatewayResponse",
       "Properties": {
         "ResponseType": "DEFAULT_4XX",
@@ -393,7 +393,7 @@
         }
       }
     },
-    "luminaAPIDefault5XXResponse7618b280": {
+    "luminaAPIDefault5XXResponse1f6922e7": {
       "Type": "AWS::ApiGateway::GatewayResponse",
       "Properties": {
         "ResponseType": "DEFAULT_5XX",
@@ -408,7 +408,7 @@
         }
       }
     },
-    "DeploymentAPIGWluminaAPI65c1d7e7": {
+    "DeploymentAPIGWluminaAPI189f0c45": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -426,8 +426,8 @@
         }
       },
       "DependsOn": [
-        "luminaAPIDefault4XXResponse7618b280",
-        "luminaAPIDefault5XXResponse7618b280"
+        "luminaAPIDefault4XXResponse1f6922e7",
+        "luminaAPIDefault5XXResponse1f6922e7"
       ]
     }
   }

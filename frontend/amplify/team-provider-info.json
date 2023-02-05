@@ -19,11 +19,11 @@
       "function": {
         "authLambda": {
           "deploymentBucketName": "amplify-h4ilumina-staging-21353-deployment",
-          "s3Key": "amplify-builds/authLambda-6f2b623057646c566e54-build.zip"
+          "s3Key": "amplify-builds/authLambda-4b6b7a7a687077576f6b-build.zip"
         },
         "luminaLambda": {
           "deploymentBucketName": "amplify-h4ilumina-staging-21353-deployment",
-          "s3Key": "amplify-builds/luminaLambda-3854566c6d6e6357596c-build.zip"
+          "s3Key": "amplify-builds/luminaLambda-2f6865574b3776713368-build.zip"
         }
       },
       "api": {
