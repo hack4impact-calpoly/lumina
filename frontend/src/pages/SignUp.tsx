@@ -1,8 +1,16 @@
-import { Button, Center, VStack, Card } from '@chakra-ui/react';
+import {
+  Button,
+  Container,
+  Stack,
+  Heading,
+  Text,
+  HStack,
+} from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import FormInput from '../components/FormInput';
 import { emailRegex, phoneRegex } from '../misc/regex';
+import Logo from '../components/Logo';
 
 function SignUp() {
   const [firstName, setFirstName] = useState('');
@@ -13,7 +21,6 @@ function SignUp() {
   const [confirmPassword, setConfirmPassword] = useState('');
 
   const navigate = useNavigate();
-  console.log(navigate);
 
   const nonEmptyStates = () =>
     firstName.length > 0 &&
@@ -35,51 +42,74 @@ function SignUp() {
   };
 
   return (
-    <Center h="100%">
-      <Card>
-        <VStack>
-          <FormInput
-            label="First Name"
-            type="text"
-            isRequired
-            onChange={setFirstName}
-          />
-          <FormInput
-            label="Last Name"
-            type="text"
-            isRequired
-            onChange={setLastName}
-          />
-          <FormInput
-            label="Email"
-            type="email"
-            isRequired
-            onChange={setEmail}
-          />
-          <FormInput
-            label="Phone Number"
-            type="text"
-            isRequired
-            onChange={setPhoneNumber}
-          />
-          <FormInput
-            label="Password"
-            type="password"
-            isRequired
-            onChange={setPassword}
-          />
-          <FormInput
-            label="Confirm Password"
-            type="password"
-            isRequired
-            onChange={setConfirmPassword}
-          />
-          <Button w="100%" onClick={signUp}>
-            Submit
+    <Container maxW="md" py={{ base: '12', md: '24' }}>
+      <Stack spacing="8">
+        <Stack spacing="6" align="center">
+          <Logo />
+          <Stack spacing="3" textAlign="center">
+            <Heading size={{ base: 'xs', md: 'sm' }}>Create an account</Heading>
+          </Stack>
+        </Stack>
+        <Stack spacing="6">
+          <Stack spacing="5">
+            <FormInput
+              label="First Name"
+              type="text"
+              isRequired
+              onChange={setFirstName}
+            />
+            <FormInput
+              label="Last Name"
+              type="text"
+              isRequired
+              onChange={setLastName}
+            />
+            <FormInput
+              label="Email"
+              type="email"
+              isRequired
+              onChange={setEmail}
+            />
+            <FormInput
+              label="Phone Number"
+              type="text"
+              isRequired
+              onChange={setPhoneNumber}
+            />
+            <FormInput
+              label="Password"
+              type="password"
+              isRequired
+              onChange={setPassword}
+            />
+            <FormInput
+              label="Confirm Password"
+              type="password"
+              isRequired
+              onChange={setConfirmPassword}
+            />
+          </Stack>
+          <Stack spacing="4">
+            <Button variant="primary" onClick={signUp}>
+              Create account
+            </Button>
+          </Stack>
+        </Stack>
+        <HStack justify="center" spacing="1">
+          <Text fontSize="sm" color="muted">
+            Already have an account?
+          </Text>
+          <Button
+            onClick={() => navigate('/')}
+            variant="link"
+            colorScheme="blue"
+            size="sm"
+          >
+            Log in
           </Button>
-        </VStack>
-      </Card>
-    </Center>
+        </HStack>
+      </Stack>
+    </Container>
   );
 }
 
