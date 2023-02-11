@@ -34,8 +34,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "prettier": "prettier --check src/**/*.tsx",
-    "prettierf": "prettier --write src/**/*.tsx",
+    "prettier": "prettier --check src/**/*.tsx src/**/*.js",
+    "prettierf": "prettier --write src/**/*.tsx src/**/*.js",
     "lint-check": "eslint --ext .js,.jsx,.ts,.tsx --ignore-path .gitignore . && prettier --check .",
     "lint-write": "npx lint-staged"
   },
@@ -55,6 +55,7 @@
     ]
   },
   "devDependencies": {
+    "@types/luxon": "^3.2.0",
     "@typescript-eslint/eslint-plugin": "^5.41.0",
     "@typescript-eslint/parser": "^5.41.0",
     "eslint": "^8.26.0",

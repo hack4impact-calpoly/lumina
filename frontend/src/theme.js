@@ -40,6 +40,9 @@ const Button = {
         boxShadow: 'lg',
       },
     },
+    primary: {
+      bgColor: 'blue.200',
+    },
   },
 };
 
