@@ -2,10 +2,6 @@
 import { initSchema } from '@aws-amplify/datastore';
 import { schema } from './schema';
 
-
-
 const { Example } = initSchema(schema);
 
-export {
-  Example
-};
+export { Example };

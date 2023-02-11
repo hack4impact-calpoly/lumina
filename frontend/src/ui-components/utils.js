@@ -7,11 +7,11 @@
 /* eslint-disable */
 export const validateField = (value, validations) => {
   for (const validation of validations) {
-    if (value === undefined || value === "") {
-      if (validation.type === "Required") {
+    if (value === undefined || value === '') {
+      if (validation.type === 'Required') {
         return {
           hasError: true,
-          errorMessage: validation.validationMessage || "The value is required",
+          errorMessage: validation.validationMessage || 'The value is required',
         };
       } else {
         return {
@@ -29,74 +29,74 @@ export const validateField = (value, validations) => {
 const checkValidation = (value, validation) => {
   if (validation.numValues?.length) {
     switch (validation.type) {
-      case "LessThanChar":
+      case 'LessThanChar':
         return {
           hasError: !(value.length <= validation.numValues[0]),
           errorMessage:
             validation.validationMessage ||
             `The value must be shorter than ${validation.numValues[0]}`,
         };
-      case "GreaterThanChar":
+      case 'GreaterThanChar':
         return {
           hasError: !(value.length > validation.numValues[0]),
           errorMessage:
             validation.validationMessage ||
             `The value must be longer than ${validation.numValues[0]}`,
         };
-      case "LessThanNum":
+      case 'LessThanNum':
         return {
           hasError: !(value < validation.numValues[0]),
           errorMessage:
             validation.validationMessage ||
             `The value must be less than ${validation.numValues[0]}`,
         };
-      case "GreaterThanNum":
+      case 'GreaterThanNum':
         return {
           hasError: !(value > validation.numValues[0]),
           errorMessage:
             validation.validationMessage ||
             `The value must be greater than ${validation.numValues[0]}`,
         };
-      case "EqualTo":
+      case 'EqualTo':
         return {
           hasError: !validation.numValues.some((el) => el === value),
           errorMessage:
             validation.validationMessage ||
-            `The value must be equal to ${validation.numValues.join(" or ")}`,
+            `The value must be equal to ${validation.numValues.join(' or ')}`,
         };
       default:
     }
   } else if (validation.strValues?.length) {
     switch (validation.type) {
-      case "StartWith":
+      case 'StartWith':
         return {
           hasError: !validation.strValues.some((el) => value.startsWith(el)),
           errorMessage:
             validation.validationMessage ||
-            `The value must start with ${validation.strValues.join(", ")}`,
+            `The value must start with ${validation.strValues.join(', ')}`,
         };
-      case "EndWith":
+      case 'EndWith':
         return {
           hasError: !validation.strValues.some((el) => value.endsWith(el)),
           errorMessage:
             validation.validationMessage ||
-            `The value must end with ${validation.strValues.join(", ")}`,
+            `The value must end with ${validation.strValues.join(', ')}`,
         };
-      case "Contains":
+      case 'Contains':
         return {
           hasError: !validation.strValues.some((el) => value.includes(el)),
           errorMessage:
             validation.validationMessage ||
-            `The value must contain ${validation.strValues.join(", ")}`,
+            `The value must contain ${validation.strValues.join(', ')}`,
         };
-      case "NotContains":
+      case 'NotContains':
         return {
           hasError: !validation.strValues.every((el) => !value.includes(el)),
           errorMessage:
             validation.validationMessage ||
-            `The value must not contain ${validation.strValues.join(", ")}`,
+            `The value must not contain ${validation.strValues.join(', ')}`,
         };
-      case "BeAfter":
+      case 'BeAfter':
         const afterTimeValue = parseInt(validation.strValues[0]);
         const afterTimeValidator = Number.isNaN(afterTimeValue)
           ? validation.strValues[0]
@@ -107,7 +107,7 @@ const checkValidation = (value, validation) => {
             validation.validationMessage ||
             `The value must be after ${validation.strValues[0]}`,
         };
-      case "BeBefore":
+      case 'BeBefore':
         const beforeTimeValue = parseInt(validation.strValues[0]);
         const beforeTimevalue = Number.isNaN(beforeTimeValue)
           ? validation.strValues[0]
@@ -121,16 +121,16 @@ const checkValidation = (value, validation) => {
     }
   }
   switch (validation.type) {
-    case "Email":
+    case 'Email':
       const EMAIL_ADDRESS_REGEX =
         /^[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~](\.?[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/;
       return {
         hasError: !EMAIL_ADDRESS_REGEX.test(value),
         errorMessage:
           validation.validationMessage ||
-          "The value must be a valid email address",
+          'The value must be a valid email address',
       };
-    case "JSON":
+    case 'JSON':
       let isInvalidJSON = false;
       try {
         JSON.parse(value);
@@ -141,9 +141,9 @@ const checkValidation = (value, validation) => {
         hasError: isInvalidJSON,
         errorMessage:
           validation.validationMessage ||
-          "The value must be in a correct JSON format",
+          'The value must be in a correct JSON format',
       };
-    case "IpAddress":
+    case 'IpAddress':
       const IPV_4 =
         /^(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]\d|\d)(?:\.(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]\d|\d)){3}$/;
       const IPV_6 =
@@ -152,9 +152,9 @@ const checkValidation = (value, validation) => {
         hasError: !(IPV_4.test(value) || IPV_6.test(value)),
         errorMessage:
           validation.validationMessage ||
-          "The value must be an IPv4 or IPv6 address",
+          'The value must be an IPv4 or IPv6 address',
       };
-    case "URL":
+    case 'URL':
       let isInvalidUrl = false;
       try {
         new URL(value);
@@ -165,34 +165,34 @@ const checkValidation = (value, validation) => {
         hasError: isInvalidUrl,
         errorMessage:
           validation.validationMessage ||
-          "The value must be a valid URL that begins with a schema (i.e. http:// or mailto:)",
+          'The value must be a valid URL that begins with a schema (i.e. http:// or mailto:)',
       };
-    case "Phone":
+    case 'Phone':
       const PHONE = /^\+?\d[\d\s-]+$/;
       return {
         hasError: !PHONE.test(value),
         errorMessage:
           validation.validationMessage ||
-          "The value must be a valid phone number",
+          'The value must be a valid phone number',
       };
     default:
   }
 };
 const monthToShortMon = {
-  "1": "Jan",
-  "2": "Feb",
-  "3": "Mar",
-  "4": "Apr",
-  "5": "May",
-  "6": "Jun",
-  "7": "Jul",
-  "8": "Aug",
-  "9": "Sep",
-  "10": "Oct",
-  "11": "Nov",
-  "12": "Dec",
+  1: 'Jan',
+  2: 'Feb',
+  3: 'Mar',
+  4: 'Apr',
+  5: 'May',
+  6: 'Jun',
+  7: 'Jul',
+  8: 'Aug',
+  9: 'Sep',
+  10: 'Oct',
+  11: 'Nov',
+  12: 'Dec',
 };
-const invalidDateStr = "Invalid Date";
+const invalidDateStr = 'Invalid Date';
 export function formatDate(date, dateFormat) {
   if (date === undefined || date === null) {
     return date;
@@ -205,17 +205,17 @@ export function formatDate(date, dateFormat) {
   const year = splitDate[0];
   const month = splitDate[1];
   const day = splitDate[2];
-  const truncatedMonth = month.replace(/^0+/, "");
+  const truncatedMonth = month.replace(/^0+/, '');
   switch (dateFormat) {
-    case "locale":
+    case 'locale':
       return validDate.toLocaleDateString();
-    case "YYYY.MM.DD":
+    case 'YYYY.MM.DD':
       return `${year}.${month}.${day}`;
-    case "DD.MM.YYYY":
+    case 'DD.MM.YYYY':
       return `${day}.${month}.${year}`;
-    case "MM/DD/YYYY":
+    case 'MM/DD/YYYY':
       return `${month}/${day}/${year}`;
-    case "Mmm DD, YYYY":
+    case 'Mmm DD, YYYY':
       return `${monthToShortMon[truncatedMonth]} ${day}, ${year}`;
     default:
       return date;
@@ -232,7 +232,7 @@ export function formatTime(time, timeFormat) {
   const validTime = new Date();
   validTime.setHours(Number.parseInt(splitTime[0], 10));
   validTime.setMinutes(Number.parseInt(splitTime[1], 10));
-  const splitSeconds = splitTime[2].split(".");
+  const splitSeconds = splitTime[2].split('.');
   validTime.setSeconds(
     Number.parseInt(splitSeconds[0], 10),
     Number.parseInt(splitSeconds[1], 10)
@@ -241,12 +241,12 @@ export function formatTime(time, timeFormat) {
     return time;
   }
   switch (timeFormat) {
-    case "locale":
+    case 'locale':
       return validTime.toLocaleTimeString();
-    case "hours24":
-      return validTime.toLocaleTimeString("en-gb");
-    case "hours12":
-      return validTime.toLocaleTimeString("en-us");
+    case 'hours24':
+      return validTime.toLocaleTimeString('en-gb');
+    case 'hours12':
+      return validTime.toLocaleTimeString('en-us');
     default:
       return time;
   }
@@ -261,34 +261,34 @@ export function formatDateTime(dateTimeStr, dateTimeFormat) {
   if (dateTime.toString() === invalidDateStr) {
     return dateTimeStr;
   }
-  if (dateTimeFormat === "locale") {
+  if (dateTimeFormat === 'locale') {
     return dateTime.toLocaleString();
   }
-  const dateAndTime = dateTime.toISOString().split("T");
+  const dateAndTime = dateTime.toISOString().split('T');
   const date = formatDate(dateAndTime[0], dateTimeFormat.dateFormat);
   const time = formatTime(dateAndTime[1], dateTimeFormat.timeFormat);
   return `${date} - ${time}`;
 }
 export function formatter(value, formatterInput) {
   switch (formatterInput.type) {
-    case "DateFormat":
+    case 'DateFormat':
       return formatDate(value, formatterInput.format);
-    case "DateTimeFormat":
+    case 'DateTimeFormat':
       return formatDateTime(value, formatterInput.format);
-    case "TimeFormat":
+    case 'TimeFormat':
       return formatTime(value, formatterInput.format);
     default:
       return value;
   }
 }
-export const fetchByPath = (input, path = "", accumlator = []) => {
-  const currentPath = path.split(".");
+export const fetchByPath = (input, path = '', accumlator = []) => {
+  const currentPath = path.split('.');
   const head = currentPath.shift();
   if (input && head && input[head] !== undefined) {
     if (!currentPath.length) {
       accumlator.push(input[head]);
     } else {
-      fetchByPath(input[head], currentPath.join("."), accumlator);
+      fetchByPath(input[head], currentPath.join('.'), accumlator);
     }
   }
   return accumlator[0];

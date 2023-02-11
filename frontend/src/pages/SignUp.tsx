@@ -93,7 +93,7 @@ function SignUp() {
             />
           </Stack>
           <Stack spacing="4">
-            <Button variant="primary" onClick={signUp}>
+            <Button variant="primary" onClick={validateSignUp}>
               Create account
             </Button>
           </Stack>
