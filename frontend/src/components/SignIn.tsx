@@ -2,6 +2,8 @@ import { Button, Heading, Stack } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import FormInput from './FormInput';
+import { Auth } from '@aws-amplify/auth';
+import { redirect } from 'react-router-dom';
 
 function SignIn() {
   const [email, setEmail] = useState('');
@@ -14,6 +16,11 @@ function SignIn() {
     if (email.length > 0 && password.length > 0) {
       console.log('signIn');
     }
+
+    Auth.signIn(email, password).then((res) => {
+      console.log(res);
+      return redirect('/home');
+    });
   };
 
   return (
