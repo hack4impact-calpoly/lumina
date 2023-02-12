@@ -37,7 +37,7 @@
       },
       "providerPlugin": "awscloudformation",
       "service": "AppSync",
-      "lastPushTimeStamp": "2023-02-05T23:46:22.567Z",
+      "lastPushTimeStamp": "2023-02-12T00:13:53.225Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-h4ilumina-staging-21353-deployment/amplify-cfn-templates/api/cloudformation-template.json",
         "logicalId": "apih4ilumina"
@@ -61,7 +61,7 @@
         "RootUrl": "https://y5scttb1jf.execute-api.us-west-1.amazonaws.com/staging",
         "ApiId": "y5scttb1jf"
       },
-      "lastPushTimeStamp": "2023-02-05T23:46:22.591Z",
+      "lastPushTimeStamp": "2023-02-12T00:13:53.302Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-h4ilumina-staging-21353-deployment/amplify-cfn-templates/api/luminaAPI-cloudformation-template.json",
         "logicalId": "apiluminaAPI"
@@ -105,7 +105,7 @@
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-h4ilumina-staging-21353-deployment/amplify-cfn-templates/auth/h4ilumina-cloudformation-template.json",
         "logicalId": "authh4ilumina"
       },
-      "lastPushTimeStamp": "2023-02-05T23:46:22.606Z",
+      "lastPushTimeStamp": "2023-02-12T00:13:53.382Z",
       "output": {
         "CreatedSNSRole": "arn:aws:iam::641453070140:role/sns59a16cec21353-staging",
         "UserPoolId": "us-west-1_doPZcUNBn",
@@ -131,7 +131,7 @@
         "Name": "authLambda-staging",
         "LambdaExecutionRole": "h4iluminaLambdaRole9ddeac70-staging"
       },
-      "lastPushTimeStamp": "2023-02-05T23:46:22.637Z",
+      "lastPushTimeStamp": "2023-02-12T00:13:53.451Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-h4ilumina-staging-21353-deployment/amplify-cfn-templates/function/authLambda-cloudformation-template.json",
         "logicalId": "functionauthLambda"
@@ -157,7 +157,7 @@
         "Name": "luminaLambda-staging",
         "LambdaExecutionRole": "h4iluminaLambdaRolebd48b89d-staging"
       },
-      "lastPushTimeStamp": "2023-02-05T23:46:22.656Z",
+      "lastPushTimeStamp": "2023-02-12T00:13:53.502Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-h4ilumina-staging-21353-deployment/amplify-cfn-templates/function/luminaLambda-cloudformation-template.json",
         "logicalId": "functionluminaLambda"

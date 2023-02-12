@@ -8,6 +8,7 @@ import {
   Text,
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
+import { Auth } from '@aws-amplify/auth';
 import { useNavigate } from 'react-router-dom';
 import Logo from '../components/Logo';
 import FormInput from '../components/FormInput';
@@ -20,7 +21,14 @@ function Landing() {
 
   const signIn = async () => {
     if (email.length > 0 && password.length > 0) {
-      console.log('signIn');
+      try {
+        const user = await Auth.signIn(email, password);
+        if (user) {
+          navigate('/home/dashboard');
+        }
+      } catch (error) {
+        console.log('error signing in', error);
+      }
     }
   };
   return (
