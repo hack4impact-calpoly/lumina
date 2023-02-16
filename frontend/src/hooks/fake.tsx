@@ -1,6 +1,7 @@
 import { faker } from '@faker-js/faker';
 import { Event } from 'react-big-calendar';
-import { Message, MessageType, User } from '../types';
+import { Message, MessageType, User, UserOption } from '../types';
+import { randomRange } from './hooks';
 
 function createRandomUser(): User {
   return {
@@ -74,7 +75,7 @@ export function fakeMessages(num: number): Message[] {
   return MESSAGES;
 }
 
-function getAllDaysInMonth(month: number, year: number) {
+function getAllDaysInMonth(year: number, month: number) {
   const date = new Date(year, month, 1);
   const days = [];
   while (date.getMonth() === month) {
@@ -84,29 +85,82 @@ function getAllDaysInMonth(month: number, year: number) {
   return days;
 }
 
-export function getEventTime(day: Date, start: boolean): Date {
-  if (start) {
-    const startDate = day;
-    startDate.setHours(0, 0, 0);
-    return startDate;
-  }
-  const endDate = day;
-  endDate.setHours()
+function getEventTime(day: Date, hour: number, minute: number): Date {
+  const newDay = new Date(day);
+  newDay.setHours(hour, minute, 0);
+  return newDay;
 }
 
-export function fakeEvents(): Event[] {
+function getPrimaryUsers(users: User[], n: number): UserOption[] {
+  const primaryUsers: UserOption[] = [];
+  for (let i = 0; i < n; i++) {
+    const user = users[randomRange(0, users.length)];
+    primaryUsers.push({
+      value: `${user.firstName}${user.lastName}`,
+      label: `${user.firstName} ${user.lastName}`,
+    });
+  }
+  return primaryUsers;
+}
+
+export function fakeEvents(users: User[]): Event[] {
   const days = getAllDaysInMonth(
     new Date().getFullYear(),
     new Date().getMonth()
   );
-  const events: Event[] = [];
+  let events: Event[] = [];
   days.forEach((day) => {
-    const event = {
-      title: faker.system.fileName(),
-      start: new Date(2015, 3, 7),
-      end: new Date(2015, 3, 10),
-    };
-    events.push(event);
+    let dayEvents: Event[] = [];
+    const primaryUsers = getPrimaryUsers(users, 3);
+
+    if (day.getDay() === 6 || day.getDay() === 0) {
+      dayEvents = [
+        {
+          title: 'Morning',
+          start: getEventTime(day, 0, 0),
+          end: getEventTime(day, 8, 0),
+          resource: {
+            primary: primaryUsers[0],
+          },
+        },
+        {
+          title: 'Afternoon',
+          start: getEventTime(day, 8, 0),
+          end: getEventTime(day, 16, 0),
+          resource: {
+            primary: primaryUsers[1],
+          },
+        },
+        {
+          title: 'Night',
+          start: getEventTime(day, 16, 0),
+          end: getEventTime(day, 23, 59),
+          resource: {
+            primary: primaryUsers[2],
+          },
+        },
+      ];
+    } else {
+      dayEvents = [
+        {
+          title: 'Morning',
+          start: getEventTime(day, 0, 0),
+          end: getEventTime(day, 8, 30),
+          resource: {
+            primary: primaryUsers[0],
+          },
+        },
+        {
+          title: 'Night',
+          start: getEventTime(day, 17, 0),
+          end: getEventTime(day, 23, 59),
+          resource: {
+            primary: primaryUsers[1],
+          },
+        },
+      ];
+    }
+    events = events.concat(dayEvents);
   });
   return events;
 }

@@ -1,4 +1,5 @@
 import { IconType } from 'react-icons';
+import { OptionBase } from 'chakra-react-select';
 
 export type Timestamp = {
   seconds: number;
@@ -50,3 +51,8 @@ export type SidebarElement = {
   url: string;
   icon: IconType;
 };
+
+export interface UserOption extends OptionBase {
+  label: string;
+  value: string;
+}
