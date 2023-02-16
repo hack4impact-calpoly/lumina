@@ -9,11 +9,11 @@ type Props = {
 
 function HomePage({ children }: Props) {
   return (
-    <SimpleGrid columns={10} overflow="hidden">
-      <GridItem colSpan={1}>
+    <SimpleGrid columns={100} overflowY="hidden" h="100vh">
+      <GridItem colSpan={15}>
         <Sidebar />
       </GridItem>
-      <GridItem colSpan={9} textAlign="start" overflowY="scroll" p={6}>
+      <GridItem colSpan={85} textAlign="start" overflowY="scroll" p={6}>
         {children}
       </GridItem>
     </SimpleGrid>

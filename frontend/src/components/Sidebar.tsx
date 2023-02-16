@@ -50,7 +50,6 @@ function Sidebar() {
   const navigate = useNavigate();
 
   const signOut = () => {
-    localStorage.removeItem('user');
     navigate('/');
   };
 

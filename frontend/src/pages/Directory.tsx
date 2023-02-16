@@ -17,7 +17,7 @@ function Directory() {
         Directory
       </Heading>
       <SimpleGrid columns={5} mb={3}>
-        <GridItem rowSpan={1} colSpan={2}>
+        <GridItem rowSpan={1} colSpan={2} mr={1}>
           <DirectorySearch
             name={setSearchName}
             email={setSearchEmail}

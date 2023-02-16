@@ -1,4 +1,5 @@
 import { faker } from '@faker-js/faker';
+import { Event } from 'react-big-calendar';
 import { Message, MessageType, User } from '../types';
 
 function createRandomUser(): User {
@@ -71,4 +72,41 @@ export function fakeMessages(num: number): Message[] {
     MESSAGES.push(createRandomEmail());
   });
   return MESSAGES;
+}
+
+function getAllDaysInMonth(month: number, year: number) {
+  const date = new Date(year, month, 1);
+  const days = [];
+  while (date.getMonth() === month) {
+    days.push(new Date(date));
+    date.setDate(date.getDate() + 1);
+  }
+  return days;
+}
+
+export function getEventTime(day: Date, start: boolean): Date {
+  if (start) {
+    const startDate = day;
+    startDate.setHours(0, 0, 0);
+    return startDate;
+  }
+  const endDate = day;
+  endDate.setHours()
+}
+
+export function fakeEvents(): Event[] {
+  const days = getAllDaysInMonth(
+    new Date().getFullYear(),
+    new Date().getMonth()
+  );
+  const events: Event[] = [];
+  days.forEach((day) => {
+    const event = {
+      title: faker.system.fileName(),
+      start: new Date(2015, 3, 7),
+      end: new Date(2015, 3, 10),
+    };
+    events.push(event);
+  });
+  return events;
 }
