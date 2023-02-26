@@ -43,7 +43,14 @@ function FormInput({ isRequired, label, type, onChange }: FormInputProps) {
       );
     }
     if (onChange !== undefined)
-      return <Input type={type} onChange={(e) => onChange(e.target.value)} />;
+      return (
+        <Input
+          paddingLeft={3}
+          type={type}
+          placeholder="username@example.com"
+          onChange={(e) => onChange(e.target.value)}
+        />
+      );
     return <Input type={type} />;
   };
   return (
