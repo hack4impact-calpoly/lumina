@@ -26,6 +26,7 @@ function FormInput({ isRequired, label, type, onChange }: FormInputProps) {
           <Input
             type={show ? 'text' : 'password'}
             borderColor="#C1C1C1"
+            bg="#F6F5F5"
             onChange={(e) => onChange(e.target.value)}
           />
           <InputRightElement>
@@ -51,11 +52,12 @@ function FormInput({ isRequired, label, type, onChange }: FormInputProps) {
       return (
         <Input
           type={type}
+          bg="#F6F5F5"
           borderColor="#C1C1C1"
           onChange={(e) => onChange(e.target.value)}
         />
       );
-    return <Input type={type} borderColor="#C1C1C1" />;
+    return <Input type={type} bg="#F6F5F5" borderColor="#C1C1C1" />;
   };
   return (
     <FormControl isRequired={isRequired}>
