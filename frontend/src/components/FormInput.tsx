@@ -25,12 +25,18 @@ function FormInput({ isRequired, label, type, onChange }: FormInputProps) {
         <InputGroup>
           <Input
             type={show ? 'text' : 'password'}
+            borderColor="#C1C1C1"
+            bg="#F6F5F5"
             onChange={(e) => onChange(e.target.value)}
           />
           <InputRightElement>
             <button
               type="button"
-              style={{ background: 'clear', width: '100%', height: '100%' }}
+              style={{
+                background: 'clear',
+                width: '100%',
+                height: '100%',
+              }}
               onClick={() => setShow(!show)}
             >
               <Icon
@@ -43,12 +49,19 @@ function FormInput({ isRequired, label, type, onChange }: FormInputProps) {
       );
     }
     if (onChange !== undefined)
-      return <Input type={type} onChange={(e) => onChange(e.target.value)} />;
-    return <Input type={type} />;
+      return (
+        <Input
+          type={type}
+          bg="#F6F5F5"
+          borderColor="#C1C1C1"
+          onChange={(e) => onChange(e.target.value)}
+        />
+      );
+    return <Input type={type} bg="#F6F5F5" borderColor="#C1C1C1" />;
   };
   return (
     <FormControl isRequired={isRequired}>
-      <FormLabel>{label}</FormLabel>
+      <FormLabel style={{ fontSize: '15px' }}>{label}</FormLabel>
       {input()}
     </FormControl>
   );

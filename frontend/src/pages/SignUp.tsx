@@ -1,11 +1,4 @@
-import {
-  Button,
-  Container,
-  Stack,
-  Heading,
-  Text,
-  HStack,
-} from '@chakra-ui/react';
+import { Button, Container, Stack, Text, HStack } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import FormInput from '../components/FormInput';
@@ -42,16 +35,18 @@ function SignUp() {
   };
 
   return (
-    <Container maxW="md" py={{ base: '12', md: '24' }}>
-      <Stack spacing="8">
-        <Stack spacing="6" align="center">
+    <Container bg="#F5F5F5" maxW="md" py={{ base: '6', md: '24' }}>
+      <Stack spacing="4">
+        <Stack spacing="3" align="center">
           <Logo />
-          <Stack spacing="3" textAlign="center">
-            <Heading size={{ base: 'xs', md: 'sm' }}>Create an account</Heading>
+          <Stack spacing="1" textAlign="center">
+            <Text textStyle="t1" fontSize="22px">
+              Create account
+            </Text>
           </Stack>
         </Stack>
-        <Stack spacing="6">
-          <Stack spacing="5">
+        <Stack spacing="4">
+          <Stack spacing="3">
             <FormInput
               label="First Name"
               type="text"

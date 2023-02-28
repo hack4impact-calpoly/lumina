@@ -52,6 +52,21 @@ const theme = extendTheme({
     CenterBox,
     Button,
   },
+  textStyles: {
+    t1: {
+      fontSize: '10px',
+      fontWeight: 'semibold',
+      color: 'black',
+    },
+    t2: {
+      fontSize: '24px',
+      color: 'red',
+    },
+    t3: {
+      fontSize: '16px',
+      color: 'orange',
+    },
+  },
 });
 
 export default theme;
