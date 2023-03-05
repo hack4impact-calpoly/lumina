@@ -9,11 +9,26 @@
       "UnauthRoleName": "amplify-h4ilumina-staging-21353-unauthRole",
       "StackName": "amplify-h4ilumina-staging-21353",
       "StackId": "arn:aws:cloudformation:us-west-1:641453070140:stack/amplify-h4ilumina-staging-21353/a30dfc80-7054-11ed-b280-02fa27c81975",
-      "AmplifyAppId": "durrvcb6u1t4v"
+      "AmplifyAppId": "durrvcb6u1t4v",
+      "APIGatewayAuthURL": "https://s3.amazonaws.com/amplify-h4ilumina-staging-21353-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json"
     },
     "categories": {
       "auth": {
         "h4ilumina": {}
+      },
+      "function": {
+        "authLambda": {
+          "deploymentBucketName": "amplify-h4ilumina-staging-21353-deployment",
+          "s3Key": "amplify-builds/authLambda-4b6b7a7a687077576f6b-build.zip"
+        },
+        "luminaLambda": {
+          "deploymentBucketName": "amplify-h4ilumina-staging-21353-deployment",
+          "s3Key": "amplify-builds/luminaLambda-2f6865574b3776713368-build.zip"
+        }
+      },
+      "api": {
+        "h4ilumina": {},
+        "luminaAPI": {}
       }
     }
   }

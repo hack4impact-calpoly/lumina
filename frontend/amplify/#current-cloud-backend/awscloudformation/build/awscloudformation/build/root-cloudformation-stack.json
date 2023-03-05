@@ -152,6 +152,27 @@
         }
       }
     },
+    "APIGatewayAuthStack": {
+      "Type": "AWS::CloudFormation::Stack",
+      "Properties": {
+        "TemplateURL": "https://s3.amazonaws.com/amplify-h4ilumina-staging-21353-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json",
+        "Parameters": {
+          "authRoleName": {
+            "Ref": "AuthRoleName"
+          },
+          "unauthRoleName": {
+            "Ref": "UnauthRoleName"
+          },
+          "env": "staging",
+          "luminaAPI": {
+            "Fn::GetAtt": [
+              "apiluminaAPI",
+              "Outputs.ApiId"
+            ]
+          }
+        }
+      }
+    },
     "apih4ilumina": {
       "Type": "AWS::CloudFormation::Stack",
       "Properties": {
@@ -172,6 +193,27 @@
         }
       }
     },
+    "apiluminaAPI": {
+      "Type": "AWS::CloudFormation::Stack",
+      "Properties": {
+        "TemplateURL": "https://s3.amazonaws.com/amplify-h4ilumina-staging-21353-deployment/amplify-cfn-templates/api/luminaAPI-cloudformation-template.json",
+        "Parameters": {
+          "functionluminaLambdaName": {
+            "Fn::GetAtt": [
+              "functionluminaLambda",
+              "Outputs.Name"
+            ]
+          },
+          "functionluminaLambdaArn": {
+            "Fn::GetAtt": [
+              "functionluminaLambda",
+              "Outputs.Arn"
+            ]
+          },
+          "env": "staging"
+        }
+      }
+    },
     "authh4ilumina": {
       "Type": "AWS::CloudFormation::Stack",
       "Properties": {
@@ -179,7 +221,7 @@
         "Parameters": {
           "identityPoolName": "testAuthIdentityPool",
           "allowUnauthenticatedIdentities": false,
-          "resourceNameTruncated": "h4iluma799736a",
+          "resourceNameTruncated": "h4ilum59a16cec",
           "userPoolName": "h4ilumina",
           "autoVerifiedAttributes": "email",
           "mfaConfiguration": "OFF",
@@ -191,15 +233,15 @@
           "defaultPasswordPolicy": false,
           "passwordPolicyMinLength": 8,
           "passwordPolicyCharacters": "Requires Lowercase,Requires Numbers,Requires Symbols,Requires Uppercase",
-          "requiredAttributes": "email",
+          "requiredAttributes": "phone_number,given_name,email",
           "aliasAttributes": "",
           "userpoolClientGenerateSecret": false,
           "userpoolClientRefreshTokenValidity": 30,
           "userpoolClientWriteAttributes": "",
           "userpoolClientReadAttributes": "",
-          "userpoolClientLambdaRole": "h4iluma799736a_userpoolclient_lambda_role",
+          "userpoolClientLambdaRole": "h4ilum59a16cec_userpoolclient_lambda_role",
           "userpoolClientSetAttributes": false,
-          "sharedId": "a799736a",
+          "sharedId": "59a16cec",
           "resourceName": "h4ilumina",
           "authSelections": "identityPoolAndUserPool",
           "serviceName": "Cognito",
@@ -226,7 +268,28 @@
           },
           "breakCircularDependency": true,
           "dependsOn": "",
-          "hostedUI": false,
+          "env": "staging"
+        }
+      }
+    },
+    "functionauthLambda": {
+      "Type": "AWS::CloudFormation::Stack",
+      "Properties": {
+        "TemplateURL": "https://s3.amazonaws.com/amplify-h4ilumina-staging-21353-deployment/amplify-cfn-templates/function/authLambda-cloudformation-template.json",
+        "Parameters": {
+          "deploymentBucketName": "amplify-h4ilumina-staging-21353-deployment",
+          "s3Key": "amplify-builds/authLambda-4b6b7a7a687077576f6b-build.zip",
+          "env": "staging"
+        }
+      }
+    },
+    "functionluminaLambda": {
+      "Type": "AWS::CloudFormation::Stack",
+      "Properties": {
+        "TemplateURL": "https://s3.amazonaws.com/amplify-h4ilumina-staging-21353-deployment/amplify-cfn-templates/function/luminaLambda-cloudformation-template.json",
+        "Parameters": {
+          "deploymentBucketName": "amplify-h4ilumina-staging-21353-deployment",
+          "s3Key": "amplify-builds/luminaLambda-2f6865574b3776713368-build.zip",
           "env": "staging"
         }
       }

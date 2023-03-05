@@ -9,39 +9,63 @@
       "UnauthRoleName": "amplify-h4ilumina-staging-21353-unauthRole",
       "StackName": "amplify-h4ilumina-staging-21353",
       "StackId": "arn:aws:cloudformation:us-west-1:641453070140:stack/amplify-h4ilumina-staging-21353/a30dfc80-7054-11ed-b280-02fa27c81975",
-      "AmplifyAppId": "durrvcb6u1t4v"
+      "AmplifyAppId": "durrvcb6u1t4v",
+      "APIGatewayAuthURL": "https://s3.amazonaws.com/amplify-h4ilumina-staging-21353-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json"
     }
   },
   "api": {
     "h4ilumina": {
-      "service": "AppSync",
-      "providerPlugin": "awscloudformation",
       "dependsOn": [],
       "output": {
         "authConfig": {
-          "defaultAuthentication": {
-            "authenticationType": "API_KEY",
-            "apiKeyConfig": {
-              "apiKeyExpirationDays": 30,
-              "description": "api key description"
-            }
-          },
           "additionalAuthenticationProviders": [
             {
               "authenticationType": "AWS_IAM"
             }
-          ]
+          ],
+          "defaultAuthentication": {
+            "apiKeyConfig": {
+              "apiKeyExpirationDays": 30,
+              "description": "api key description"
+            },
+            "authenticationType": "API_KEY"
+          }
         },
         "GraphQLAPIIdOutput": "4zl7nv2otvgtrjjvl5u6acjshi",
         "GraphQLAPIEndpointOutput": "https://stp45kmz7rgjjgdoag245wlkxq.appsync-api.us-west-1.amazonaws.com/graphql",
         "GraphQLAPIKeyOutput": "da2-ekn65cf5uzehnpto6y3svd3edu"
       },
-      "lastPushTimeStamp": "2023-02-04T23:29:43.944Z",
+      "providerPlugin": "awscloudformation",
+      "service": "AppSync",
+      "lastPushTimeStamp": "2023-02-05T23:07:19.169Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-h4ilumina-staging-21353-deployment/amplify-cfn-templates/api/cloudformation-template.json",
         "logicalId": "apih4ilumina"
+      }
+    },
+    "luminaAPI": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "luminaLambda"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway",
+      "output": {
+        "ApiName": "luminaAPI",
+        "RootUrl": "https://y5scttb1jf.execute-api.us-west-1.amazonaws.com/staging",
+        "ApiId": "y5scttb1jf"
       },
-      "lastPushDirHash": "UqQIcYhXvU4SETOPi3NMmDLR/CI="
+      "lastPushTimeStamp": "2023-02-05T23:07:19.171Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-h4ilumina-staging-21353-deployment/amplify-cfn-templates/api/luminaAPI-cloudformation-template.json",
+        "logicalId": "apiluminaAPI"
+      }
     }
   },
   "auth": {
@@ -56,6 +80,8 @@
           "EMAIL"
         ],
         "signupAttributes": [
+          "PHONE_NUMBER",
+          "GIVEN_NAME",
           "EMAIL"
         ],
         "passwordProtectionSettings": {
@@ -75,21 +101,76 @@
           "EMAIL"
         ]
       },
-      "output": {
-        "UserPoolId": "us-west-1_L4OtDLDGE",
-        "AppClientIDWeb": "52leri14mtil9k6j089soqk4fq",
-        "AppClientID": "4ovian22at3jinlj3kgorlevrk",
-        "IdentityPoolId": "us-west-1:9edb2243-9814-49a9-b343-f8030c2e74d0",
-        "UserPoolArn": "arn:aws:cognito-idp:us-west-1:641453070140:userpool/us-west-1_L4OtDLDGE",
-        "IdentityPoolName": "testAuthIdentityPool__staging",
-        "UserPoolName": "h4ilumina"
-      },
-      "lastPushTimeStamp": "2023-02-04T23:29:43.944Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-h4ilumina-staging-21353-deployment/amplify-cfn-templates/auth/h4ilumina-cloudformation-template.json",
         "logicalId": "authh4ilumina"
       },
-      "lastPushDirHash": "OLGbE9JUvaUX5rlxNibKSB4T4yk="
+      "lastPushTimeStamp": "2023-02-05T23:07:19.172Z",
+      "output": {
+        "CreatedSNSRole": "arn:aws:iam::641453070140:role/sns59a16cec21353-staging",
+        "UserPoolId": "us-west-1_doPZcUNBn",
+        "AppClientIDWeb": "1682i0kc7euo53sqiqh530pghh",
+        "AppClientID": "116adv409sv75v4srbk6moesbn",
+        "IdentityPoolId": "us-west-1:9fbee535-4803-4df4-a2bf-a7848a3048e0",
+        "UserPoolArn": "arn:aws:cognito-idp:us-west-1:641453070140:userpool/us-west-1_doPZcUNBn",
+        "IdentityPoolName": "testAuthIdentityPool__staging",
+        "UserPoolName": "h4ilumina"
+      },
+      "lastPushDirHash": "oLJ3DTSynonaXAK+x6O5lv/zglY="
+    }
+  },
+  "function": {
+    "authLambda": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "output": {
+        "LambdaExecutionRoleArn": "arn:aws:iam::641453070140:role/h4iluminaLambdaRole9ddeac70-staging",
+        "Region": "us-west-1",
+        "Arn": "arn:aws:lambda:us-west-1:641453070140:function:authLambda-staging",
+        "Name": "authLambda-staging",
+        "LambdaExecutionRole": "h4iluminaLambdaRole9ddeac70-staging"
+      },
+      "lastPushTimeStamp": "2023-02-05T23:07:19.537Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-h4ilumina-staging-21353-deployment/amplify-cfn-templates/function/authLambda-cloudformation-template.json",
+        "logicalId": "functionauthLambda"
+      },
+      "s3Bucket": {
+        "deploymentBucketName": "amplify-h4ilumina-staging-21353-deployment",
+        "s3Key": "amplify-builds/authLambda-4b6b7a7a687077576f6b-build.zip"
+      },
+      "lastBuildTimeStamp": "2023-02-05T23:06:12.944Z",
+      "lastBuildType": "PROD",
+      "lastPackageTimeStamp": "2023-02-05T23:06:12.982Z",
+      "distZipFilename": "authLambda-4b6b7a7a687077576f6b-build.zip",
+      "lastPushDirHash": "6MTFxYd0VyyZeqY8oQVgJonDVWM="
+    },
+    "luminaLambda": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "output": {
+        "LambdaExecutionRoleArn": "arn:aws:iam::641453070140:role/h4iluminaLambdaRolebd48b89d-staging",
+        "Region": "us-west-1",
+        "Arn": "arn:aws:lambda:us-west-1:641453070140:function:luminaLambda-staging",
+        "Name": "luminaLambda-staging",
+        "LambdaExecutionRole": "h4iluminaLambdaRolebd48b89d-staging"
+      },
+      "lastPushTimeStamp": "2023-02-05T23:07:19.537Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-h4ilumina-staging-21353-deployment/amplify-cfn-templates/function/luminaLambda-cloudformation-template.json",
+        "logicalId": "functionluminaLambda"
+      },
+      "s3Bucket": {
+        "deploymentBucketName": "amplify-h4ilumina-staging-21353-deployment",
+        "s3Key": "amplify-builds/luminaLambda-2f6865574b3776713368-build.zip"
+      },
+      "lastBuildTimeStamp": "2023-02-05T23:06:12.946Z",
+      "lastBuildType": "PROD",
+      "lastPackageTimeStamp": "2023-02-05T23:06:13.612Z",
+      "distZipFilename": "luminaLambda-2f6865574b3776713368-build.zip",
+      "lastPushDirHash": "RLJUgdBhhEN5IsHwhtzm2VGdPHs="
     }
   }
 }

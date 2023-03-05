@@ -9,6 +9,8 @@ import {
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import FormInput from '../components/FormInput';
+import nonEmptyFields from '../hooks/nonEmptyFields';
+import signUp from '../hooks/signUp';
 import { emailRegex, phoneRegex } from '../misc/regex';
 import Logo from '../components/Logo';
 
@@ -22,21 +24,22 @@ function SignUp() {
 
   const navigate = useNavigate();
 
-  const nonEmptyStates = () =>
-    firstName.length > 0 &&
-    lastName.length > 0 &&
-    email.length > 0 &&
-    phoneNumber.length > 0 &&
-    password.length > 0 &&
-    confirmPassword.length > 0;
-
   const validateEmail = () => email.toLowerCase().match(emailRegex);
 
   const validatePhone = () => phoneNumber.toLowerCase().match(phoneRegex);
-  const signUp = () => {
-    if (nonEmptyStates()) {
+  const validateSignUp = () => {
+    if (
+      nonEmptyFields(
+        firstName,
+        lastName,
+        email,
+        phoneNumber,
+        password,
+        confirmPassword
+      )
+    ) {
       if (password === confirmPassword && validateEmail() && validatePhone()) {
-        console.log('signUp');
+        signUp(email, password, `+1${phoneNumber}`, firstName + lastName);
       }
     }
   };
@@ -90,7 +93,7 @@ function SignUp() {
             />
           </Stack>
           <Stack spacing="4">
-            <Button variant="primary" onClick={signUp}>
+            <Button variant="primary" onClick={validateSignUp}>
               Create account
             </Button>
           </Stack>

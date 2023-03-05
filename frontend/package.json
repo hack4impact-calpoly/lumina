@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@aws-amplify/auth": "^5.1.8",
     "@chakra-ui/icons": "^2.0.11",
     "@chakra-ui/react": "^2.3.6",
     "@emotion/react": "^11.10.4",
@@ -15,6 +16,7 @@
     "@types/node": "^12.20.55",
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
+    "aws-amplify": "^5.0.12",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^17.0.0",
     "framer-motion": "^6.5.1",
