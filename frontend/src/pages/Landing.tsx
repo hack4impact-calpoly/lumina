@@ -24,17 +24,22 @@ function Landing() {
     }
   };
   return (
-    <Container maxW="md" py={{ base: '12', md: '24' }}>
+    <Container
+      maxW="lg"
+      pt={{ base: '5', md: '26' }}
+      pb={{ base: '0', md: '26' }}
+      px={{ base: '10' }}
+    >
       <Stack spacing="8">
         <Stack spacing="6" align="center">
           <Logo />
           <Stack spacing={{ base: '2', md: '3' }} textAlign="center">
-            <Heading size={{ base: 'xs', md: 'sm' }}>
+            <Heading size={{ base: 'sm', md: 'sm' }}>
               Log in to your account
             </Heading>
           </Stack>
         </Stack>
-        <Stack spacing="6">
+        <Stack spacing="25" pb={{ base: '4' }}>
           <Stack spacing="5">
             <FormInput
               label="Email"
@@ -49,10 +54,12 @@ function Landing() {
               onChange={setPassword}
             />
           </Stack>
-          <HStack justify="space-between">
-            <Checkbox defaultChecked>Remember me</Checkbox>
+          <HStack justify="space-between" spacing="0">
+            <Checkbox defaultChecked fontSize="sm">
+              <Text fontSize="sm">Remember me</Text>
+            </Checkbox>
             <Button variant="link" colorScheme="blue" size="sm">
-              Forgot password
+              Forgot password?
             </Button>
           </HStack>
           <Stack spacing="4">
